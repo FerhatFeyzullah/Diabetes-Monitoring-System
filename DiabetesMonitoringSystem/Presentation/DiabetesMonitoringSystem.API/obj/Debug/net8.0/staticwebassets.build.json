@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Div4xAJyjwFpdHVKt8qgONH/fT40yS0yJkwL6LllMQY=",
+  "Source": "DiabetesMonitoringSystem.API",
+  "BasePath": "_content/DiabetesMonitoringSystem.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
