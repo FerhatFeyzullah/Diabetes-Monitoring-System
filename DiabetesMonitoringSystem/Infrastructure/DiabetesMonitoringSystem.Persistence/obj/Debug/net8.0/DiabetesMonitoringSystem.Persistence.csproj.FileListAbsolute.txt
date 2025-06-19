@@ -2,7 +2,9 @@ C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesM
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Persistence.runtimeconfig.json
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Persistence.dll
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Persistence.pdb
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Application.dll
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.dll
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Application.pdb
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.pdb
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\obj\Debug\net8.0\DiabetesMonitoringSystem.Persistence.csproj.AssemblyReference.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Infrastructure\DiabetesMonitoringSystem.Persistence\obj\Debug\net8.0\DiabetesMonitoringSystem.Persistence.GeneratedMSBuildEditorConfig.editorconfig

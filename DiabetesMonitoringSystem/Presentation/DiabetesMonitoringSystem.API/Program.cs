@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using DiabetesMonitoringSystem.Application.ServiceExtension;
+using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
 using DiabetesMonitoringSystem.Persistence.Configurations;
 using DiabetesMonitoringSystem.Persistence.DbContext;
@@ -18,6 +20,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddApplicationServices();
+
 
 builder.Services.AddDbContext<DiabetesDbContext>(options =>
 {
@@ -105,3 +109,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+var provider = builder.Services.BuildServiceProvider();
+Console.WriteLine(provider.GetService<IUserService>() is null ? "NULL" : "OK");
+

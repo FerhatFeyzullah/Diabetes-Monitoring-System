@@ -20,6 +20,7 @@ namespace DiabetesMonitoringSystem.Persistence.ServiceExtension
         {
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+            services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<IJwtService, JwtService>();
             services.Configure<JwtTokenOptions>(cfg.GetSection("TokenOptions"));

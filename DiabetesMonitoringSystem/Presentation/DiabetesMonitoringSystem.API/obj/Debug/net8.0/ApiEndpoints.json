@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AuthsController",
+    "Method": "CreateUser",
+    "RelativePath": "api/Auths",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateUser.CreateUserRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

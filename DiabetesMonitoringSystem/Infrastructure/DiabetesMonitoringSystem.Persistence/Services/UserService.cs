@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
-    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,JwtService jwtService) : IUserService
+    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService) : IUserService
     {
         public async Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto)
         {
@@ -23,14 +23,18 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                 TC = userRegisterDto.TC,
                 Gender = userRegisterDto.Gender,
                 BirthDate = userRegisterDto.BirthDate,
+                UserName = userRegisterDto.UserName,
             };
 
             var result = await usermanager.CreateAsync(user, userRegisterDto.Password);
-            if (result.Succeeded) 
+            if (!result.Succeeded)
             {
-                await usermanager.AddToRoleAsync(user, "Hasta");
-                return result;
+                // HATALARI LOG'LAMA (GEÇİCİ OLARAK)
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new Exception($"Kayıt Başarısız: {errors}");
             }
+
+            await usermanager.AddToRoleAsync(user, "Hasta");
             return result;
         }
 

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.17">
       <PrivateAssets>all</PrivateAssets>
@@ -16,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DiabetesMonitoringSystem.Application\DiabetesMonitoringSystem.Application.csproj" />
     <ProjectReference Include="..\..\Core\DiabetesMonitoringSystem.Domain\DiabetesMonitoringSystem.Domain.csproj" />
   </ItemGroup>
 

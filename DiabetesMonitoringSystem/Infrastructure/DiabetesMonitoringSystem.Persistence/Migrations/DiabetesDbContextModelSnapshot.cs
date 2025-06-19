@@ -141,11 +141,13 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ProfilePhotoId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
+
+                    b.Property<int>("TC")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
