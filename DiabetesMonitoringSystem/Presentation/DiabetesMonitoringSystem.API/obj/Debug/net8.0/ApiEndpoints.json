@@ -1,16 +1,48 @@
 [
   {
-    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AuthsController",
-    "Method": "CreateUser",
-    "RelativePath": "api/Auths",
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "CreateDoctor",
+    "RelativePath": "api/Users/CreateDoctor",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateUser.CreateUserRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateDoctor.CreateDoctorRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "CreatePatient",
+    "RelativePath": "api/Users/CreatePatient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateUser.CreatePatientRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "GetPatientForDoctor",
+    "RelativePath": "api/Users/GetPatientForDoctor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DoctorId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

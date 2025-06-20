@@ -3,38 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DiabetesMonitoringSystem.Application.DTOs.UserDTOs;
 using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
-    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService) : IUserService
+    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService,IMapper mapper) : IUserService
     {
-        public async Task<IdentityResult> CreateUserAsync(UserRegisterDto userRegisterDto)
+        public async Task<IdentityResult> CreateDoctorAsync(UserRegisterDto userRegisterDto)
         {
-            var user = new AppUser
-            {
-                FirstName = userRegisterDto.FirstName,
-                LastName = userRegisterDto.LastName,
-                Email = userRegisterDto.Email,
-                TC = userRegisterDto.TC,
-                Gender = userRegisterDto.Gender,
-                BirthDate = userRegisterDto.BirthDate,
-                UserName = userRegisterDto.UserName,
-            };
+            var user = mapper.Map<AppUser>(userRegisterDto);
 
             var result = await usermanager.CreateAsync(user, userRegisterDto.Password);
-            if (!result.Succeeded)
+
+            if (result.Succeeded)
             {
-                // HATALARI LOG'LAMA (GEÇİCİ OLARAK)
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new Exception($"Kayıt Başarısız: {errors}");
+                await usermanager.AddToRoleAsync(user, "Doktor");
+                return result;
             }
 
-            await usermanager.AddToRoleAsync(user, "Hasta");
+            return result;
+        }
+
+        public async Task<IdentityResult> CreatePatientAsync(UserRegisterDto userRegisterDto)
+        {
+            var user = mapper.Map<AppUser>(userRegisterDto);
+
+            var result = await usermanager.CreateAsync(user, userRegisterDto.Password);
+            if (result.Succeeded)
+            {
+               await usermanager.AddToRoleAsync(user, "Hasta");
+            }
+           
             return result;
         }
 
@@ -53,9 +58,9 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return token;
         }
 
-        public Task LogoutAsync()
+        public async Task LogoutAsync()
         {
-            throw new NotImplementedException();
+            await signInManager.SignOutAsync();
         }
     }
 }

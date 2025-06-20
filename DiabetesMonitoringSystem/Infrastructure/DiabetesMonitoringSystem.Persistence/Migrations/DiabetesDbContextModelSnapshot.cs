@@ -98,6 +98,9 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -109,9 +112,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("Gender")
+                        .HasColumnType("integer");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -146,8 +148,9 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
-                    b.Property<int>("TC")
-                        .HasColumnType("integer");
+                    b.Property<string>("TC")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
@@ -157,6 +160,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -511,6 +516,15 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Navigation("Message");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.AppUser", b =>
+                {
+                    b.HasOne("DiabetesMonitoringSystem.Domain.Entities.AppUser", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.BloodSugar", b =>

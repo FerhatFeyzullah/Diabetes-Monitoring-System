@@ -16,7 +16,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
         public int PatientId { get; set; }
         public AppUser Patient { get; set; }
 
-        public DateTime SymptomDate { get; set; }
+        public DateTime SymptomDate { get; set; } = DateTime.Now;
 
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using DiabetesMonitoringSystem.Domain.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace DiabetesMonitoringSystem.Domain.Entities
@@ -12,9 +13,12 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int TC { get; set; }
+        public string TC { get; set; }
         public DateTime BirthDate { get; set; }
-        public string Gender { get; set; }
+        public Gender Gender { get; set; }        
         public string? ProfilePhotoId { get; set; }
+
+        public int? DoctorId { get; set; }
+        public AppUser Doctor { get; set; }
     }
 }

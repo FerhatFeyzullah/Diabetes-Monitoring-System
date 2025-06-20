@@ -8,7 +8,7 @@ namespace DiabetesMonitoringSystem.Application.DTOs.UserDTOs
 {
     public class UserLoginDto
     {
-        public int TC { get; set; }
+        public string TC { get; set; }
         public string Password { get; set; }
 
     }
