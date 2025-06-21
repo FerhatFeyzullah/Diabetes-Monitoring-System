@@ -1,12 +1,12 @@
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.deps.json
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.dll
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.pdb
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.csproj.AssemblyReference.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.AssemblyInfoInputs.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.AssemblyInfo.cs
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.csproj.CoreCompileInputs.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.sourcelink.json
-C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.deps.json
-C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.dll
-C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\bin\Debug\net8.0\DiabetesMonitoringSystem.Domain.pdb
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.dll
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\refint\DiabetesMonitoringSystem.Domain.dll
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Core\DiabetesMonitoringSystem.Domain\obj\Debug\net8.0\DiabetesMonitoringSystem.Domain.pdb

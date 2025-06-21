@@ -3,6 +3,7 @@ using System.Text;
 using DiabetesMonitoringSystem.Application.ServiceExtension;
 using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
+using DiabetesMonitoringSystem.Infrastructure.ServiceExtension;
 using DiabetesMonitoringSystem.Persistence.Configurations;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using DiabetesMonitoringSystem.Persistence.ServiceExtension;
@@ -21,6 +22,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices();
 
 
 builder.Services.AddDbContext<DiabetesDbContext>(options =>

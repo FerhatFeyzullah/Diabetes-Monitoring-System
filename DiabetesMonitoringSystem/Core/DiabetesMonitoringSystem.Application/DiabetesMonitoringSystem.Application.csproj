@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\BloodSugar\Queries\" />
+    <Folder Include="CQRS\BloodSugarFeatures\Queries\" />
   </ItemGroup>
 
 </Project>

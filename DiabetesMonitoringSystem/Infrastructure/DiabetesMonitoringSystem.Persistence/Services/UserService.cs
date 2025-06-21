@@ -7,19 +7,20 @@ using AutoMapper;
 using DiabetesMonitoringSystem.Application.DTOs.UserDTOs;
 using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
+using DiabetesMonitoringSystem.Infrastructure.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
-    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService,IMapper mapper) : IUserService
+    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService,IMapper mapper,IMailService mailService) : IUserService
     {
-        public async Task<IdentityResult> CreateDoctorAsync(UserRegisterDto userRegisterDto)
+        public async Task<IdentityResult> CreateDoctorAsync(DoctorRegisterDto doctorRegisterDto)
         {
-            var user = mapper.Map<AppUser>(userRegisterDto);
+            var user = mapper.Map<AppUser>(doctorRegisterDto);
 
-            var result = await usermanager.CreateAsync(user, userRegisterDto.Password);
+            var result = await usermanager.CreateAsync(user, doctorRegisterDto.Password);
 
             if (result.Succeeded)
             {
@@ -30,14 +31,31 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return result;
         }
 
-        public async Task<IdentityResult> CreatePatientAsync(UserRegisterDto userRegisterDto)
+        public string GenerateRandomPassword(int length = 10)
         {
-            var user = mapper.Map<AppUser>(userRegisterDto);
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
-            var result = await usermanager.CreateAsync(user, userRegisterDto.Password);
+        public async Task<IdentityResult> CreatePatientAsync(PatientRegisterDto patientRegisterDto)
+        {
+            var user = mapper.Map<AppUser>(patientRegisterDto);
+            var randomPassword = GenerateRandomPassword(); 
+
+            var result = await usermanager.CreateAsync(user, randomPassword);
             if (result.Succeeded)
             {
-               await usermanager.AddToRoleAsync(user, "Hasta");
+                await usermanager.AddToRoleAsync(user, "Hasta");
+                await mailService.SendEmailAsync(user.Email, "Diyabet Takip Sistemine Hoş Geldiniz - Giriş Bilgileriniz!",
+                    $"Sayın {user.FirstName} {user.LastName} ,\r\n\r\nDiyabet Takip Sistemine hoş geldiniz.\r\n\r\n" +
+                    "Sistemimize giriş yapabilmeniz için oluşturulan geçici şifreniz aşağıda yer almaktadır:\r\n\r\n" +
+                    $"🔐 Giriş Şifreniz:{randomPassword}\r\n\r\n⚠️ Bu şifre sadece size özeldir." +
+                    "Güvenliğiniz açısından bu bilgiyi doktorunuz dahil kimseyle paylaşmayınız.\r\n\r\n" +
+                    "İlk girişinizden sonra şifrenizi değiştirmenizi önemle tavsiye ederiz.\r\n\r\n" +
+                    "Sağlıklı günler dileriz." + "  \r\nDiyabet Takip Sistemi Destek Ekibi\r\n\r\n");
+                    
             }
            
             return result;

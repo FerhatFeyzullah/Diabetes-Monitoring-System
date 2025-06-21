@@ -11,9 +11,9 @@ namespace DiabetesMonitoringSystem.Application.Services
     public interface IUserService
     {
 
-        Task<IdentityResult> CreatePatientAsync(UserRegisterDto userRegisterDto);
+        Task<IdentityResult> CreatePatientAsync(PatientRegisterDto userRegisterDto);
 
-        Task<IdentityResult> CreateDoctorAsync(UserRegisterDto userRegisterDto);
+        Task<IdentityResult> CreateDoctorAsync(DoctorRegisterDto userRegisterDto);
 
         Task<string?> LoginAsync(UserLoginDto userLoginDto);
 

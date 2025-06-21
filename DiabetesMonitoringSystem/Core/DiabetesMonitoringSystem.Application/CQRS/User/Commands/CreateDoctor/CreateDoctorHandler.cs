@@ -16,7 +16,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateDoctor
     {
         public async Task<IdentityResult> Handle(CreateDoctorRequest request, CancellationToken cancellationToken)
         {
-            var value = mapper.Map<UserRegisterDto>(request);
+            var value = mapper.Map<DoctorRegisterDto>(request);
             return await userService.CreateDoctorAsync(value);
            
         }

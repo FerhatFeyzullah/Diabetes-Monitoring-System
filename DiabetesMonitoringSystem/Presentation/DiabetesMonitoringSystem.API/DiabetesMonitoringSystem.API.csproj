@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\DiabetesMonitoringSystem.Infrastructure\DiabetesMonitoringSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\DiabetesMonitoringSystem.Persistence\DiabetesMonitoringSystem.Persistence.csproj" />
   </ItemGroup>
 
