@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DiabetesMonitoringSystem.Application.Repositories;
@@ -51,6 +52,28 @@ namespace DiabetesMonitoringSystem.Persistence.Repositories
         public async Task<T> GetByIdAsync(int id)
         {
          ;  return await Table.FindAsync(id);
+        }
+
+        public Task<List<T>> GetByFilteredList(Expression<Func<T, bool>> kosul, params Expression<Func<T, object>>[] includes)
+        {
+           IQueryable<T> query = Table.Where(kosul);           
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            
+            return query.ToListAsync();
+        }
+
+        public Task<T> GetByFiltered(Expression<Func<T, bool>> kosul, params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = Table.Where(kosul);
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.FirstOrDefaultAsync();
         }
     }
 }

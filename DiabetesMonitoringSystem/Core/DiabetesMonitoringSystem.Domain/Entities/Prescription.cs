@@ -9,7 +9,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     public class Prescription
     {
         public int PrescriptionId { get; set; }
-        public DateTime PrescriptionDate { get; set; }
+        public DateOnly PrescriptionDate { get; set; }
         public string Comment { get; set; }
 
 

@@ -12,7 +12,9 @@ namespace DiabetesMonitoringSystem.Application.Repositories
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task<T> GetByFiltered(Expression<Func<T, bool>> kosul);
+        Task<T> GetByFiltered(Expression<Func<T, bool>> kosul, params Expression<Func<T, object>>[] includes);
         Task<List<T>> GetByFilteredList(Expression<Func<T, bool>> kosul);
+        Task<List<T>> GetByFilteredList(Expression<Func<T, bool>> kosul, params Expression<Func<T, object>>[] includes);
         Task<int> FilteredCountAsync(Expression<Func<T, bool>> kosul);
         Task<int> CountAsync();
 

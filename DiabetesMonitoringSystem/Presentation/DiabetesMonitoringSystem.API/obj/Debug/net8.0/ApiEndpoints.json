@@ -32,6 +32,262 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
+    "Method": "CreateBloodSugar",
+    "RelativePath": "api/BloodSugars/CreateBloodSugar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.AddBloodSugar.AddBloodSugarRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
+    "Method": "GetBloodSugarByPatientAndByDate",
+    "RelativePath": "api/BloodSugars/GetBloodSugarByPatientAndByDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "CreateDailyStatus",
+    "RelativePath": "api/DailyStatuses/CreateDS",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.CreateDS.CreateDS_Request",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "DS_DietUpdate",
+    "RelativePath": "api/DailyStatuses/DS_DietUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietStatus.UpdateDS_DietStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "DS_ExerciseUpdate",
+    "RelativePath": "api/DailyStatuses/DS_ExerciseUpdate",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseStatus.UpdateDS_ExerciseStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "GetDS_ByDate",
+    "RelativePath": "api/DailyStatuses/GetDS_ByDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Date",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "GetDS_ByPatient",
+    "RelativePath": "api/DailyStatuses/GetDS_ByPatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DietsController",
+    "Method": "CreateDiet",
+    "RelativePath": "api/Diets/CreateDiet",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands.CreateDietRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DietsController",
+    "Method": "GetAllDiets",
+    "RelativePath": "api/Diets/GetAllDiets",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries.GetAllDietRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.ExercisesController",
+    "Method": "CreateExercise",
+    "RelativePath": "api/Exercises/CreateExercise",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Commands.CreateExerciseRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.ExercisesController",
+    "Method": "GetAllExercises",
+    "RelativePath": "api/Exercises/GetAllExercises",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Queries.GetAllExerciseRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PatientSymptomsController",
+    "Method": "CreatePatientSymptom",
+    "RelativePath": "api/PatientSymptoms/CreatePatientSymptom",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands.CreatePatientSymptomRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PatientSymptomsController",
+    "Method": "GetPatientSymptomsByPatient",
+    "RelativePath": "api/PatientSymptoms/GetPatientSymptomsByPatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
+    "Method": "CreatePrescription",
+    "RelativePath": "api/Prescriptions/CreatePrescription",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.CreatePrescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
+    "Method": "GetPrescriptionByPatient",
+    "RelativePath": "api/Prescriptions/GetPrescriptionByPatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.SymptomsController",
+    "Method": "GetAllSymptoms",
+    "RelativePath": "api/Symptoms/GetAllSymptoms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptomRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
     "Method": "CreateDoctor",
     "RelativePath": "api/Users/CreateDoctor",

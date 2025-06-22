@@ -12,7 +12,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     {
         public int BloodSugarId { get; set; }
         public int Value { get; set; }
-        public DateTime MeasurementTime { get; set; }
+        public DateOnly MeasurementTime { get; set; }
         public TimePeriod TimePeriod { get; set; }
 
         public int PatientId { get; set; }

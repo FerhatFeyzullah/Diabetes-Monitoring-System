@@ -13,7 +13,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
         public int PatientId { get; set; }
         public AppUser Patient { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
 
         public bool ExerciseStatus { get; set; } = false;
         public bool DietStatus { get; set; } = false;

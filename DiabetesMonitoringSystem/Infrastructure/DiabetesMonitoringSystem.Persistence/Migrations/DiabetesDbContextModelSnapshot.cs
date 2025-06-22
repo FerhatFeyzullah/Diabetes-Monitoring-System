@@ -91,8 +91,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("BirthDate")
+                        .HasColumnType("date");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -181,8 +181,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("BloodSugarId"));
 
-                    b.Property<DateTime>("MeasurementTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("MeasurementTime")
+                        .HasColumnType("date");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("integer");
@@ -208,8 +208,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DailyStatusId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<bool>("DietStatus")
                         .HasColumnType("boolean");
@@ -321,8 +321,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("SymptomDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("SymptomDate")
+                        .HasColumnType("date");
 
                     b.Property<int>("SymptomId")
                         .HasColumnType("integer");
@@ -360,8 +360,8 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("PrescriptionDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("PrescriptionDate")
+                        .HasColumnType("date");
 
                     b.HasKey("PrescriptionId");
 

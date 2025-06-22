@@ -17,7 +17,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateUser
         public string TC { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }        
-        public DateTime BirthDate { get; set; }
+        public DateOnly BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string? ProfilePhotoId { get; set; }
 

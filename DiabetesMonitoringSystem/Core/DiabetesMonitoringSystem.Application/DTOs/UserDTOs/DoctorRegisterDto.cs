@@ -16,7 +16,7 @@ namespace DiabetesMonitoringSystem.Application.DTOs.UserDTOs
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateOnly BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string? ProfilePhotoId { get; set; }
 
