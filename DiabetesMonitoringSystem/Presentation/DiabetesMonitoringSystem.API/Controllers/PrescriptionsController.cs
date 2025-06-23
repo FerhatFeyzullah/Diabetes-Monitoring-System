@@ -1,5 +1,5 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries;
+﻿using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.CreatePrescription;
+using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatient;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

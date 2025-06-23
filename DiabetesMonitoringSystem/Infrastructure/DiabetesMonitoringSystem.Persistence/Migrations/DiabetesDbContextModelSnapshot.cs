@@ -277,6 +277,9 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("InsulinId"));
 
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
+
                     b.Property<int>("Dose")
                         .HasColumnType("integer");
 

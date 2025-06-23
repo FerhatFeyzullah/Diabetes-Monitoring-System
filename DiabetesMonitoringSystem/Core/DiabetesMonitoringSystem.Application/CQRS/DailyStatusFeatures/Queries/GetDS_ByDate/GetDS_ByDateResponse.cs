@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DiabetesMonitoringSystem.Application.DTOs.UserDTOs;
 using DiabetesMonitoringSystem.Domain.Entities;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByDate
@@ -12,7 +13,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.
         public int DailyStatusId { get; set; }
 
         public int PatientId { get; set; }
-        public AppUser Patient { get; set; }
+        public ResultUserDto Patient { get; set; }
 
         public DateOnly Date { get; set; }
 

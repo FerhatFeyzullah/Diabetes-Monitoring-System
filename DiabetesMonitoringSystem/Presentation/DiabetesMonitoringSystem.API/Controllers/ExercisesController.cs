@@ -1,5 +1,5 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Queries;
+﻿using DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Commands.CreateExercise;
+using DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Queries.GetAllExercise;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

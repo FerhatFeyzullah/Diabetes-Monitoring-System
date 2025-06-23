@@ -11,6 +11,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     {
         public int InsulinId { get; set; }
         public int Dose { get; set; }
+        public DateOnly Date { get; set; }
         public TimePeriod TimePeriod { get; set; }
 
         public int PatientId { get; set; }

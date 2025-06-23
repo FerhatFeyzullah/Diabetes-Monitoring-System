@@ -582,10 +582,6 @@
             "type": "integer",
             "format": "int32"
           },
-          "measurementTime": {
-            "type": "string",
-            "format": "date"
-          },
           "timePeriod": {
             "$ref": "#/components/schemas/TimePeriod"
           },
@@ -606,12 +602,6 @@
           "date": {
             "type": "string",
             "format": "date"
-          },
-          "exerciseStatus": {
-            "type": "boolean"
-          },
-          "dietStatus": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -752,10 +742,6 @@
       "CreatePrescriptionRequest": {
         "type": "object",
         "properties": {
-          "prescriptionDate": {
-            "type": "string",
-            "format": "date"
-          },
           "comment": {
             "type": "string",
             "nullable": true
@@ -831,11 +817,18 @@
       "UpdateDS_DietStatusRequest": {
         "type": "object",
         "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "patientId": {
             "type": "integer",
             "format": "int32"
           },
           "dietStatus": {
+            "type": "boolean"
+          },
+          "exerciseStatus": {
             "type": "boolean"
           }
         },
@@ -844,11 +837,18 @@
       "UpdateDS_ExerciseStatusRequest": {
         "type": "object",
         "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
+          },
           "patientId": {
             "type": "integer",
             "format": "int32"
           },
           "exerciseStatus": {
+            "type": "boolean"
+          },
+          "dietStatus": {
             "type": "boolean"
           }
         },

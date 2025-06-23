@@ -1,5 +1,5 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Queries;
+﻿using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands.CreatePatientSymptom;
+using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Queries.GetPS_ByPatient;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

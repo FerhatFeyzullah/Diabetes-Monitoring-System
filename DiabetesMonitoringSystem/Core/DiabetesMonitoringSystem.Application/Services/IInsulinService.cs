@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DiabetesMonitoringSystem.Domain.Enums;
+
+namespace DiabetesMonitoringSystem.Application.Services
+{
+    public interface IInsulinService
+    {
+        Task InsulinCreateBasedOnBloodSugar(TimePeriod timePeriod, int patientId,DateOnly date);
+    }
+}

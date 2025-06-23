@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Queries;
+using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands.CreatePatientSymptom;
+using DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Queries.GetPS_ByPatient;
 using DiabetesMonitoringSystem.Domain.Entities;
 
 namespace DiabetesMonitoringSystem.Application.Mapping

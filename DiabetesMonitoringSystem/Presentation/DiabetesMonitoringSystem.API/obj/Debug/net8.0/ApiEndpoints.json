@@ -153,7 +153,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands.CreateDietRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands.CreateDiet.CreateDietRequest",
         "IsRequired": true
       }
     ],
@@ -169,7 +169,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries.GetAllDietRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries.GetAllDiet.GetAllDietRequest",
         "IsRequired": false
       }
     ],
@@ -185,7 +185,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Commands.CreateExerciseRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Commands.CreateExercise.CreateExerciseRequest",
         "IsRequired": true
       }
     ],
@@ -201,7 +201,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Queries.GetAllExerciseRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.ExerciseFeatures.Queries.GetAllExercise.GetAllExerciseRequest",
         "IsRequired": false
       }
     ],
@@ -217,7 +217,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands.CreatePatientSymptomRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.PatientSymptomFeatures.Commands.CreatePatientSymptom.CreatePatientSymptomRequest",
         "IsRequired": true
       }
     ],
@@ -249,7 +249,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.CreatePrescriptionRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.CreatePrescription.CreatePrescriptionRequest",
         "IsRequired": true
       }
     ],
@@ -281,7 +281,7 @@
     "Parameters": [
       {
         "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptomRequest",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptom.GetAllSymptomRequest",
         "IsRequired": false
       }
     ],

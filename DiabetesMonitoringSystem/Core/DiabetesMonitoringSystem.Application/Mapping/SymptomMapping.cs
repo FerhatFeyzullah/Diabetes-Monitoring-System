@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries;
+using DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptom;
 using DiabetesMonitoringSystem.Domain.Entities;
 
 namespace DiabetesMonitoringSystem.Application.Mapping

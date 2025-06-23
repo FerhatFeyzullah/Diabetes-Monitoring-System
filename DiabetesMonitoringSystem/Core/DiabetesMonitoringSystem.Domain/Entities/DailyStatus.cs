@@ -15,8 +15,8 @@ namespace DiabetesMonitoringSystem.Domain.Entities
 
         public DateOnly Date { get; set; }
 
-        public bool ExerciseStatus { get; set; } = false;
-        public bool DietStatus { get; set; } = false;
+        public bool ExerciseStatus { get; set; }
+        public bool DietStatus { get; set; }
 
     }
 }

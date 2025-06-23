@@ -22,9 +22,15 @@ namespace DiabetesMonitoringSystem.Persistence.ServiceExtension
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBloodSugarService, BloodSugarService>();
+            services.AddScoped<IInsulinService, InsulinService>();      
+            services.AddScoped<DailyService>();
+
+            services.AddHostedService<DailyBackgroundService>();
 
             services.AddScoped<IJwtService, JwtService>();
             services.Configure<JwtTokenOptions>(cfg.GetSection("TokenOptions"));
+
+            
         }
     }
 }

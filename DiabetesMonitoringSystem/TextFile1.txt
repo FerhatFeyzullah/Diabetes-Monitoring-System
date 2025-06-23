@@ -1,0 +1,65 @@
+public class DailyBackgroundService : BackgroundService
+{
+    private readonly IServiceProvider _serviceProvider;
+    private DateOnly _lastRun = DateOnly.MinValue;
+
+    public DailyBackgroundService(IServiceProvider serviceProvider)
+    {
+        _serviceProvider = serviceProvider;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Now);
+            if (today != _lastRun)
+            {
+                using var scope = _serviceProvider.CreateScope();
+                var initializer = scope.ServiceProvider.GetRequiredService<DailyInitializerService>();
+                await initializer.EnsureTodayInitializedAsync(stoppingToken);
+                _lastRun = today;
+            }
+
+            await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken); // 5 dakikada bir kontrol
+        }
+    }
+}
+
+
+
+
+
+
+public class DailyInitializerService
+{
+    private readonly DiabetesDbContext _context;
+
+    public DailyInitializerService(DiabetesDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task EnsureTodayInitializedAsync(CancellationToken ct = default)
+    {
+        var today = DateOnly.FromDateTime(DateTime.Now.Date);
+
+        bool exists = await _context.DailyChecks.AnyAsync(x => x.Date == today, ct);
+
+        if (!exists)
+        {
+            _context.DailyChecks.Add(new DailyCheck
+            {
+                Date = today,
+                Note = "Otomatik günlük kayýt"
+            });
+
+            await _context.SaveChangesAsync(ct);
+            Console.WriteLine($"? Kayýt oluþturuldu ? {today}");
+        }
+        else
+        {
+            Console.WriteLine($"?? Bugünün kaydý zaten var ? {today}");
+        }
+    }
+}

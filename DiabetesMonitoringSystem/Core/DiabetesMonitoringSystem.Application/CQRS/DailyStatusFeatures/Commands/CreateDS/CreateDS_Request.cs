@@ -12,7 +12,6 @@ namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands
     {
         public int PatientId { get; set; }
         public DateOnly Date { get; set; }
-        public bool ExerciseStatus { get; set; }
-        public bool DietStatus { get; set; }
+        
     }
 }

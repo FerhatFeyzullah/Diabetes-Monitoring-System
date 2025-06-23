@@ -1,5 +1,5 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries;
+﻿using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands.CreateDiet;
+using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries.GetAllDiet;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

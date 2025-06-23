@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands;
-using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries;
+using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Commands.CreateDiet;
+using DiabetesMonitoringSystem.Application.CQRS.DietFeatures.Queries.GetAllDiet;
 using DiabetesMonitoringSystem.Domain.Entities;
 
 namespace DiabetesMonitoringSystem.Application.Mapping

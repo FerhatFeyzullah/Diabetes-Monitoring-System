@@ -1,4 +1,4 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries;
+﻿using DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptom;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

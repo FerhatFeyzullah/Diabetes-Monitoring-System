@@ -11,7 +11,6 @@ namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.
     public class AddBloodSugarRequest:IRequest<Unit>
     {
         public int Value { get; set; }
-        public DateOnly MeasurementTime { get; set; }
         public TimePeriod TimePeriod { get; set; }
 
         public int PatientId { get; set; }
