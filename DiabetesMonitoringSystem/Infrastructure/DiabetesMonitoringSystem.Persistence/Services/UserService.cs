@@ -33,7 +33,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 
         public string GenerateRandomPassword(int length = 10)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*";
             var random = new Random();
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
@@ -42,19 +42,41 @@ namespace DiabetesMonitoringSystem.Persistence.Services
         public async Task<IdentityResult> CreatePatientAsync(PatientRegisterDto patientRegisterDto)
         {
             var user = mapper.Map<AppUser>(patientRegisterDto);
-            var randomPassword = GenerateRandomPassword(); 
+            var randomPassword = GenerateRandomPassword()+"1*";
+            user.UserName = user.FirstName;
 
             var result = await usermanager.CreateAsync(user, randomPassword);
             if (result.Succeeded)
             {
                 await usermanager.AddToRoleAsync(user, "Hasta");
-                await mailService.SendEmailAsync(user.Email, "Diyabet Takip Sistemine Hoş Geldiniz - Giriş Bilgileriniz!",
-                    $"Sayın {user.FirstName} {user.LastName} ,\r\n\r\nDiyabet Takip Sistemine hoş geldiniz.\r\n\r\n" +
-                    "Sistemimize giriş yapabilmeniz için oluşturulan geçici şifreniz aşağıda yer almaktadır:\r\n\r\n" +
-                    $"🔐 Giriş Şifreniz:{randomPassword}\r\n\r\n⚠️ Bu şifre sadece size özeldir." +
-                    "Güvenliğiniz açısından bu bilgiyi doktorunuz dahil kimseyle paylaşmayınız.\r\n\r\n" +
-                    "İlk girişinizden sonra şifrenizi değiştirmenizi önemle tavsiye ederiz.\r\n\r\n" +
-                    "Sağlıklı günler dileriz." + "  \r\nDiyabet Takip Sistemi Destek Ekibi\r\n\r\n");
+
+                string htmlBody = $@"
+                    <div style='font-family: Arial, sans-serif; padding: 20px; color: #333;'>
+                        <h2 style='color: #2c3e50;'>👋 Hoş Geldiniz, {user.FirstName} {user.LastName}</h2>
+
+                        <p>Diyabet Takip Sistemine kayıt işleminiz başarıyla tamamlandı.</p>
+
+                        <p><strong>📌 Giriş Bilgileriniz:</strong></p>
+                        <div style='background-color: #f1f1f1; border-left: 6px solid #3498db; padding: 12px; font-size: 16px;'>
+                            <strong>🔐 Geçici Şifreniz:</strong> {randomPassword}
+                        </div>
+
+                        <p style='margin-top: 20px;'>
+                            ⚠️ Bu şifre sadece size özeldir. Güvenliğiniz için <strong>doktorunuz dahil</strong> kimseyle paylaşmayınız.
+                        </p>
+
+                        <p>
+                            İlk girişinizin ardından <strong>şifrenizi değiştirmeniz önemle tavsiye edilir</strong>.
+                        </p>
+
+                        <hr style='margin-top: 30px;' />
+                        <p style='font-size: 13px; color: #999;'>
+                            Sağlıklı günler dileriz.<br />
+                            <strong>Diyabet Takip Sistemi Destek Ekibi</strong>
+                        </p>
+                    </div>";
+
+                await mailService.SendEmailAsync(user.Email, "Diyabet Takip Sistemine Hoş Geldiniz - Giriş Bilgileriniz!", htmlBody,isHtml:true);
                     
             }
            

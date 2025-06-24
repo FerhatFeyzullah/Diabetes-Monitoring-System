@@ -10,7 +10,6 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Command
 {
     public class CreatePrescriptionRequest:IRequest<Unit>
     {
-        public string Comment { get; set; }
 
         public int DietId { get; set; }
       

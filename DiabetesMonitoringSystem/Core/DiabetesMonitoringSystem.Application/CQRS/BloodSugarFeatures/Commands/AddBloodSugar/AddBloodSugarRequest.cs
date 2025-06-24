@@ -12,6 +12,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.
     {
         public int Value { get; set; }
         public TimePeriod TimePeriod { get; set; }
+        public List<string>? Symptoms { get; set; }
 
         public int PatientId { get; set; }
     }

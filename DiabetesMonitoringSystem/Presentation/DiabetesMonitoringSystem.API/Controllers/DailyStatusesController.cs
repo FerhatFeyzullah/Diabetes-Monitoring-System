@@ -1,6 +1,7 @@
 ﻿using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.CreateDS;
-using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietStatus;
-using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseStatus;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Diet;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Exercise;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByDate;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatient;
 using MediatR;
@@ -34,18 +35,26 @@ namespace DiabetesMonitoringSystem.API.Controllers
             return Ok("Yeni Günlük Durum Eklendi");
         }
 
-        [HttpPut("DS_DietUpdate")]
-        public async Task<IActionResult> DS_DietUpdate([FromBody] UpdateDS_DietStatusRequest request)
+        [HttpPut("UpdateDS")]
+        public async Task<IActionResult> DS_DietUpdate([FromBody] UpdateDSRequest request)
         {
             await mediator.Send(request);
             return Ok("Günlük Durum Diyet Bilgisi Güncellendi");
         }
 
-        [HttpPut("DS_ExerciseUpdate")]
-        public async Task<IActionResult> DS_ExerciseUpdate([FromBody] UpdateDS_ExerciseStatusRequest request)
+        [HttpPut("UpdateDS_Diet")]
+        public async Task<IActionResult> UpdateDS_Diet([FromQuery]UpdateDS_DietRequest request)
         {
             await mediator.Send(request);
-            return Ok("Günlük Durum Egzersiz Bilgisi Güncellendi");
+            return Ok("Günlük Durum Diet Güncellemesi Başarılı.");
         }
+
+        [HttpPut("UpdateDS_Exercise")]
+        public async Task<IActionResult> UpdateDS_Exercise([FromQuery]UpdateDS_ExerciseRequest request)
+        {
+            await mediator.Send(request);
+            return Ok("Günlük Durum Egzersiz Güncellemesi Başarılı.");
+        }
+
     }
 }

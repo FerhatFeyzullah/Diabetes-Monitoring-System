@@ -195,7 +195,7 @@
         }
       }
     },
-    "/api/DailyStatuses/DS_DietUpdate": {
+    "/api/DailyStatuses/UpdateDS": {
       "put": {
         "tags": [
           "DailyStatuses"
@@ -204,17 +204,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDS_DietStatusRequest"
+                "$ref": "#/components/schemas/UpdateDSRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDS_DietStatusRequest"
+                "$ref": "#/components/schemas/UpdateDSRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateDS_DietStatusRequest"
+                "$ref": "#/components/schemas/UpdateDSRequest"
               }
             }
           }
@@ -226,30 +226,43 @@
         }
       }
     },
-    "/api/DailyStatuses/DS_ExerciseUpdate": {
+    "/api/DailyStatuses/UpdateDS_Diet": {
       "put": {
         "tags": [
           "DailyStatuses"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDS_ExerciseStatusRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDS_ExerciseStatusRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateDS_ExerciseStatusRequest"
-              }
+        "parameters": [
+          {
+            "name": "DailyStatusId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DailyStatuses/UpdateDS_Exercise": {
+      "put": {
+        "tags": [
+          "DailyStatuses"
+        ],
+        "parameters": [
+          {
+            "name": "DailyStatusId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -354,59 +367,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/PatientSymptoms/CreatePatientSymptom": {
-      "post": {
-        "tags": [
-          "PatientSymptoms"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePatientSymptomRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePatientSymptomRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreatePatientSymptomRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/PatientSymptoms/GetPatientSymptomsByPatient": {
-      "get": {
-        "tags": [
-          "PatientSymptoms"
-        ],
-        "parameters": [
-          {
-            "name": "PatientId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -585,6 +545,13 @@
           "timePeriod": {
             "$ref": "#/components/schemas/TimePeriod"
           },
+          "symptoms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
           "patientId": {
             "type": "integer",
             "format": "int32"
@@ -694,10 +661,6 @@
             "type": "string",
             "nullable": true
           },
-          "userName": {
-            "type": "string",
-            "nullable": true
-          },
           "email": {
             "type": "string",
             "nullable": true
@@ -721,31 +684,9 @@
         },
         "additionalProperties": false
       },
-      "CreatePatientSymptomRequest": {
-        "type": "object",
-        "properties": {
-          "symptomId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "patientId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "symptomDate": {
-            "type": "string",
-            "format": "date"
-          }
-        },
-        "additionalProperties": false
-      },
       "CreatePrescriptionRequest": {
         "type": "object",
         "properties": {
-          "comment": {
-            "type": "string",
-            "nullable": true
-          },
           "dietId": {
             "type": "integer",
             "format": "int32"
@@ -814,7 +755,7 @@
         "type": "integer",
         "format": "int32"
       },
-      "UpdateDS_DietStatusRequest": {
+      "UpdateDSRequest": {
         "type": "object",
         "properties": {
           "dailyStatusId": {
@@ -830,25 +771,8 @@
           },
           "exerciseStatus": {
             "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
-      "UpdateDS_ExerciseStatusRequest": {
-        "type": "object",
-        "properties": {
-          "dailyStatusId": {
-            "type": "integer",
-            "format": "int32"
           },
-          "patientId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "exerciseStatus": {
-            "type": "boolean"
-          },
-          "dietStatus": {
+          "prescriptionAvailable": {
             "type": "boolean"
           }
         },

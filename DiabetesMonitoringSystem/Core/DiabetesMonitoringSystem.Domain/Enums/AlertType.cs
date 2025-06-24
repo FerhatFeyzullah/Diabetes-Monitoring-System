@@ -8,12 +8,10 @@ namespace DiabetesMonitoringSystem.Domain.Enums
 {
     public enum AlertType 
     {
-        Emergency = 1,
-        Normal = 2,
-        FollowUp = 3,
-        Monitoring = 4,
-        EmergencyIntervention = 5,
-        MissingMeasurement = 6,
-        InsufficientMeasurement = 7,
+        Emergency = 1,        
+        FollowUp = 2,
+        Monitoring = 3,
+        MissingMeasurement = 4,
+        InsufficientMeasurement = 5,
     }
 }

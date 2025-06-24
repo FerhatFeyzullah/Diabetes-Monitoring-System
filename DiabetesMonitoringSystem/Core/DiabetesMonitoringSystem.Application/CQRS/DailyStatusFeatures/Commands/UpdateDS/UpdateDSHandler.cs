@@ -9,11 +9,11 @@ using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
 using MediatR;
 
-namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietStatus
+namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS
 {
-    public class UpdateDS_DietStatusHandler(IWriteRepository<DailyStatus> writeRepository, IMapper mapper) : IRequestHandler<UpdateDS_DietStatusRequest, Unit>
+    public class UpdateDSHandler(IWriteRepository<DailyStatus> writeRepository, IMapper mapper) : IRequestHandler<UpdateDSRequest, Unit>
     {
-        public async Task<Unit> Handle(UpdateDS_DietStatusRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateDSRequest request, CancellationToken cancellationToken)
         {
             var dailyStatus = mapper.Map<DailyStatus>(request);
             dailyStatus.Date = DateOnly.FromDateTime(DateTime.Today);

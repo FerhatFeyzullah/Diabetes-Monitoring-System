@@ -19,13 +19,17 @@ namespace DiabetesMonitoringSystem.Infrastructure.Services
             _configuration = configuration;
         }
 
-        public async Task SendEmailAsync(string toEmail, string subject, string body)
+        public async Task SendEmailAsync(string toEmail, string subject, string body, bool isHtml = false)
         {
             var email = new MimeMessage();
             email.From.Add(new MailboxAddress("Diyabet Takip Sistemi", _configuration["EmailSettings:SmtpUser"]));
             email.To.Add(new MailboxAddress("", toEmail));
             email.Subject = subject;
-            email.Body = new TextPart("plain") { Text = body };
+            email.Body = new TextPart(isHtml ? "html" : "plain")
+            {
+                Text = body
+            };
+
 
             using (var client = new SmtpClient())
             {

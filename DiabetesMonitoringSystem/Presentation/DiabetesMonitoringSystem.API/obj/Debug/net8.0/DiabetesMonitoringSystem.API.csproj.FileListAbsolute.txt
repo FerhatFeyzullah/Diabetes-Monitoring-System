@@ -125,6 +125,7 @@ C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMon
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.AssemblyInfoInputs.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.AssemblyInfo.cs
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.csproj.CoreCompileInputs.cache
+C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\DiabetesMonitoringSystem.API.sourcelink.json
 C:\Users\Dell\Desktop\Projects\DiabetesMonitoringSystem\Presentation\DiabetesMonitoringSystem.API\obj\Debug\net8.0\scopedcss\bundle\DiabetesMonitoringSystem.API.styles.css

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace DiabetesMonitoringSystem.Persistence.Services
+namespace DiabetesMonitoringSystem.Persistence.Services.EveryFiveMinutesService
 {
     public class DailyBackgroundService:BackgroundService
     {
@@ -29,7 +29,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     await initializer.DailyCreateDS_Async(stoppingToken);
                 
                 await Task.Delay(TimeSpan.FromMinutes(5), stoppingToken);
-            }
+           }
         }
     }
 }

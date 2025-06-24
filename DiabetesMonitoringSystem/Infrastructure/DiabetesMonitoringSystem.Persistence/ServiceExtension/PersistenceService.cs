@@ -8,6 +8,8 @@ using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Persistence.Configurations;
 using DiabetesMonitoringSystem.Persistence.Repositories;
 using DiabetesMonitoringSystem.Persistence.Services;
+using DiabetesMonitoringSystem.Persistence.Services.EverydayService;
+using DiabetesMonitoringSystem.Persistence.Services.EveryFiveMinutesService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,10 +24,15 @@ namespace DiabetesMonitoringSystem.Persistence.ServiceExtension
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBloodSugarService, BloodSugarService>();
-            services.AddScoped<IInsulinService, InsulinService>();      
-            services.AddScoped<DailyService>();
+            services.AddScoped<IInsulinService, InsulinService>();  
+            services.AddScoped<IAlertService, AlertService>();
+            services.AddScoped<IDS_Service, DS_Service>();
+            services.AddScoped<IPrescriptionService, PrescriptionService>();
 
+
+            services.AddScoped<DailyService>();
             services.AddHostedService<DailyBackgroundService>();
+            services.AddHostedService<DailyAlertBackgroundService>();
 
             services.AddScoped<IJwtService, JwtService>();
             services.Configure<JwtTokenOptions>(cfg.GetSection("TokenOptions"));

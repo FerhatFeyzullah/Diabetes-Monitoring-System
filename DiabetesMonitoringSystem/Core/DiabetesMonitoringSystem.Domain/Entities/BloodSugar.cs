@@ -14,6 +14,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
         public int Value { get; set; }
         public DateOnly MeasurementTime { get; set; }
         public TimePeriod TimePeriod { get; set; }
+        public List<string>? Symptoms { get; set; }
 
         public int PatientId { get; set; }
         public AppUser Patient { get; set; }
