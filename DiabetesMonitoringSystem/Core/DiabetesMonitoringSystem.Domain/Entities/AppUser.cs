@@ -13,7 +13,6 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string TC { get; set; }
         public DateOnly BirthDate { get; set; }
         public Gender Gender { get; set; }        
         public string? ProfilePhotoId { get; set; }

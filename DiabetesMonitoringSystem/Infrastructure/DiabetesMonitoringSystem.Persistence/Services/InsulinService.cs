@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DiabetesMonitoringSystem.Application.DTOs.InsulinDTOs;
 using DiabetesMonitoringSystem.Application.Repositories;
 using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
@@ -82,7 +83,49 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return validValues.Length > 0 ? (int)validValues.Average() : 0;
         }
 
+        public async Task<List<DailyInsulinGroupDto>> GetInsulinByPatientAndGroupedByDate(int patientId)
+        {
+            var values = await _dbContext.Insulins
+                .Where(i=>i.PatientId == patientId)
+                .GroupBy(i => i.Date)
+                .Select(g=> new DailyInsulinGroupDto
+                {
+                    Date = g.Key,
+                    Doses = g.Select(x => new InsulinDto
+                    {
+                        InsulinId = x.InsulinId,
+                        Dose = x.Dose,
+                        TimePeriod = x.TimePeriod
+                    })
+                    .OrderBy(h => h.TimePeriod)
+                    .ToList()
+                })
+                .OrderBy(d => d.Date)
+                .ToListAsync();
+            return values;
+        }
 
+        public async Task<List<DailyInsulinGroupDto>> GetInsulinByPatientAndGroupedByFilteredDate(int patientId, DateOnly start, DateOnly end)
+        {
+            var values = await _dbContext.Insulins
+                .Where(i => i.PatientId == patientId && i.Date >=start && i.Date<=end)
+                .GroupBy(i => i.Date)
+                .Select(g => new DailyInsulinGroupDto
+                {
+                    Date = g.Key,
+                    Doses = g.Select(x => new InsulinDto
+                    {
+                        InsulinId = x.InsulinId,
+                        Dose = x.Dose,
+                        TimePeriod = x.TimePeriod
+                    })
+                    .OrderBy(h => h.TimePeriod)
+                    .ToList()
+                })
+                .OrderBy(d => d.Date)
+                .ToListAsync();
+            return values;
+        }
     }
 }
 

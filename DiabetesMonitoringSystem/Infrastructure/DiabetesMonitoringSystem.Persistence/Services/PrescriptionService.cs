@@ -31,17 +31,11 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 
             if (!prescriptionExist)
             {
-                var doctorId = await _context.Users
-                    .Where(x => x.Id == patientId)
-                    .Select(x => x.DoctorId)
-                    .FirstOrDefaultAsync();
-
 
                 if (timePeriod == TimePeriod.Morning || timePeriod == TimePeriod.Midday)
                 {
 
                     var prescription = new Prescription();
-                    prescription.DoctorId = doctorId.Value;
                     prescription.PatientId = patientId;
                     prescription.PrescriptionDate = date;
 

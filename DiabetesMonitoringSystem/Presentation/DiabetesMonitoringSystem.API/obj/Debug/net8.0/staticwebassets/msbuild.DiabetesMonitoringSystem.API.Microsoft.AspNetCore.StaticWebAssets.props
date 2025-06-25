@@ -1,0 +1,22 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\upload\46ca2722-f6e7-4765-a32a-9a6004ff5962.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>DiabetesMonitoringSystem.API</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/DiabetesMonitoringSystem.API</BasePath>
+      <RelativePath>upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>8p3m6gi5ge</Fingerprint>
+      <Integrity>PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\upload\46ca2722-f6e7-4765-a32a-9a6004ff5962.png'))</OriginalItemSpec>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

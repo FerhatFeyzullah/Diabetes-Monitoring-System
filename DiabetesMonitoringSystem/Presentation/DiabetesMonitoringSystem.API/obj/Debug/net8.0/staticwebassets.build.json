@@ -1,12 +1,125 @@
 {
   "Version": 1,
-  "Hash": "Div4xAJyjwFpdHVKt8qgONH/fT40yS0yJkwL6LllMQY=",
+  "Hash": "32Scbj9JAUgtQGS6Zv+SXBEAb7Wi94GrJDGH+0SWYck=",
   "Source": "DiabetesMonitoringSystem.API",
   "BasePath": "_content/DiabetesMonitoringSystem.API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "DiabetesMonitoringSystem.API\\wwwroot",
+      "Source": "DiabetesMonitoringSystem.API",
+      "ContentRoot": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\",
+      "BasePath": "_content/DiabetesMonitoringSystem.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png",
+      "SourceId": "DiabetesMonitoringSystem.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\",
+      "BasePath": "_content/DiabetesMonitoringSystem.API",
+      "RelativePath": "upload/46ca2722-f6e7-4765-a32a-9a6004ff5962#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8p3m6gi5ge",
+      "Integrity": "PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.8p3m6gi5ge.png",
+      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Jun 2025 14:36:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8p3m6gi5ge"
+        },
+        {
+          "Name": "label",
+          "Value": "upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU="
+        }
+      ]
+    },
+    {
+      "Route": "upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.png",
+      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 25 Jun 2025 14:36:26 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU="
+        }
+      ]
+    }
+  ]
 }

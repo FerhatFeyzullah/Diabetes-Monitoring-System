@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,18 +10,16 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatient
 {
-    public class GetPrescriptionByPatientHandler(IReadRepository<Prescription> readRepository,IMapper mapper) : IRequestHandler<GetPrescriptionByPatientRequest, GetPrescriptionByPatientResponse>
+    public class GetPrescriptionByPatientHandler(IReadRepository<Prescription> readRepository,IMapper mapper) : IRequestHandler<GetPrescriptionByPatientRequest, List<GetPrescriptionByPatientResponse>>
     {
-        public async Task<GetPrescriptionByPatientResponse> Handle(GetPrescriptionByPatientRequest request, CancellationToken cancellationToken)
+        public async Task<List<GetPrescriptionByPatientResponse>> Handle(GetPrescriptionByPatientRequest request, CancellationToken cancellationToken)
         {
-            var value = await readRepository.GetByFiltered(x => x.PatientId == request.PatientId
-            , x => x.Doctor, x => x.Patient, x => x.Diet, x => x.Exercise
-            );
-
-            return mapper.Map<GetPrescriptionByPatientResponse>(value);
-
-
-
+            var values = await readRepository.GetByFilteredList(
+                 x=>x.PatientId == request.PatientId,
+                    x => x.Diet,
+                    x => x.Exercise
+                 );
+            return mapper.Map<List<GetPrescriptionByPatientResponse>>(values);
         }
     }
 }

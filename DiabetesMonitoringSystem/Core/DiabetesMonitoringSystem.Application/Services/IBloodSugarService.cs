@@ -10,5 +10,6 @@ namespace DiabetesMonitoringSystem.Application.Services
     public interface IBloodSugarService
     {
         Task<List<DailyBloodSugarGroupDto>> GetBloodSugarByPatientAndByDate(int patientId);
+        Task<List<DailyBloodSugarGroupDto>> GetBloodSugarByPatientAndByFilteredDate(int patientId,DateOnly start,DateOnly end);
     }
 }

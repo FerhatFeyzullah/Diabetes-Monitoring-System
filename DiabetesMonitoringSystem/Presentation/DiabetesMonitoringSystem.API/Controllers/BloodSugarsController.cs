@@ -1,5 +1,6 @@
 ﻿using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.AddBloodSugar;
-using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.BloodSugarListByDate;
+using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByDate;
+using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByFilteredDate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,17 @@ namespace DiabetesMonitoringSystem.API.Controllers
             return Ok(await mediator.Send(request));
         }
 
-        [HttpGet("GetBloodSugarByPatientAndByDate")]
-        public async Task<IActionResult> GetBloodSugarByPatientAndByDate([FromQuery]BloodSugarListByDateRequest request)
+        [HttpGet("GetBS_ByPatientAndGroupedByDate")]
+        public async Task<IActionResult> GetBS_ByPatientAndGroupedByDate([FromQuery] BloodSugarListByDateRequest request)
         {
-            var values =  await mediator.Send(request);
-            return Ok(values);
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpGet("GetBS_ByPatientAndGroupedByFilteredDate")]
+        public async Task<IActionResult> GetBS_ByPatientAndGroupedByFilteredDate([FromQuery] GetBS_ByPatientAndGroupedByFilteredDateRequest request)
+        {
+            return Ok(await mediator.Send(request));
+
         }
     }
 }

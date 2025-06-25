@@ -1,5 +1,68 @@
 [
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetAlertByPatientAndAlertType",
+    "RelativePath": "api/Alerts/GetAlertByPatientAndAlertType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "AlertType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetAlertsByPatient",
+    "RelativePath": "api/Alerts/GetAlertsByPatient",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetAlertsByPatientAndDate",
+    "RelativePath": "api/Alerts/GetAlertsByPatientAndDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "StartDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AuthsController",
     "Method": "Login",
     "RelativePath": "api/Auths/Login",
@@ -49,8 +112,8 @@
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
-    "Method": "GetBloodSugarByPatientAndByDate",
-    "RelativePath": "api/BloodSugars/GetBloodSugarByPatientAndByDate",
+    "Method": "GetBS_ByPatientAndGroupedByDate",
+    "RelativePath": "api/BloodSugars/GetBS_ByPatientAndGroupedByDate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -58,6 +121,32 @@
       {
         "Name": "PatientId",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
+    "Method": "GetBS_ByPatientAndGroupedByFilteredDate",
+    "RelativePath": "api/BloodSugars/GetBS_ByPatientAndGroupedByFilteredDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "StartDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.DateOnly",
         "IsRequired": false
       }
     ],
@@ -81,22 +170,6 @@
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
-    "Method": "GetDS_ByDate",
-    "RelativePath": "api/DailyStatuses/GetDS_ByDate",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Date",
-        "Type": "System.DateOnly",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
     "Method": "GetDS_ByPatient",
     "RelativePath": "api/DailyStatuses/GetDS_ByPatient",
     "HttpMethod": "GET",
@@ -106,6 +179,48 @@
       {
         "Name": "PatientId",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "GetDS_ByPatientAndDate",
+    "RelativePath": "api/DailyStatuses/GetDS_ByPatientAndDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "GetDS_ByPatientAndFilteredDate",
+    "RelativePath": "api/DailyStatuses/GetDS_ByPatientAndFilteredDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Start",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "End",
+        "Type": "System.DateOnly",
         "IsRequired": false
       }
     ],
@@ -224,17 +339,43 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
-    "Method": "CreatePrescription",
-    "RelativePath": "api/Prescriptions/CreatePrescription",
-    "HttpMethod": "POST",
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.InsulinsController",
+    "Method": "GetInsulinByPatientAndGroupedByDate",
+    "RelativePath": "api/Insulins/GetInsulinByPatientAndGroupedByDate",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.CreatePrescription.CreatePrescriptionRequest",
-        "IsRequired": true
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.InsulinsController",
+    "Method": "GetInsulinByPatientAndGroupedByFilteredDate",
+    "RelativePath": "api/Insulins/GetInsulinByPatientAndGroupedByFilteredDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Start",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "End",
+        "Type": "System.DateOnly",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -256,6 +397,64 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
+    "Method": "GetPrescriptionByPatientAndDate",
+    "RelativePath": "api/Prescriptions/GetPrescriptionByPatientAndDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
+    "Method": "GetPrescriptionByPatientAndFilteredDate",
+    "RelativePath": "api/Prescriptions/GetPrescriptionByPatientAndFilteredDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Start",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "End",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.PrescriptionsController",
+    "Method": "UpdatePrescription",
+    "RelativePath": "api/Prescriptions/UpdatePrescription",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.UpdatePrescription.UpdatePrescriptionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.SymptomsController",
     "Method": "GetAllSymptoms",
     "RelativePath": "api/Symptoms/GetAllSymptoms",
@@ -267,6 +466,38 @@
         "Name": "request",
         "Type": "DiabetesMonitoringSystem.Application.CQRS.SymptomFeatures.Queries.GetAllSymptom.GetAllSymptomRequest",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "ChangeForgotPassword",
+    "RelativePath": "api/Users/ChangeForgotPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.ChangeForgotPassword.ChangeForgotPasswordRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Users/ChangePassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.ChangePassword.ChangePasswordRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -315,6 +546,59 @@
         "Name": "DoctorId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "SendResetCode",
+    "RelativePath": "api/Users/SendResetCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.SendResetCode.SendResetCodeRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "UploadProfilePhoto",
+    "RelativePath": "api/Users/UploadProfilePhoto",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "AppUserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "VerifyResetCode",
+    "RelativePath": "api/Users/VerifyResetCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.VerifyResetCode.VerifyResetCodeRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -28,6 +28,7 @@ namespace DiabetesMonitoringSystem.Persistence.ServiceExtension
             services.AddScoped<IAlertService, AlertService>();
             services.AddScoped<IDS_Service, DS_Service>();
             services.AddScoped<IPrescriptionService, PrescriptionService>();
+            services.AddScoped<IForgotPasswordService, ForgotPasswordService>();
 
 
             services.AddScoped<DailyService>();
@@ -37,7 +38,9 @@ namespace DiabetesMonitoringSystem.Persistence.ServiceExtension
             services.AddScoped<IJwtService, JwtService>();
             services.Configure<JwtTokenOptions>(cfg.GetSection("TokenOptions"));
 
-            
+            services.AddMemoryCache();
+
+
         }
     }
 }

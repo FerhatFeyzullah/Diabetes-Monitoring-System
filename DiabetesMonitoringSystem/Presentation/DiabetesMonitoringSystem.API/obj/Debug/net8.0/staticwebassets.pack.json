@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png",
+      "PackagePath": "staticwebassets\\upload\\46ca2722-f6e7-4765-a32a-9a6004ff5962.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DiabetesMonitoringSystem.API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.DiabetesMonitoringSystem.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.DiabetesMonitoringSystem.API.props",
+      "PackagePath": "build\\DiabetesMonitoringSystem.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.DiabetesMonitoringSystem.API.props",
+      "PackagePath": "buildMultiTargeting\\DiabetesMonitoringSystem.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.DiabetesMonitoringSystem.API.props",
+      "PackagePath": "buildTransitive\\DiabetesMonitoringSystem.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

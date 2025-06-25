@@ -8,6 +8,7 @@ using DiabetesMonitoringSystem.Persistence.Configurations;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using DiabetesMonitoringSystem.Persistence.ServiceExtension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -25,11 +26,12 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 
 
+
 builder.Services.AddDbContext<DiabetesDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection"));
 });
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DiabetesDbContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DiabetesDbContext>().AddDefaultTokenProviders(); 
 
 
 
@@ -103,6 +105,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 

@@ -1,0 +1,16 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAssetEndpoint Include="_content/DiabetesMonitoringSystem.API/upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.8p3m6gi5ge.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\upload\46ca2722-f6e7-4765-a32a-9a6004ff5962.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"8p3m6gi5ge"},{"Name":"integrity","Value":"sha256-PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU="},{"Name":"label","Value":"_content/DiabetesMonitoringSystem.API/upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"15884"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 14:36:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/DiabetesMonitoringSystem.API/upload/46ca2722-f6e7-4765-a32a-9a6004ff5962.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\upload\46ca2722-f6e7-4765-a32a-9a6004ff5962.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"15884"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022PCKiBhUq/c9dKiUa1ZvQdgWMHtg7oB6crabIUEYY6tU=\u0022"},{"Name":"Last-Modified","Value":"Wed, 25 Jun 2025 14:36:26 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+  </ItemGroup>
+</Project>

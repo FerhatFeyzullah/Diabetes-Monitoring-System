@@ -22,10 +22,10 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 
         public async Task<List<DailyBloodSugarGroupDto>> GetBloodSugarByPatientAndByDate(int patientId)
         {
-            var values =  await _dbContext.BloodSugars
+            var values = await _dbContext.BloodSugars
                 .Where(b => b.PatientId == patientId)
                 .GroupBy(b => b.MeasurementTime)
-                .Select(g => new DailyBloodSugarGroupDto 
+                .Select(g => new DailyBloodSugarGroupDto
                 {
                     MeasurementTime = g.Key,
                     Measurements = g.Select(x => new BloodSugarDto
@@ -34,7 +34,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                         Value = x.Value,
                         TimePeriod = x.TimePeriod
                     })
-                    .OrderBy(h=>h.TimePeriod)
+                    .OrderBy(h => h.TimePeriod)
                     .ToList()
                 })
                 .OrderBy(d => d.MeasurementTime)
@@ -42,5 +42,26 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return values;
         }
 
+        public async Task<List<DailyBloodSugarGroupDto>> GetBloodSugarByPatientAndByFilteredDate(int patientId, DateOnly start, DateOnly end)
+        {
+            var values = await _dbContext.BloodSugars
+                 .Where(b => b.PatientId == patientId && b.MeasurementTime >= start && b.MeasurementTime <=end)
+                 .GroupBy(b => b.MeasurementTime)
+                 .Select(g => new DailyBloodSugarGroupDto
+                 {
+                     MeasurementTime = g.Key,
+                     Measurements = g.Select(x => new BloodSugarDto
+                     {
+                         BloodSugarId = x.BloodSugarId,
+                         Value = x.Value,
+                         TimePeriod = x.TimePeriod
+                     })
+                     .OrderBy(h => h.TimePeriod)
+                     .ToList()
+                 })
+                 .OrderBy(d => d.MeasurementTime)
+                 .ToListAsync();
+            return values;
+        }
     }
 }

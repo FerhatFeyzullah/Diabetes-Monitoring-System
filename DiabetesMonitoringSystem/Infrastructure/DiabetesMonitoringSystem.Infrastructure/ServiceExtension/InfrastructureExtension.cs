@@ -15,6 +15,7 @@ namespace DiabetesMonitoringSystem.Infrastructure.ServiceExtension
         public static void AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddScoped<IMailService, MailService>();
+            services.AddScoped<IFileStorageService, FileStorageService>();
         }
     }
 }

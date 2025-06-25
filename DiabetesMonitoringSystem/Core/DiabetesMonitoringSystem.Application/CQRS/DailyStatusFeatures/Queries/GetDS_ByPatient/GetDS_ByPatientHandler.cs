@@ -14,9 +14,8 @@ namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.
     {
         public async Task<List<GetDS_ByPatientResponse>> Handle(GetDS_ByPatientRequest request, CancellationToken cancellationToken)
         {
-            var values = await readRepository.GetByFilteredList(x => x.PatientId == request.PatientId);
-            var mapped = mapper.Map<List<GetDS_ByPatientResponse>>(values);
-            return mapped;
+            var values = await readRepository.GetByFilteredList(x => x.PatientId == request.PatientId);         
+            return mapper.Map<List<GetDS_ByPatientResponse>>(values);
         }
     }
 }

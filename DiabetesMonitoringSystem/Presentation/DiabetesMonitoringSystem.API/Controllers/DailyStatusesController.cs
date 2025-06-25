@@ -2,8 +2,9 @@
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Diet;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Exercise;
-using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByDate;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatient;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDate;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndFilteredDate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,15 +18,19 @@ namespace DiabetesMonitoringSystem.API.Controllers
         [HttpGet("GetDS_ByPatient")]
         public async Task<IActionResult> GetDS_ByPatient([FromQuery] GetDS_ByPatientRequest request)
         {
-            var values = await mediator.Send(request);
-            return Ok(values);
+            return Ok(await mediator.Send(request));
         }
 
-        [HttpGet("GetDS_ByDate")]
-        public async Task<IActionResult> GetDS_ByDate([FromQuery] GetDS_ByDateRequest request)
+        [HttpGet("GetDS_ByPatientAndDate")]
+        public async Task<IActionResult> GetDS_ByPatientAndDate([FromQuery] GetDS_ByPatientAndDateRequest request)
         {
-            var values = await mediator.Send(request);
-            return Ok(values);
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpGet("GetDS_ByPatientAndFilteredDate")]
+        public async Task<IActionResult> GetDS_ByPatientAndFilteredDate([FromQuery] GetDS_ByPatientAndFilteredDateRequest request)
+        {
+            return Ok(await mediator.Send(request));
         }
 
         [HttpPost("CreateDS")]

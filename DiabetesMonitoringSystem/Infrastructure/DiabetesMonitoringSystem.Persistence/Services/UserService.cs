@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -8,18 +9,41 @@ using DiabetesMonitoringSystem.Application.DTOs.UserDTOs;
 using DiabetesMonitoringSystem.Application.Services;
 using DiabetesMonitoringSystem.Domain.Entities;
 using DiabetesMonitoringSystem.Infrastructure.Interfaces;
+using DiabetesMonitoringSystem.Persistence.DbContext;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
-    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,IJwtService jwtService,IMapper mapper,IMailService mailService) : IUserService
+    public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,
+        IJwtService jwtService,IMapper mapper,IMailService mailService,
+        IFileStorageService fileStorageService, DiabetesDbContext _context) : IUserService
     {
+        private readonly DiabetesDbContext context = _context;
+      
+        
         public async Task<IdentityResult> CreateDoctorAsync(DoctorRegisterDto doctorRegisterDto)
         {
             var user = mapper.Map<AppUser>(doctorRegisterDto);
 
+
+            var existingUser = await usermanager.FindByNameAsync(doctorRegisterDto.TC);
+            if (existingUser != null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Bu TC kimlik numarasıyla kayıtlı zaten bir kullanıcı var." });
+            }
+
+            var existingEmailUser = await usermanager.FindByEmailAsync(doctorRegisterDto.Email);
+            if (existingEmailUser != null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Bu e-posta adresiyle kayıtlı zaten bir kullanıcı var." });
+            }
+
+
+            user.UserName = doctorRegisterDto.TC;
             var result = await usermanager.CreateAsync(user, doctorRegisterDto.Password);
 
             if (result.Succeeded)
@@ -31,7 +55,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return result;
         }
 
-        public string GenerateRandomPassword(int length = 10)
+        private string GenerateRandomPassword(int length = 10)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789*";
             var random = new Random();
@@ -42,8 +66,24 @@ namespace DiabetesMonitoringSystem.Persistence.Services
         public async Task<IdentityResult> CreatePatientAsync(PatientRegisterDto patientRegisterDto)
         {
             var user = mapper.Map<AppUser>(patientRegisterDto);
+
+
+            var existingUser = await usermanager.FindByNameAsync(patientRegisterDto.TC);
+            if (existingUser != null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Bu TC kimlik numarasıyla kayıtlı zaten bir kullanıcı var." });
+            }
+
+            var existingEmailUser = await usermanager.FindByEmailAsync(patientRegisterDto.Email);
+            if (existingEmailUser != null)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Bu e-posta adresiyle kayıtlı zaten bir kullanıcı var." });
+            }
+
+
+
             var randomPassword = GenerateRandomPassword()+"1*";
-            user.UserName = user.FirstName;
+            user.UserName = patientRegisterDto.TC;
 
             var result = await usermanager.CreateAsync(user, randomPassword);
             if (result.Succeeded)
@@ -85,14 +125,19 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 
         public async Task<string?> LoginAsync(UserLoginDto userLoginDto)
         {
-            var user = await usermanager.Users.FirstOrDefaultAsync(u => u.TC == userLoginDto.TC);
-            if (user == null)
-                return null;
+            var user = await usermanager.FindByNameAsync(userLoginDto.TC);
+            if (user == null) 
+            {
+                var message = "Bu TC kimlik numarasıyla kayıtlı bir kullanıcı bulunamadı.";
+                return message;
+            }
+                
 
             var result = await signInManager.PasswordSignInAsync(user, userLoginDto.Password, false, false);
             if (!result.Succeeded)
             {
-                return null;
+                var message = "Şifre yanlış";
+                return message;
             }
             var token = await jwtService.CreateTokenAsync(user);
             return token;
@@ -101,6 +146,56 @@ namespace DiabetesMonitoringSystem.Persistence.Services
         public async Task LogoutAsync()
         {
             await signInManager.SignOutAsync();
+        }
+
+        public async Task UploadImage(int patientId, IFormFile image)
+        {
+            var imageId = await fileStorageService.UploadImage(image);
+
+            var user = await context.Users.FindAsync(patientId);
+            if (user != null)
+            {
+                user.ProfilePhotoId = imageId;
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
+        }
+
+        public async Task<IdentityResult> ChangePassword(int appUserId, string oldPass, string newPass, string confNewPass)
+        {
+            var user = await usermanager.FindByIdAsync(appUserId.ToString());
+
+            bool isOldPasswordValid = await usermanager.CheckPasswordAsync(user, oldPass);
+            if (!isOldPasswordValid)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Eski şifre yanlış" });
+            }
+            if (newPass != confNewPass)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Yeni şifreler eşleşmiyor" });
+            }
+
+            return await usermanager.ChangePasswordAsync(user, oldPass, newPass);
+
+
+        }
+
+        public async Task<IdentityResult> ChangeForgotPassword(string email, string newPass, string confNewPass)
+        {
+            var user = await usermanager.FindByEmailAsync(email);
+            if (newPass != confNewPass)
+            {
+                return IdentityResult.Failed(new IdentityError { Description = "Yeni şifreler eşleşmiyor" });
+            }
+
+            var token = await usermanager.GeneratePasswordResetTokenAsync(user);
+            var result = await usermanager.ResetPasswordAsync(user, token, newPass);
+            return result;
+
         }
     }
 }

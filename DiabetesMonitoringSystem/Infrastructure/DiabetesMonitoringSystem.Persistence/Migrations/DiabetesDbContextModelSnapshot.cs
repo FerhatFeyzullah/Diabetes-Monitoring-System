@@ -154,10 +154,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
-                    b.Property<string>("TC")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -319,9 +315,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<int>("DietId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("ExerciseId")
                         .HasColumnType("integer");
 
@@ -334,8 +327,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.HasKey("PrescriptionId");
 
                     b.HasIndex("DietId");
-
-                    b.HasIndex("DoctorId");
 
                     b.HasIndex("ExerciseId");
 
@@ -528,12 +519,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DiabetesMonitoringSystem.Domain.Entities.AppUser", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DiabetesMonitoringSystem.Domain.Entities.Exercise", "Exercise")
                         .WithMany()
                         .HasForeignKey("ExerciseId")
@@ -547,8 +532,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Diet");
-
-                    b.Navigation("Doctor");
 
                     b.Navigation("Exercise");
 
