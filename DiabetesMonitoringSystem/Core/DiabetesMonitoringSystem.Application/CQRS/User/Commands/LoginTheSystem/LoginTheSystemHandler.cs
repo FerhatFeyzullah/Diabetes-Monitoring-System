@@ -10,13 +10,15 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.LoginTheSystem
 {
-    public class LoginTheSystemHandler(IUserService userService,IMapper mapper) : IRequestHandler<LoginTheSystemRequest, string>
+    public class LoginTheSystemHandler(IUserService userService,IMapper mapper) : IRequestHandler<LoginTheSystemRequest, LoginTheSystemResponse>
     {
-        public async Task<string> Handle(LoginTheSystemRequest request, CancellationToken cancellationToken)
+        public async Task<LoginTheSystemResponse> Handle(LoginTheSystemRequest request, CancellationToken cancellationToken)
         {
             var value = mapper.Map<UserLoginDto>(request);
-            var token = await userService.LoginAsync(value);
-            return token;
+            var response = await userService.LoginAsync(value);
+            return mapper.Map<LoginTheSystemResponse>(response);
+
+
         }
     }
 }

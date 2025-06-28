@@ -25,6 +25,7 @@ namespace DiabetesMonitoringSystem.Application.Mapping
             CreateMap<AppUser,GetPatientForDoctorResponse>().ReverseMap();
 
             CreateMap<LoginTheSystemRequest, UserLoginDto>().ReverseMap();
+            CreateMap<LoginTheSystemResponse, UserLoginResponseDto>().ReverseMap();
         }
     }
 }

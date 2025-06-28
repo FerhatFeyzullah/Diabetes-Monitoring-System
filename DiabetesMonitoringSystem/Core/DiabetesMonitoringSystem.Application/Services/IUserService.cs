@@ -16,7 +16,7 @@ namespace DiabetesMonitoringSystem.Application.Services
 
         Task<IdentityResult> CreateDoctorAsync(DoctorRegisterDto userRegisterDto);
 
-        Task<string?> LoginAsync(UserLoginDto userLoginDto);
+        Task<UserLoginResponseDto> LoginAsync(UserLoginDto userLoginDto);
 
         Task LogoutAsync();
 

@@ -2,6 +2,7 @@
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.LogoutTheSystem;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
@@ -13,13 +14,35 @@ namespace DiabetesMonitoringSystem.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginTheSystemRequest request)
         {
-            return Ok(await mediator.Send(request));
+
+            var result = await mediator.Send(request);
+
+            if (result.Success) 
+            {
+                Response.Cookies.Append("MyAuthCookie", result.Message, new CookieOptions
+                {
+                    HttpOnly = true,
+                    SameSite = SameSiteMode.None,
+                    Secure = true
+                });
+            }
+            return Ok(result);
+
+
+
         }
 
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout(LogoutTheSystemRequest request)
         {
-            return Ok(await mediator.Send(request));
+            Response.Cookies.Append("MyAuthCookie", "", new CookieOptions
+            {
+                HttpOnly = true,
+                SameSite = SameSiteMode.None,
+                Secure = true
+            });
+            await mediator.Send(request);
+            return Ok();
         }
     }
 }

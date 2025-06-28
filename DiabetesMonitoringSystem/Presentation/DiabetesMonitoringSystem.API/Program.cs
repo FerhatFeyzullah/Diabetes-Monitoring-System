@@ -86,7 +86,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowLocalhost5173",
+    options.AddPolicy("AllowFrontend",
         policy => policy.WithOrigins("http://localhost:5173")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
@@ -107,7 +107,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
-
+app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

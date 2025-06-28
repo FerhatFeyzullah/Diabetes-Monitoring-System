@@ -13,6 +13,7 @@ using DiabetesMonitoringSystem.Persistence.DbContext;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -123,24 +124,37 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             return result;
         }
 
-        public async Task<string?> LoginAsync(UserLoginDto userLoginDto)
+        public async Task<UserLoginResponseDto> LoginAsync(UserLoginDto userLoginDto)
         {
             var user = await usermanager.FindByNameAsync(userLoginDto.TC);
             if (user == null) 
             {
-                var message = "Bu TC kimlik numarasıyla kayıtlı bir kullanıcı bulunamadı.";
-                return message;
+                return new UserLoginResponseDto
+                {
+                    Success = false,
+                    Message = "Bu TC kimlik numarasıyla kayıtlı bir kullanıcı bulunamadı."
+                };
             }
                 
 
             var result = await signInManager.PasswordSignInAsync(user, userLoginDto.Password, false, false);
             if (!result.Succeeded)
             {
-                var message = "Şifre yanlış";
-                return message;
+                return new UserLoginResponseDto
+                {
+                    Success = false,
+                    Message = "Şifre yanlış"
+                };
             }
+
+            
+
             var token = await jwtService.CreateTokenAsync(user);
-            return token;
+            return new UserLoginResponseDto
+            {
+                Success = true,
+                Message = token
+            };
         }
 
         public async Task LogoutAsync()

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.LoginTheSystem
 {
-    public class LoginTheSystemRequest:IRequest<string>
+    public class LoginTheSystemRequest:IRequest<LoginTheSystemResponse>
     {
         public string TC { get; set; }
         public string Password { get; set; }
