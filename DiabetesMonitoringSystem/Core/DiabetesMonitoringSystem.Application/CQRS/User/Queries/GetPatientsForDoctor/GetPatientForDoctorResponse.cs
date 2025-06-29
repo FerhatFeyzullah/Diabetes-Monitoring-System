@@ -10,10 +10,9 @@ namespace DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetPatientWithD
 {
     public class GetPatientForDoctorResponse
     {
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }        
-        public DateOnly BirthDate { get; set; }
-        public Gender Gender { get; set; }
         
     }
 }

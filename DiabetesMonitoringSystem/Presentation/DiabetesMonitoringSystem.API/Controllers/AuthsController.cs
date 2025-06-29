@@ -23,7 +23,8 @@ namespace DiabetesMonitoringSystem.API.Controllers
                 {
                     HttpOnly = true,
                     SameSite = SameSiteMode.None,
-                    Secure = true
+                    Secure = true,
+                    Expires = DateTime.UtcNow.AddHours(1)
                 });
             }
             return Ok(result);
@@ -39,7 +40,8 @@ namespace DiabetesMonitoringSystem.API.Controllers
             {
                 HttpOnly = true,
                 SameSite = SameSiteMode.None,
-                Secure = true
+                Secure = true,
+                Expires = DateTime.UtcNow.AddHours(1)
             });
             await mediator.Send(request);
             return Ok();

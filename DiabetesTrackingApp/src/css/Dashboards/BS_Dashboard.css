@@ -1,0 +1,26 @@
+.bs-title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bs-periods-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  margin-top: 30px;
+}
+.bs-period {
+  width: 70px;
+  height: 70px;
+  background-color: lightgray;
+  border-radius: 50px;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 0 10px 5px rgb(90, 192, 80);
+}
+.bs-period-title {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}

@@ -1,0 +1,16 @@
+.dashboard-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.single-dashboard {
+  width: 550px;
+  height: 280px;
+  background-color: whitesmoke;
+  margin: 15px;
+  border: 1px solid lightgrey;
+  box-shadow: 7px 7px 4px lightblue;
+  border-radius: 5px;
+}

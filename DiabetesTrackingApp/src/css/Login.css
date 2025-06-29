@@ -1,41 +1,40 @@
-.login-card{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
+.login-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
 }
-.login-card-main{
-    border: 1px solid rgb(228, 219, 219);
-    box-shadow: 10px 10px 5px lightblue;
-    border-radius: 5px;
-    background-color: whitesmoke;
-    width: 350px;
-    height: 300px;
-    
+.login-card-main {
+  border: 1px solid rgb(228, 219, 219);
+  box-shadow: 10px 10px 5px lightblue;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  width: 350px;
+  height: 300px;
 }
-.login-card-title{
-font-family: Arial, Helvetica, sans-serif;
-font-size: 17px;
-margin: 20px 0px;
+.login-card-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  margin: 20px 0px;
 }
-.login-navbar{
-    width: 100%;
-    height: 70px;
-    background-color: rgb(52, 176, 207);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.login-navbar {
+  width: 100%;
+  height: 70px;
+  background-color: rgb(52, 176, 207);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.login-navbar-title{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: bold;
-    color:beige;
+.login-navbar-title {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: bold;
+  color: beige;
 }
-.login-input{
-    width :250px;
+.login-input {
+  width: 250px;
 }
-.login-card-button{
-    margin-top: 50px;
+.login-card-button {
+  margin-top: 50px;
 }

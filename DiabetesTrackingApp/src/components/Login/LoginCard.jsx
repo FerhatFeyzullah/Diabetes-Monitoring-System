@@ -10,12 +10,14 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Button } from '@mui/material';
+import {setDoctorId} from '../../redux/slice/doctorSlice'
 
 function LoginCard() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {token,errorMessage} = useSelector(Store=>Store.auth)
+    
 
     useEffect(()=>{
 console.log(errorMessage);
@@ -30,6 +32,7 @@ if (token) {
 
                 if (role === "Doktor") {
                     navigate("/doktor/" + userId);
+                    dispatch(setDoctorId(userId));
                 }
 
                 else if (role === "Hasta") {

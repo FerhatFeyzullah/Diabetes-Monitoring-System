@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Login from '../pages/Login'
 import Patient from '../pages/Patient'
 import Doctor from '../pages/Doctor'
+import Archive from '../pages/Archive'
 
 function RouterConfig() {
 
@@ -14,6 +15,8 @@ function RouterConfig() {
 
         <Route path='/hasta/:userId' element={<Patient/>}/>
         <Route path='/doktor/:userId' element={<Doctor/>}/>
+        <Route path='/arsiv/:doctorId' element={<Archive/>}/>
+
     </Routes>
   )
 }
