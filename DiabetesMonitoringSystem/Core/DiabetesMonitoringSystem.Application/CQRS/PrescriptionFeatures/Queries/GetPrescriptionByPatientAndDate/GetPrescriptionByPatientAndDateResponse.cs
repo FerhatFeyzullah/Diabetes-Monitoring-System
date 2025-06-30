@@ -11,7 +11,10 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries
     {
         public int PrescriptionId { get; set; }
         public DateOnly PrescriptionDate { get; set; }
+        public int DietId { get; set; }
         public Diet Diet { get; set; }
+        public int ExerciseId { get; set; }
         public Exercise Exercise { get; set; }
+        public int PatientId { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -125,6 +126,29 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                 .OrderBy(d => d.Date)
                 .ToListAsync();
             return values;
+        }
+
+        public async Task<DailyInsulinGroupDto> GetInsulinByPatientAndGroupedByDateDaily(int patientId)
+        {
+            var date = DateOnly.FromDateTime(DateTime.Today);
+            var value = await _dbContext.Insulins
+                .Where(i => i.PatientId == patientId && i.Date == date)
+                .GroupBy(i => i.Date)
+                .Select(g => new DailyInsulinGroupDto
+                {
+                    Date = g.Key,
+                    Doses = g.Select(x => new InsulinDto
+                    {
+                        InsulinId = x.InsulinId,
+                        Dose = x.Dose,
+                        TimePeriod = x.TimePeriod
+                    })
+                    .OrderBy(h => h.TimePeriod)
+                    .ToList()
+                })
+                .OrderBy(d => d.Date)
+                .FirstOrDefaultAsync();
+            return value;
         }
     }
 }

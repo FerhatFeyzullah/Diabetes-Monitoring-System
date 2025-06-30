@@ -1,4 +1,5 @@
 ﻿using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByDate;
+using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByFilteredDate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,12 @@ namespace DiabetesMonitoringSystem.API.Controllers
     {
         [HttpGet("GetInsulinByPatientAndGroupedByDate")]
         public async Task<IActionResult> GetInsulinByPatientAndGroupedByDate([FromQuery] GetInsulinByPatientAndGroupedByDateRequest request)
+        {
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpGet("GetInsulinByPatientAndGroupedByDateDaily")]
+        public async Task<IActionResult> GetInsulinByPatientAndGroupedByDateDaily([FromQuery] GetInsulinByPatientAndGroupedByDateDailyRequest request)
         {
             return Ok(await mediator.Send(request));
         }

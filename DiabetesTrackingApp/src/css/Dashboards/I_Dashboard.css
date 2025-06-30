@@ -9,7 +9,7 @@
   justify-content: space-around;
   align-items: center;
   height: 100px;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .i-period {
   width: 70px;
@@ -18,7 +18,7 @@
   border-radius: 50px;
   margin-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0 0 10px 5px lightcyan;
+  box-shadow: 0 0 10px 5px rgb(86, 168, 61);
 }
 .i-period-title {
   font-family: Arial, Helvetica, sans-serif;

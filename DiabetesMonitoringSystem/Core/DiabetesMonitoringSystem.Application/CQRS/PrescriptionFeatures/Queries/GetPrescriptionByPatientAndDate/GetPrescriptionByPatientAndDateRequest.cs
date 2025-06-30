@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndDate
 {
-    public class GetPrescriptionByPatientAndDateRequest:IRequest<GetPrescriptionByPatientAndDateResponse>
+    public class GetPrescriptionByPatientAndDateRequest:IRequest<List<GetPrescriptionByPatientAndDateResponse>>
     {
         public int PatientId { get; set; }
     }

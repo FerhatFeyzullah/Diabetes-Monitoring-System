@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByDate;
+using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByFilteredDate;
 using DiabetesMonitoringSystem.Application.DTOs.InsulinDTOs;
 using DiabetesMonitoringSystem.Domain.Entities;
@@ -16,6 +17,7 @@ namespace DiabetesMonitoringSystem.Application.Mapping
         public InsulinMapping()
         {
             CreateMap<GetInsulinByPatientAndGroupedByDateResponse, DailyInsulinGroupDto>().ReverseMap();
+            CreateMap<GetInsulinByPatientAndGroupedByDateDailyResponse, DailyInsulinGroupDto>().ReverseMap();
             CreateMap<GetInsulinByPatientAndGroupedByFilteredDateResponse, DailyInsulinGroupDto>().ReverseMap();
         }
     }

@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using DiabetesMonitoringSystem.Domain.Entities;
 
-namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatient
+namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndDateDaily
 {
-    public class GetPrescriptionByPatientResponse
+    public class GetPrescriptionByPatientAndDateDailyResponse
     {
         public int PrescriptionId { get; set; }
         public DateOnly PrescriptionDate { get; set; }
-        public int DietId { get; set; }
         public Diet Diet { get; set; }
-        public int ExerciseId { get; set; }
         public Exercise Exercise { get; set; }
-        public int PatientId { get; set; }
+        public List<string> Symptoms { get; set; }
     }
 }

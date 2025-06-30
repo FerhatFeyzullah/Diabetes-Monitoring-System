@@ -187,6 +187,28 @@
         }
       }
     },
+    "/api/BloodSugars/GetBS_ByPatientAndGroupedByDateDaily": {
+      "get": {
+        "tags": [
+          "BloodSugars"
+        ],
+        "parameters": [
+          {
+            "name": "PatientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/BloodSugars/GetBS_ByPatientAndGroupedByDate": {
       "get": {
         "tags": [
@@ -247,7 +269,7 @@
         }
       }
     },
-    "/api/DailyStatuses/GetDS_ByPatient": {
+    "/api/DailyStatuses/GetDS_ByPatientAndDate": {
       "get": {
         "tags": [
           "DailyStatuses"
@@ -269,7 +291,7 @@
         }
       }
     },
-    "/api/DailyStatuses/GetDS_ByPatientAndDate": {
+    "/api/DailyStatuses/GetDS_ByPatientAndDateDaily": {
       "get": {
         "tags": [
           "DailyStatuses"
@@ -561,6 +583,28 @@
         }
       }
     },
+    "/api/Insulins/GetInsulinByPatientAndGroupedByDateDaily": {
+      "get": {
+        "tags": [
+          "Insulins"
+        ],
+        "parameters": [
+          {
+            "name": "PatientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Insulins/GetInsulinByPatientAndGroupedByFilteredDate": {
       "get": {
         "tags": [
@@ -599,7 +643,7 @@
         }
       }
     },
-    "/api/Prescriptions/GetPrescriptionByPatient": {
+    "/api/Prescriptions/GetPrescriptionByPatientAndDate": {
       "get": {
         "tags": [
           "Prescriptions"
@@ -621,7 +665,7 @@
         }
       }
     },
-    "/api/Prescriptions/GetPrescriptionByPatientAndDate": {
+    "/api/Prescriptions/GetPrescriptionByPatientAndDateDaily": {
       "get": {
         "tags": [
           "Prescriptions"

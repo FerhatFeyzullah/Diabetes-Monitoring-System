@@ -1,7 +1,7 @@
 ﻿
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Commands.UpdatePrescription;
-using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatient;
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndDate;
+using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndFilteredDate;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -13,13 +13,13 @@ namespace DiabetesMonitoringSystem.API.Controllers
     [ApiController]
     public class PrescriptionsController(IMediator mediator) : ControllerBase
     {
-        [HttpGet("GetPrescriptionByPatient")]
-        public async Task<IActionResult> GetPrescriptionByPatient([FromQuery]GetPrescriptionByPatientRequest request) 
+        [HttpGet("GetPrescriptionByPatientAndDate")]
+        public async Task<IActionResult> GetPrescriptionByPatientAndDate([FromQuery]GetPrescriptionByPatientAndDateRequest request) 
         {
             return Ok(await mediator.Send(request));
         }
-        [HttpGet("GetPrescriptionByPatientAndDate")]
-        public async Task<IActionResult> GetPrescriptionByPatientAndDate([FromQuery]GetPrescriptionByPatientAndDateRequest request)
+        [HttpGet("GetPrescriptionByPatientAndDateDaily")]
+        public async Task<IActionResult> GetPrescriptionByPatientAndDateDaily([FromQuery]GetPrescriptionByPatientAndDateDailyRequest request)
         {
             return Ok(await mediator.Send(request));
         }

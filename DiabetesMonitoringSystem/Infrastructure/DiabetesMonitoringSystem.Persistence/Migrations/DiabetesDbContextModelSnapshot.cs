@@ -324,6 +324,10 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.Property<DateOnly>("PrescriptionDate")
                         .HasColumnType("date");
 
+                    b.Property<List<string>>("Symptoms")
+                        .IsRequired()
+                        .HasColumnType("text[]");
+
                     b.HasKey("PrescriptionId");
 
                     b.HasIndex("DietId");

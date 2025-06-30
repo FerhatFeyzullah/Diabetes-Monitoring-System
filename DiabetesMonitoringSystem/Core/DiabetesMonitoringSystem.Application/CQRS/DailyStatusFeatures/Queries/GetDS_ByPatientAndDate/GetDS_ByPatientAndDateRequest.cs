@@ -7,8 +7,9 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDate
 {
-    public class GetDS_ByPatientAndDateRequest:IRequest<GetDS_ByPatientAndDateResponse>
+    public class GetDS_ByPatientAndDateRequest:IRequest<List<GetDS_ByPatientAndDateResponse>>
     {
         public int PatientId { get; set; }
+       
     }
 }

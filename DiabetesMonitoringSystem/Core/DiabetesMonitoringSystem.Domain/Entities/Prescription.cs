@@ -10,6 +10,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
     {
         public int PrescriptionId { get; set; }
         public DateOnly PrescriptionDate { get; set; }
+        public List<string> Symptoms { get; set; }
 
         public int DietId { get; set; }
         public Diet Diet { get; set; }

@@ -38,6 +38,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     var prescription = new Prescription();
                     prescription.PatientId = patientId;
                     prescription.PrescriptionDate = date;
+                    prescription.Symptoms = symptoms;
 
                     var belirtiler = symptoms.OrderBy(x => x).ToList();
 
