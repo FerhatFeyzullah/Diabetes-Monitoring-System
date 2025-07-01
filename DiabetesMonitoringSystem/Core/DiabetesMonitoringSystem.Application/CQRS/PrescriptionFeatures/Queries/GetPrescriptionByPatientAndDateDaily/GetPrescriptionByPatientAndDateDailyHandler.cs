@@ -17,9 +17,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries
         {
             var value = await readRepository.GetByFiltered(
                 x => x.PatientId == request.PatientId &&
-                x.PrescriptionDate == DateOnly.FromDateTime(DateTime.Today),
-                v => v.Diet,
-                v => v.Exercise
+                x.PrescriptionDate == DateOnly.FromDateTime(DateTime.Today)
                 );
             return mapper.Map<GetPrescriptionByPatientAndDateDailyResponse>(value);
         }

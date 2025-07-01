@@ -18,8 +18,6 @@ namespace DiabetesMonitoringSystem.Persistence.DbContext
         public DbSet<Alert> Alerts { get; set; }
         public DbSet<BloodSugar> BloodSugars { get; set; }
         public DbSet<DailyStatus> DailyStatuses { get; set; }
-        public DbSet<Diet> Diets { get; set; }
-        public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Insulin> Insulins { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Symptom> Symptoms { get; set; }

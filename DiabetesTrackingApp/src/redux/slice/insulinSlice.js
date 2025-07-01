@@ -35,7 +35,7 @@ export const insulinSlice = createSlice({
         state.insulin = action.payload;
       })
       .addCase(GetInsulin.rejected, (state) => {
-        state.iLoading = false;
+        state.iLoading = true;
       });
   },
 });

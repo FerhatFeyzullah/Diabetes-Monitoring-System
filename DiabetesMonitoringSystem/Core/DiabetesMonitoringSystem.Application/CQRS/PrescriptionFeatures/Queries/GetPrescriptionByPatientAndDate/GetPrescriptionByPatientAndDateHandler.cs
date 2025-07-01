@@ -15,9 +15,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries
         public async Task<List<GetPrescriptionByPatientAndDateResponse>> Handle(GetPrescriptionByPatientAndDateRequest request, CancellationToken cancellationToken)
         {
             var values = await readRepository.GetByFilteredList(
-                 x=>x.PatientId == request.PatientId,
-                    x => x.Diet,
-                    x => x.Exercise
+                 x=>x.PatientId == request.PatientId
                  );
             return mapper.Map<List<GetPrescriptionByPatientAndDateResponse>>(values);
         }

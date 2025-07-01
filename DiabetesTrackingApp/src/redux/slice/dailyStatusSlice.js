@@ -35,7 +35,7 @@ export const dailyStatusSlice = createSlice({
         state.dailyStatus = action.payload;
       })
       .addCase(GetDailyStatus.rejected, (state) => {
-        state.dsLoading = false;
+        state.dsLoading = true;
       });
   },
 });

@@ -235,48 +235,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                     b.ToTable("DailyStatuses");
                 });
 
-            modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.Diet", b =>
-                {
-                    b.Property<int>("DietId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DietId"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DietType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("DietId");
-
-                    b.ToTable("Diets");
-                });
-
-            modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.Exercise", b =>
-                {
-                    b.Property<int>("ExerciseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ExerciseId"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ExerciseType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ExerciseId");
-
-                    b.ToTable("Exercises");
-                });
-
             modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.Insulin", b =>
                 {
                     b.Property<int>("InsulinId")
@@ -312,11 +270,13 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PrescriptionId"));
 
-                    b.Property<int>("DietId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Diet")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<int>("ExerciseId")
-                        .HasColumnType("integer");
+                    b.Property<string>("Exercise")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("integer");
@@ -329,10 +289,6 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                         .HasColumnType("text[]");
 
                     b.HasKey("PrescriptionId");
-
-                    b.HasIndex("DietId");
-
-                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("PatientId");
 
@@ -517,27 +473,11 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
 
             modelBuilder.Entity("DiabetesMonitoringSystem.Domain.Entities.Prescription", b =>
                 {
-                    b.HasOne("DiabetesMonitoringSystem.Domain.Entities.Diet", "Diet")
-                        .WithMany()
-                        .HasForeignKey("DietId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DiabetesMonitoringSystem.Domain.Entities.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DiabetesMonitoringSystem.Domain.Entities.AppUser", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Diet");
-
-                    b.Navigation("Exercise");
 
                     b.Navigation("Patient");
                 });

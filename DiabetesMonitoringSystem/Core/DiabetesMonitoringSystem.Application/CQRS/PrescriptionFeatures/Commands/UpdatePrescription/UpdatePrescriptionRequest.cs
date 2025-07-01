@@ -10,8 +10,9 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Command
     public class UpdatePrescriptionRequest:IRequest<Unit>
     {
         public int PrescriptionId { get; set; }
-        public int DietId { get; set; }
-        public int ExerciseId { get; set; }
+        public string Diet { get; set; }
+        public string Exercise { get; set; }
+        public List<string> Symptoms { get; set; }
         public int PatientId { get; set; }
     }
 }

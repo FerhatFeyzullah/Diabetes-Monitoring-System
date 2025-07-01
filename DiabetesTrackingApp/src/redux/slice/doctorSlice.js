@@ -9,10 +9,10 @@ const initialState = {
 
 export const GetPatientsForDoctor = createAsyncThunk(
   "GetPatients",
-  async (data) => {
+  async (doctorId) => {
     var response = await axios.get("Users/GetPatientsForDoctor", {
       params: {
-        DoctorId: data.doctorId,
+        DoctorId: doctorId,
       },
     });
     return response.data;

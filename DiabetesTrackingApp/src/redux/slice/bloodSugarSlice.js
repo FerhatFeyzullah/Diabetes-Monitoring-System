@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 const initialState = {
   bsLoading: false,
   bloodSugar: {},
+  bloodSugarArchive: [],
 };
 
 export const GetBloodSugar = createAsyncThunk(
@@ -11,6 +12,33 @@ export const GetBloodSugar = createAsyncThunk(
   async (patientId) => {
     const response = await axios.get(
       "BloodSugars/GetBS_ByPatientAndGroupedByDateDaily",
+      {
+        params: {
+          PatientId: patientId,
+        },
+      }
+    );
+    return response.data;
+  }
+);
+export const GetBS_Filtered = createAsyncThunk("getbsfilter", async (data) => {
+  var response = await axios.get(
+    "BloodSugars/GetBS_ByPatientAndGroupedByFilteredDate",
+    {
+      params: {
+        PatientId: data.patientid,
+        StartDate: data.startDate,
+        EndDate: data.endDate,
+      },
+    }
+  );
+  return response.data;
+});
+export const GetBS_UnFiltered = createAsyncThunk(
+  "getbsunfilter",
+  async (patientId) => {
+    var response = await axios.get(
+      "BloodSugars/GetBS_ByPatientAndGroupedByDate",
       {
         params: {
           PatientId: patientId,
@@ -35,10 +63,15 @@ export const bloodSugarSlice = createSlice({
         state.bloodSugar = action.payload;
       })
       .addCase(GetBloodSugar.rejected, (state) => {
-        state.bsLoading = false;
+        state.bsLoading = true;
+      })
+      .addCase(GetBS_Filtered.fulfilled, (state, action) => {
+        state.bloodSugarArchive = action.payload;
+      })
+      .addCase(GetBS_UnFiltered.fulfilled, (state, action) => {
+        state.bloodSugarArchive = action.payload;
       });
   },
 });
 
-//export const {} = bloodSugarSlice.actions;
 export default bloodSugarSlice.reducer;

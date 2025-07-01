@@ -3,43 +3,69 @@ import "../../../css/Dashboards/P_Dashboard.css";
 import { IconButton, TextField } from "@mui/material";
 import { CiEdit } from "react-icons/ci";
 import { IoCheckmark } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { UpdatePrescription } from "../../../redux/slice/prescriptionSlice";
+import useTimeRange from "../../../hooks/useTimeRange";
 
 function PrescriptionDashboard() {
+  const dispatch = useDispatch();
+  const isActive = useTimeRange(7, 13);
+
   const { prescription } = useSelector((store) => store.prescription);
   const {
+    prescriptionId,
+    patientId,
     prescriptionDate,
-    diet = {},
-    exercise = {},
+    diet = "",
+    exercise = "",
     symptoms = [],
   } = prescription;
 
-  const hasPrescription = Object.keys(prescription).length !== 0;
+  const hasPrescription = !!prescriptionDate;
 
-  const [isOnEditMode, setIsOnEditMode] = useState(false);
   const [newDiet, setNewDiet] = useState("");
   const [newExercise, setNewExercise] = useState("");
+  const [isOnEditMode, setIsOnEditMode] = useState(false);
 
   const EditButton = () => {
-    setNewDiet(diet.dietType);
-    setNewExercise(exercise.exerciseType);
+    setNewDiet(diet);
+    setNewExercise(exercise);
     setIsOnEditMode(true);
+  };
+
+  const Update = () => {
+    const data = {
+      prescriptionId: prescriptionId,
+      diet: newDiet,
+      exercise: newExercise,
+      symptoms: symptoms,
+      patientId: patientId,
+    };
+
+    dispatch(UpdatePrescription(data));
+    setIsOnEditMode(false);
   };
 
   return (
     <div className="single-dashboard">
       <div className="p-title-header">
-        <h3 className="p-title">Günlük Reçete</h3>
+        <h3
+          className="p-title"
+          style={{ marginRight: !hasPrescription ? "40px" : "0px" }}
+        >
+          Günlük Reçete
+        </h3>
         {hasPrescription &&
           (!isOnEditMode ? (
-            <IconButton className="p-edit-icon" onClick={EditButton}>
+            <IconButton
+              className="p-edit-icon"
+              onClick={EditButton}
+              disabled={!isActive}
+            >
               <CiEdit style={{ fontSize: "30px" }} />
             </IconButton>
           ) : (
-            <IconButton
-              className="p-edit-icon"
-              onClick={() => setIsOnEditMode(false)}
-            >
+            <IconButton className="p-edit-icon" onClick={Update}>
               <IoCheckmark style={{ fontSize: "30px" }} />
             </IconButton>
           ))}
@@ -60,7 +86,7 @@ function PrescriptionDashboard() {
           <div>
             <div className="p-status-title">Diyet</div>
             {!isOnEditMode ? (
-              <div className="p-status flex-row">{diet.dietType}</div>
+              <div className="p-status flex-row">{diet}</div>
             ) : (
               <div>
                 <TextField
@@ -68,7 +94,7 @@ function PrescriptionDashboard() {
                   size="small"
                   value={newDiet}
                   onChange={(e) => setNewDiet(e.target.value)}
-                  sx={{ width: "150px" }}
+                  sx={{ width: "160px" }}
                 />
               </div>
             )}
@@ -76,7 +102,7 @@ function PrescriptionDashboard() {
           <div>
             <div className="p-status-title">Egzersiz</div>
             {!isOnEditMode ? (
-              <div className="p-status flex-row">{exercise.exerciseType}</div>
+              <div className="p-status flex-row">{exercise}</div>
             ) : (
               <div>
                 <TextField
@@ -84,7 +110,7 @@ function PrescriptionDashboard() {
                   size="small"
                   value={newExercise}
                   onChange={(e) => setNewExercise(e.target.value)}
-                  sx={{ width: "150px" }}
+                  sx={{ width: "160px" }}
                 />
               </div>
             )}

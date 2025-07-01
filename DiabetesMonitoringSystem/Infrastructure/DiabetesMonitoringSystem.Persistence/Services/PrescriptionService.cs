@@ -8,6 +8,7 @@ using DiabetesMonitoringSystem.Domain.Entities;
 using DiabetesMonitoringSystem.Domain.Enums;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
@@ -46,68 +47,68 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     {
                         if (belirtiler.Contains("Nöropati") || belirtiler.Contains("Polifaji") || belirtiler.Contains("Yorgunluk"))
                         {
-                            prescription.DietId = 3; // Dengeli Beslenme
-                            prescription.ExerciseId = 1; // Yok
+                            prescription.Diet = "Dengeli Beslenme";
+                            prescription.Exercise = "Yok";
                         }
                     }
                     else if (bsValue is > 70 and < 110)
                     {
                         if (belirtiler.Contains("Yorgunluk") || belirtiler.Contains("Kilo Kaybı"))
                         {
-                            prescription.DietId = 1; // Az Şekerli Diyet
-                            prescription.ExerciseId = 2; // Yürüyüş
+                            prescription.Diet = "Az Şekerli Diyet";
+                            prescription.Exercise = "Yürüyüş"; 
                         }
                         else if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi"))
                         {
-                            prescription.DietId = 3; // Dengeli Beslenme
-                            prescription.ExerciseId = 2; // Yürüyüş
+                            prescription.Diet = "Dengeli Beslenme";
+                            prescription.Exercise = "Yürüyüş";
                         }
                     }
                     else if (bsValue is >= 110 and < 180)
                     {
-                        // 1. Koşul: Bulanık Görme, Nöropati
+                        
                         if ((belirtiler.Contains("Bulanık Görme") || belirtiler.Contains("Nöropati")) &&
                             !belirtiler.Contains("Poliüri") && !belirtiler.Contains("Polidipsi") &&
                             !belirtiler.Contains("Yorgunluk"))
                         {
-                            prescription.DietId = 1; // Az Şekerli Diyet
-                            prescription.ExerciseId = 4; // Klinik Egzersiz
+                            prescription.Diet = "Az Şekerli Diyet"; 
+                            prescription.Exercise = "Klinik Egzersiz";
                         }
-                        // 2. Koşul: Poliüri, Polidipsi
+                        
                         else if ((belirtiler.Contains("Poliüri") || belirtiler.Contains("Polidipsi")) &&
                                  !belirtiler.Contains("Bulanık Görme") && !belirtiler.Contains("Nöropati") &&
                                  !belirtiler.Contains("Yorgunluk"))
                         {
-                            prescription.DietId = 2; // Şekersiz Diyet
-                            prescription.ExerciseId = 4; // Klinik Egzersiz
+                            prescription.Diet = "Şekersiz Diyet"; 
+                            prescription.Exercise = "Klinik Egzersiz";
                         }
-                        // 3. Koşul: Yorgunluk, Nöropati, Bulanık Görme
+                        
                         else if (belirtiler.Contains("Yorgunluk") &&
                                  (belirtiler.Contains("Nöropati") || belirtiler.Contains("Bulanık Görme")))
                         {
-                            prescription.DietId = 1; // Az Şekerli Diyet
-                            prescription.ExerciseId = 2; // Yürüyüş
+                            prescription.Diet = "Az Şekerli Diyet";
+                            prescription.Exercise = "Yürüyüş";
                         }
                     }
                     else if (bsValue >= 180)
                     {
                         if (belirtiler.Contains("Yaraların Yavaş İyileşmesi"))
                         {
-                            prescription.DietId = 2; // Şekersiz Diyet
+                            prescription.Diet = "Şekersiz Diyet";
                             if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi"))
-                                prescription.ExerciseId = 4; // Klinik Egzersiz
+                                prescription.Exercise = "Klinik Egzersiz";
                             else if (belirtiler.Contains("Kilo Kaybı"))
-                                prescription.ExerciseId = 2; // Yürüyüş
+                                prescription.Exercise = "Yürüyüş";
                             else
-                                prescription.ExerciseId = 4; // Klinik Egzersiz
+                                prescription.Exercise = "Klinik Egzersiz";
                         }
                         else if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi") || belirtiler.Contains("Kilo Kaybı"))
                         {
-                            prescription.DietId = 2; // Şekersiz Diyet
+                            prescription.Diet = "Şekersiz Diyet";
                             if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi"))
-                                prescription.ExerciseId = 4; // Klinik Egzersiz
+                                prescription.Exercise = "Klinik Egzersiz";
                             else if (belirtiler.Contains("Kilo Kaybı"))
-                                prescription.ExerciseId = 2; // Yürüyüş
+                                prescription.Exercise = "Yürüyüş";
                         }
                     }
 

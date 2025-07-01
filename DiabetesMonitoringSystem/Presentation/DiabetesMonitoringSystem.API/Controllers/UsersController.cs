@@ -26,15 +26,9 @@ namespace DiabetesMonitoringSystem.API.Controllers
         [HttpPost("CreatePatient")]
         public async Task<IActionResult> CreatePatient(CreatePatientRequest request)
         {
-            var result = await mediator.Send(request);
-            if (result.Succeeded)
-            {
-                return Ok("Yeni Hasta Kaydi Yapildi");
-            }
-            else
-            {
-                return BadRequest(new { errors = result.Errors.Select(e => e.Description) });
-            }
+          
+                return Ok(await mediator.Send(request));
+            
         }
 
         [HttpPost("CreateDoctor")]

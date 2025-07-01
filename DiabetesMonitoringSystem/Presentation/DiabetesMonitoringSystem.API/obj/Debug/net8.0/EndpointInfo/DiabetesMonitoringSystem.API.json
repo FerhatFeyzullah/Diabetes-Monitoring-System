@@ -457,110 +457,6 @@
         }
       }
     },
-    "/api/Diets/GetAllDiets": {
-      "get": {
-        "tags": [
-          "Diets"
-        ],
-        "parameters": [
-          {
-            "name": "request",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/GetAllDietRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Diets/CreateDiet": {
-      "post": {
-        "tags": [
-          "Diets"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateDietRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateDietRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateDietRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Exercises/GetAllExercises": {
-      "get": {
-        "tags": [
-          "Exercises"
-        ],
-        "parameters": [
-          {
-            "name": "request",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/GetAllExerciseRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Exercises/CreateExercise": {
-      "post": {
-        "tags": [
-          "Exercises"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExerciseRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExerciseRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateExerciseRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Insulins/GetInsulinByPatientAndGroupedByDate": {
       "get": {
         "tags": [
@@ -1116,20 +1012,6 @@
         },
         "additionalProperties": false
       },
-      "CreateDietRequest": {
-        "type": "object",
-        "properties": {
-          "dietType": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "CreateDoctorRequest": {
         "type": "object",
         "properties": {
@@ -1165,20 +1047,6 @@
             "$ref": "#/components/schemas/Gender"
           },
           "profilePhotoId": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateExerciseRequest": {
-        "type": "object",
-        "properties": {
-          "exerciseType": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
             "type": "string",
             "nullable": true
           }
@@ -1230,14 +1098,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "GetAllDietRequest": {
-        "type": "object",
-        "additionalProperties": false
-      },
-      "GetAllExerciseRequest": {
-        "type": "object",
-        "additionalProperties": false
       },
       "GetAllSymptomRequest": {
         "type": "object",
@@ -1312,13 +1172,20 @@
             "type": "integer",
             "format": "int32"
           },
-          "dietId": {
-            "type": "integer",
-            "format": "int32"
+          "diet": {
+            "type": "string",
+            "nullable": true
           },
-          "exerciseId": {
-            "type": "integer",
-            "format": "int32"
+          "exercise": {
+            "type": "string",
+            "nullable": true
+          },
+          "symptoms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
           },
           "patientId": {
             "type": "integer",
