@@ -26,9 +26,9 @@ export const GetBS_Filtered = createAsyncThunk("getbsfilter", async (data) => {
     "BloodSugars/GetBS_ByPatientAndGroupedByFilteredDate",
     {
       params: {
-        PatientId: data.patientid,
-        StartDate: data.startDate,
-        EndDate: data.endDate,
+        PatientId: data.patientId,
+        Start: data.startDate,
+        End: data.endDate,
       },
     }
   );

@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 const initialState = {
   pLoading: false,
   prescription: {},
+  prescriptionArchive: [],
 };
 
 export const GetPrescription = createAsyncThunk(
@@ -20,7 +21,6 @@ export const GetPrescription = createAsyncThunk(
     return response.data;
   }
 );
-
 export const UpdatePrescription = createAsyncThunk("updateP", async (data) => {
   await axios.put("Prescriptions/UpdatePrescription", data);
   var response = await axios.get(
@@ -33,6 +33,33 @@ export const UpdatePrescription = createAsyncThunk("updateP", async (data) => {
   );
   return response.data;
 });
+export const GetP_Filtered = createAsyncThunk("getpfilter", async (data) => {
+  var response = await axios.get(
+    "Prescriptions/GetPrescriptionByPatientAndFilteredDate",
+    {
+      params: {
+        PatientId: data.patientId,
+        Start: data.startDate,
+        End: data.endDate,
+      },
+    }
+  );
+  return response.data;
+});
+export const GetP_UnFiltered = createAsyncThunk(
+  "getpunfilter",
+  async (patientId) => {
+    var response = await axios.get(
+      "Prescriptions/GetPrescriptionByPatientAndDate",
+      {
+        params: {
+          PatientId: patientId,
+        },
+      }
+    );
+    return response.data;
+  }
+);
 
 export const prescriptionSlice = createSlice({
   name: "prescription",
@@ -62,6 +89,14 @@ export const prescriptionSlice = createSlice({
       })
       .addCase(UpdatePrescription.rejected, (state) => {
         state.pLoading = false;
+      })
+
+      //GetArchive
+      .addCase(GetP_Filtered.fulfilled, (state, action) => {
+        state.prescriptionArchive = action.payload;
+      })
+      .addCase(GetP_UnFiltered.fulfilled, (state, action) => {
+        state.prescriptionArchive = action.payload;
       });
   },
 });

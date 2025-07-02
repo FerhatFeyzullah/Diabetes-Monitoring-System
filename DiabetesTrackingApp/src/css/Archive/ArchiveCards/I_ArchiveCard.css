@@ -1,0 +1,25 @@
+.i-main-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.i-a-period-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  text-align: center;
+}
+.i-a-time-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+.i-a-period {
+  width: 30px;
+  height: 30px;
+  background-color: lightgray;
+  border-radius: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+}

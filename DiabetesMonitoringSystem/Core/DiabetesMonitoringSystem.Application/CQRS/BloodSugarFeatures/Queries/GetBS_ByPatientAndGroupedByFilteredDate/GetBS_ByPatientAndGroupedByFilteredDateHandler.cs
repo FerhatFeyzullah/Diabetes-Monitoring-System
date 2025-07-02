@@ -13,7 +13,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.G
     {
         public async Task<List<GetBS_ByPatientAndGroupedByFilteredDateResponse>> Handle(GetBS_ByPatientAndGroupedByFilteredDateRequest request, CancellationToken cancellationToken)
         {
-            var values = await bloodSugarService.GetBloodSugarByPatientAndByFilteredDate(request.PatientId, request.StartDate, request.EndDate);
+            var values = await bloodSugarService.GetBloodSugarByPatientAndByFilteredDate(request.PatientId, request.Start, request.End);
             return mapper.Map<List<GetBS_ByPatientAndGroupedByFilteredDateResponse>>(values);
         }
     }

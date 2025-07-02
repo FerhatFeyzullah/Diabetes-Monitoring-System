@@ -5,6 +5,8 @@ import {
   GetBS_UnFiltered,
 } from "../../../redux/slice/bloodSugarSlice";
 
+import BS_ArchiveCard from "../ResponsePanelCards/BS_ArchiveCard";
+
 function BloodSugarPanel() {
   const dispatch = useDispatch();
 
@@ -37,7 +39,13 @@ function BloodSugarPanel() {
     console.log(bloodSugarArchive);
   }, [bloodSugarArchive]);
 
-  return <div>BloodSugarPanel</div>;
+  return (
+    <div>
+      <div>
+        <BS_ArchiveCard />
+      </div>
+    </div>
+  );
 }
 
 export default BloodSugarPanel;

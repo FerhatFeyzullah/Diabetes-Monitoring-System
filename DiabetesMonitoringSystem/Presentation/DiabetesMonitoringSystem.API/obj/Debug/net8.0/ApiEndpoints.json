@@ -156,12 +156,12 @@
         "IsRequired": false
       },
       {
-        "Name": "StartDate",
+        "Name": "Start",
         "Type": "System.DateOnly",
         "IsRequired": false
       },
       {
-        "Name": "EndDate",
+        "Name": "End",
         "Type": "System.DateOnly",
         "IsRequired": false
       }

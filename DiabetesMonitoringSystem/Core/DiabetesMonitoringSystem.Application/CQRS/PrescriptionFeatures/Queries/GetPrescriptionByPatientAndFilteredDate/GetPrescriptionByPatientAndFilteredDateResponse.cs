@@ -14,5 +14,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries
         public string Diet { get; set; }
         public string Exercise { get; set; }
         public int PatientId { get; set; }
+        public List<string> Symptoms { get; set; }
+
     }
 }

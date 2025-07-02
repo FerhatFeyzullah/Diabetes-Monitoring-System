@@ -1,0 +1,10 @@
+.n-p-d-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.n-p-d-date-gender {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}

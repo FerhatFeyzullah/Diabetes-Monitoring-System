@@ -5,6 +5,8 @@ const initialState = {
   doctorId: 0,
   loading: false,
   patients: [],
+  newPatientDialog: false,
+  newPatientResponse: "",
 };
 
 export const GetPatientsForDoctor = createAsyncThunk(
@@ -18,6 +20,10 @@ export const GetPatientsForDoctor = createAsyncThunk(
     return response.data;
   }
 );
+export const CreatePatient = createAsyncThunk("newPatient", async (data) => {
+  var response = await axios.post("Users/CreatePatient", data);
+  return response.data;
+});
 
 export const doctorSlice = createSlice({
   name: "doctor",
@@ -26,21 +32,41 @@ export const doctorSlice = createSlice({
     setDoctorId: (state, action) => {
       state.doctorId = action.payload;
     },
+    SetNewPatientDialogTrue: (state) => {
+      state.newPatientDialog = true;
+    },
+    SetNewPatientDialogFalse: (state) => {
+      state.newPatientDialog = false;
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(GetPatientsForDoctor.pending, (state) => {
-      state.loading = true;
-    }),
-      builder.addCase(GetPatientsForDoctor.fulfilled, (state, action) => {
+    builder
+      .addCase(GetPatientsForDoctor.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(GetPatientsForDoctor.fulfilled, (state, action) => {
         state.loading = false;
         state.patients = action.payload;
-      }),
-      builder.addCase(GetPatientsForDoctor.rejected, (state, action) => {
+      })
+      .addCase(GetPatientsForDoctor.rejected, (state, action) => {
         state.loading = false;
         console.log(action.error.message);
+      })
+
+      //CreatePatient
+      .addCase(CreatePatient.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(CreatePatient.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newPatientResponse = action.payload;
       });
   },
 });
 
-export const { setDoctorId } = doctorSlice.actions;
+export const {
+  setDoctorId,
+  SetNewPatientDialogTrue,
+  SetNewPatientDialogFalse,
+} = doctorSlice.actions;
 export default doctorSlice.reducer;

@@ -1,0 +1,48 @@
+.p-main-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.p-a-info-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+.p-a-time-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  text-align: center;
+}
+
+.p-a-info {
+  width: 140px;
+  height: 35px;
+  background-color: lightcyan;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.p-a-symptom {
+  width: 190px;
+  height: 65px;
+  background-color: lightcyan;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.p-single-card {
+  width: 600px;
+  height: 100px;
+  background-color: lightgrey;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 2px solid lightcyan;
+}
