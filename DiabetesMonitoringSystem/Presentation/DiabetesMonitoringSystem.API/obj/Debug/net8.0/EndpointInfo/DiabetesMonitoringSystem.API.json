@@ -125,6 +125,18 @@
         }
       }
     },
+    "/api/Auths/me": {
+      "get": {
+        "tags": [
+          "Auths"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auths/Logout": {
       "post": {
         "tags": [

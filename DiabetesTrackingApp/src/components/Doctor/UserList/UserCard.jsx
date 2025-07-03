@@ -27,6 +27,7 @@ function UserCard({ user, activePatientId, setActivePatientId }) {
           fullWidth
           color="success"
           onClick={() => GetDailyData(id)}
+          sx={{ textTransform: "none" }}
         >
           {firstName} {lastName}
         </Button>

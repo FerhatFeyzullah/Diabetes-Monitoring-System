@@ -8,12 +8,12 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.SendResetCode
 {
-    public class SendResetCodeHandler(IForgotPasswordService forgotPasswordService) : IRequestHandler<SendResetCodeRequest, Unit>
+    public class SendResetCodeHandler(IForgotPasswordService forgotPasswordService) : IRequestHandler<SendResetCodeRequest, string>
     {
-        public async Task<Unit> Handle(SendResetCodeRequest request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SendResetCodeRequest request, CancellationToken cancellationToken)
         {
-            await forgotPasswordService.SendResetCode(request.Email);
-            return Unit.Value;
+            
+            return await forgotPasswordService.SendResetCode(request.Email);
         }
     }
 }

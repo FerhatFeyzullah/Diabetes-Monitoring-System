@@ -14,7 +14,7 @@ export const schema = yup.object().shape({
     .string()
     .email("Geçerli email adresi giriniz")
     .required("Email adresi zorunlu")
-    .matches(/[a-z]/, "Küçük harf içermeli"),
+    .max(50, "E-posta 50 karakterden uzun olamaz."),
 
   birthDate: yup.mixed().required("Doğum Tarihi Zorunlu"),
   gender: yup.number().required("Cinsiyet seçimi zorunludur"),

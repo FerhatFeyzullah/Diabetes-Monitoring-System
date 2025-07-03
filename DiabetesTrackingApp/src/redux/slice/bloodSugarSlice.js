@@ -61,6 +61,7 @@ export const bloodSugarSlice = createSlice({
       .addCase(GetBloodSugar.fulfilled, (state, action) => {
         state.bsLoading = false;
         state.bloodSugar = action.payload;
+        console.log("kan sekerleri geldi", state.bloodSugar);
       })
       .addCase(GetBloodSugar.rejected, (state) => {
         state.bsLoading = true;

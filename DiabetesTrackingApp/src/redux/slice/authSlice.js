@@ -2,16 +2,19 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 
 const initialState = {
-  token: localStorage.getItem("token") || null,
   loading: false,
+  loginAlert: false,
   errorMessage: "",
+  token: {},
 };
 
 export const LoginPost = createAsyncThunk(
   "login",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post("Auths/Login", data);
+      const response = await axios.post("Auths/Login", data, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(
@@ -23,30 +26,55 @@ export const LoginPost = createAsyncThunk(
   }
 );
 
+export const ReadToken = createAsyncThunk("readToken", async () => {
+  const response = await axios.get("Auths/me", {
+    withCredentials: true, // Cookie ile birlikte gönder
+  });
+  return response.data;
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    LoginAlertChange: (state) => {
+      state.loginAlert = false;
+    },
+    Logout: (state) => {
+      state.token = {};
+      state.errorMessage = "";
+      state.loginAlert = false;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(LoginPost.pending, (state) => {
-      state.loading = true;
-    }),
-      builder.addCase(LoginPost.fulfilled, (state, action) => {
+    builder
+      .addCase(LoginPost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(LoginPost.fulfilled, (state, action) => {
         state.loading = false;
 
         if (action.payload.success) {
-          state.token = action.payload.message; // JWT token burada
-          localStorage.setItem("token", action.payload.message);
           state.errorMessage = "";
         } else {
-          state.errorMessage = action.payload.message; // Şifre yanlış, kullanıcı bulunamadı vs.
+          state.errorMessage = action.payload.message;
+          state.loginAlert = true;
         }
-      }),
-      builder.addCase(LoginPost.rejected, (state, action) => {
+      })
+      .addCase(LoginPost.rejected, (state) => {
         state.loading = false;
+        state.loginAlert = true;
         state.errorMessage = "Sunucuya ulaşılamadı.";
+      })
+      .addCase(ReadToken.fulfilled, (state, action) => {
+        state.token = action.payload;
+        console.log(state.token);
+      })
+      .addCase(ReadToken.rejected, (state) => {
+        state.token = {};
       });
   },
 });
 
+export const { LoginAlertChange, Logout } = authSlice.actions;
 export default authSlice.reducer;

@@ -14,7 +14,7 @@ function ArchivePatient({ patient }) {
       <Button
         variant={selectedPatientId !== id ? "outlined" : "contained"}
         fullWidth
-        sx={{ width: "170px" }}
+        sx={{ width: "190px", textTransform: "none" }}
         onClick={() => dispatch(SetPatientId(id))}
       >
         {firstName} {lastName}

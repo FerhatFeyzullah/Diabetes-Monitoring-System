@@ -1,59 +1,42 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { schema } from "../../schemas/LoginSchema";
-import { LoginPost } from "../../redux/slice/authSlice";
+import { LoginPost, ReadToken } from "../../redux/slice/authSlice";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Button } from "@mui/material";
+import { Button, Alert } from "@mui/material";
 import { setDoctorId } from "../../redux/slice/doctorSlice";
 
 function LoginCard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token, errorMessage } = useSelector((Store) => Store.auth);
 
-  useEffect(() => {
-    console.log(errorMessage);
-  }, [errorMessage]);
-
-  useEffect(() => {
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        const role =
-          decoded.role ||
-          decoded[
-            "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-          ];
-        const userId =
-          decoded[
-            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-          ];
-
-        if (role === "Doktor") {
-          navigate("/doktor/" + userId);
-          dispatch(setDoctorId(userId));
-        } else if (role === "Hasta") {
-          navigate("/hasta/" + userId);
-        } else {
-          console.warn("Bilinmeyen rol:", role);
-        }
-      } catch (error) {
-        console.log(token);
-        console.error("Token çözümlenemedi:", error);
-      }
-    }
-  }, [token, navigate]);
+  const { token, errorMessage, loginAlert } = useSelector(
+    (store) => store.auth
+  );
+  const { userId, role } = token;
 
   const [tc, setTc] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (userId && role) {
+      if (role === "Doktor") {
+        navigate("/doktor/" + userId);
+        dispatch(setDoctorId(userId));
+      } else if (role === "Hasta") {
+        navigate("/hasta/" + userId);
+      } else {
+        console.warn("Bilinmeyen rol:", role);
+      }
+    }
+  }, [userId, role, navigate, dispatch]);
 
   const formClear = () => {
     setTc("");
@@ -69,14 +52,23 @@ function LoginCard() {
         TC: tc,
         Password: password,
       };
-      dispatch(LoginPost(loginData));
-      formClear();
+
+      const loginResult = await dispatch(LoginPost(loginData)).unwrap();
+
+      if (loginResult.success) {
+        await dispatch(ReadToken());
+        formClear();
+      }
     } catch (error) {
       const errObj = {};
-      error.inner.forEach((e) => {
-        errObj[e.path] = e.message;
-      });
-      setErrors(errObj);
+      if (error.inner) {
+        error.inner.forEach((e) => {
+          errObj[e.path] = e.message;
+        });
+        setErrors(errObj);
+      } else {
+        setErrors({ general: error.message || "Bir hata oluştu" });
+      }
     }
   };
 
@@ -124,7 +116,7 @@ function LoginCard() {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={() => setShow(!show)}>
+                    <IconButton onClick={() => setShow(!show)} edge="end">
                       {show ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -143,7 +135,7 @@ function LoginCard() {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton onClick={() => setShow(!show)}>
+                    <IconButton onClick={() => setShow(!show)} edge="end">
                       {show ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -155,8 +147,24 @@ function LoginCard() {
       </div>
 
       <div className="login-card-button">
-        <Button variant="contained" onClick={submit}>
+        <Button
+          variant="contained"
+          onClick={submit}
+          sx={{ textTransform: "none" }}
+          fullWidth
+        >
           Giriş Yap
+        </Button>
+      </div>
+      <div className="login-card-link">
+        <Button
+          href="/sifremiunuttum"
+          variant="contained"
+          size="small"
+          color="inherit"
+          sx={{ textTransform: "none" }}
+        >
+          Şifremi Unuttum
         </Button>
       </div>
     </div>

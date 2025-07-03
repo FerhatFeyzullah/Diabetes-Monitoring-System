@@ -23,13 +23,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import dayjs from "dayjs";
+import Loading from "../Loading";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
 function NewPatientDialog({ doctorId }) {
-  const { newPatientDialog, newPatientResponse } = useSelector(
+  const { newPatientDialog, newPatientResponse, loading } = useSelector(
     (store) => store.doctor
   );
   const dispatch = useDispatch();
@@ -78,10 +79,9 @@ function NewPatientDialog({ doctorId }) {
         Gender: Number(gender),
         DoctorId: doctorId,
       };
-
+      CloseDialog();
       await dispatch(CreatePatient(data));
       await dispatch(GetPatientsForDoctor(doctorId));
-      CloseDialog();
     } catch (error) {
       const errObj = {};
       error.inner.forEach((e) => {
@@ -96,6 +96,7 @@ function NewPatientDialog({ doctorId }) {
 
   return (
     <div>
+      <Loading status={loading} />
       <Dialog
         open={newPatientDialog}
         slots={{

@@ -5,9 +5,14 @@ import DoctorNavbar from "../components/Doctor/DoctorNavbar";
 import DoctorDashboard from "../components/Doctor/DoctorDashboard";
 import UserList from "../components/Doctor/UserList/UserList";
 import { useDispatch, useSelector } from "react-redux";
-import { GetPatientsForDoctor } from "../redux/slice/doctorSlice";
+import {
+  GetPatientsForDoctor,
+  MistakeAlertChange,
+  SuccesAlertChange,
+} from "../redux/slice/doctorSlice";
 import NewPatientDialog from "../components/Doctor/NewPatientDialog";
-import Loading from "../components/Loading";
+import SuccessAlert from "../components/Alerts/SuccessAlert";
+import MistakeAlert from "../components/Alerts/MistakeAlert";
 
 function Doctor() {
   const { userId } = useParams();
@@ -17,13 +22,23 @@ function Doctor() {
     await dispatch(GetPatientsForDoctor(userId));
   };
   useEffect(() => {
+    console.log(userId);
     GetPatient(userId);
   }, []);
 
-  const { loading } = useSelector((store) => store.doctor);
+  const { newPatientResponse, successAlert, mistakeAlert } = useSelector(
+    (store) => store.doctor
+  );
+  const handleMistakeClose = () => {
+    dispatch(MistakeAlertChange());
+  };
+  const handleSuccessClose = () => {
+    dispatch(SuccesAlertChange());
+  };
+
   return (
     <div>
-      <DoctorNavbar />
+      <DoctorNavbar doctorId={userId} />
       <div className="doctor-screen">
         <div>
           <UserList />
@@ -34,7 +49,16 @@ function Doctor() {
         <div>
           <NewPatientDialog doctorId={userId} />
         </div>
-        <Loading status={loading} />
+        <SuccessAlert
+          status={successAlert}
+          message={newPatientResponse}
+          closer={handleSuccessClose}
+        />
+        <MistakeAlert
+          status={mistakeAlert}
+          message={newPatientResponse}
+          closer={handleMistakeClose}
+        />
       </div>
     </div>
   );

@@ -95,6 +95,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AuthsController",
+    "Method": "GetCurrentUser",
+    "RelativePath": "api/Auths/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
     "Method": "CreateBloodSugar",
     "RelativePath": "api/BloodSugars/CreateBloodSugar",

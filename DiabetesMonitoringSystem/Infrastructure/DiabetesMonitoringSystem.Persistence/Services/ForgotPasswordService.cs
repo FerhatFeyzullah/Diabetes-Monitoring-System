@@ -14,19 +14,20 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 {
     public class ForgotPasswordService(IMailService mailService,IMemoryCache _cache,UserManager<AppUser> userManager) : IForgotPasswordService
     {
-        public async Task SendResetCode(string email)
+        public async Task<string> SendResetCode(string email)
         {
-
+            var message = "";
             var emailExists = await userManager.FindByEmailAsync(email);
             if (emailExists == null)
             {
-                throw new ArgumentException("Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.");
+                message = "Bu e-posta adresiyle kayıtlı bir kullanıcı bulunamadı.";
+                return(message);
             }
 
             var code = new Random().Next(100000, 999999).ToString(); // 6 haneli kod
 
             // cache'e 5 dakikalık kodu yaz
-            _cache.Set(email, code, TimeSpan.FromMinutes(5));
+            _cache.Set(email, code, TimeSpan.FromMinutes(2));
 
             string htmlBody = $@"
                     <html>
@@ -34,7 +35,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                         <h2>Şifre Sıfırlama Kodu</h2>
                         <p>Şifre sıfırlamak için gerekli doğrulama kodunuz:</p>
                         <p style='font-size: 24px; font-weight: bold; color: #0078D7;'>{code}</p>
-                        <p>⚠️ Bu kod sadece <strong>5 dakika</strong> geçerlidir.</p>
+                        <p>⚠️ Bu kod sadece <strong>2 dakika</strong> geçerlidir.</p>
                         <br />
                         <hr />
                         <p style='font-size: 12px; color: #999;'>Eğer bu isteği siz yapmadıysanız, lütfen bu e-postayı dikkate almayın.</p>
@@ -42,6 +43,8 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     </html>";
 
             await mailService.SendEmailAsync(email, "Şifre Sıfırlama Kodu",htmlBody,isHtml: true);
+            message = "";
+            return (message);
                 
         }
 

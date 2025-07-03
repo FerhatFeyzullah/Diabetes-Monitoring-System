@@ -9,6 +9,7 @@ using DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetPatientWithDocto
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
@@ -62,22 +63,16 @@ namespace DiabetesMonitoringSystem.API.Controllers
         [HttpPost("SendResetCode")]
         public async Task<IActionResult> SendResetCode([FromBody] SendResetCodeRequest request)
         {
-            await mediator.Send(request);
-            return Ok("Şifre Sıfırlama Kodu Gönderildi");
+
+            var result = await mediator.Send(request);
+            return Ok(result);
         }
 
         [HttpPost("VerifyResetCode")]
         public async Task<IActionResult> VerifyResetCode([FromBody] VerifyResetCodeRequest request)
         {
-            var result = await mediator.Send(request);
-            if (result)
-            {
-                return Ok("Şifre Sıfırlama Kodu Doğrulandı");
-            }
-            else
-            {
-                return BadRequest("Kod Doğrulanamadı");
-            }
+          
+                return Ok(await mediator.Send(request));         
         }
 
         [HttpPost("ChangeForgotPassword")]

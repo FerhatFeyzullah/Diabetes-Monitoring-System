@@ -1,6 +1,8 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.User.Commands.LoginTheSystem;
+﻿using System.Security.Claims;
+using DiabetesMonitoringSystem.Application.CQRS.User.Commands.LoginTheSystem;
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.LogoutTheSystem;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,27 @@ namespace DiabetesMonitoringSystem.API.Controllers
 
 
 
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public IActionResult GetCurrentUser()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(role))
+            {
+                return Unauthorized();
+            }
+
+            // İstersen buraya kullanıcı detayları çekilebilir.
+
+            return Ok(new
+            {
+                UserId = userId,
+                Role = role
+            });
         }
 
         [HttpPost("Logout")]

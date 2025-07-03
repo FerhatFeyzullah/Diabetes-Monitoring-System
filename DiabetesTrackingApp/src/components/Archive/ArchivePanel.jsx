@@ -28,17 +28,17 @@ function ArchivePanel() {
             textColor="inherit"
             indicatorColor="primary"
           >
-            <Tab label="Diet Ve Egzersiz" />
-            <Tab label="Reçeteler" />
-            <Tab label="Kan Şekeri Ölçümleri" />
-            <Tab label="Insulin Değerleri" />
+            <Tab label="DİET VE EGZERSİZ" sx={{ textTransform: "none" }} />
+            <Tab label="REÇETELER" sx={{ textTransform: "none" }} />
+            <Tab label="KAN ŞEKERİ ÖLÇÜMLERİ" sx={{ textTransform: "none" }} />
+            <Tab label="İNSULİN DEĞERLERİ" sx={{ textTransform: "none" }} />
           </Tabs>
         </div>
       </div>
       <div className="archive-titles">
         <div className="archive-title">Hastalar</div>
         <div className="archive-title" style={{ margin: "0px 170px" }}>
-          Sonuclar
+          Sonuçlar
         </div>
         <div className="archive-title">Filtreleme</div>
       </div>

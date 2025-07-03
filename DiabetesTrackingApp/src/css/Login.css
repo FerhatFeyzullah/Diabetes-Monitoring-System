@@ -11,11 +11,11 @@
   border-radius: 5px;
   background-color: whitesmoke;
   width: 350px;
-  height: 300px;
+  height: 320px;
 }
 .login-card-title {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 17px;
+  font-size: 19px;
   margin: 20px 0px;
 }
 .login-navbar {
@@ -36,5 +36,9 @@
   width: 250px;
 }
 .login-card-button {
-  margin-top: 50px;
+  margin-top: 15px;
+  width: 65%;
+}
+.login-card-link {
+  margin-top: 15px;
 }

@@ -6,7 +6,6 @@ function BloodSugarDashboard() {
   const { bloodSugar } = useSelector((store) => store.bloodSugar);
   const { measurementTime, measurements = [] } = bloodSugar || {};
 
-  // TimePeriod değerleri: 1-Sabah, 2-Öğle, 3-İkindi, 4-Akşam, 5-Gece
   const timePeriods = {
     1: "Sabah",
     2: "Öğle",
@@ -39,8 +38,8 @@ function BloodSugarDashboard() {
                 className="bs-period flex-row"
                 style={{
                   boxShadow: hasValue
-                    ? "0 0 10px 5px rgb(90, 192, 80)" // yeşil
-                    : "0 0 10px 5px rgb(151, 45, 45)", // kırmızı
+                    ? "0 0 10px 5px rgb(90, 192, 80)"
+                    : "0 0 10px 5px rgb(151, 45, 45)",
                 }}
               >
                 {value}

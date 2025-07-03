@@ -1,0 +1,54 @@
+.vc-main-container {
+  width: 400px;
+  height: 420px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  box-shadow: 7px 7px 5px lightblue;
+}
+.fp-input-text {
+  width: 80%;
+  margin-top: 20px;
+}
+.fp-code-description {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.fp-code-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 30px;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+}
+.fp-code-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 90%;
+}
+.fp-back-button {
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+.fp-input-link {
+  width: 80%;
+  margin-top: 20px;
+  text-align: center;
+  color: black;
+}
+.fp-timer {
+  width: 20%;
+  height: 10%;
+  margin-top: 20px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  border-radius: 7px;
+}

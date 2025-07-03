@@ -1,4 +1,5 @@
 using System;
+using System.Security.Claims;
 using System.Text;
 using DiabetesMonitoringSystem.Application.ServiceExtension;
 using DiabetesMonitoringSystem.Application.Services;
@@ -7,6 +8,7 @@ using DiabetesMonitoringSystem.Infrastructure.ServiceExtension;
 using DiabetesMonitoringSystem.Persistence.Configurations;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using DiabetesMonitoringSystem.Persistence.ServiceExtension;
+using DiabetesMonitoringSystem.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -25,35 +25,49 @@ builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
 
-
-
 builder.Services.AddDbContext<DiabetesDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection"));
 });
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<DiabetesDbContext>().AddDefaultTokenProviders(); 
+
+// Identity servisleri (SignInManager ile birlikte)
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireLowercase = false;
+    // Cookie tabanlý oturum yönetimini devre dýþý býrak
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<DiabetesDbContext>()
+.AddDefaultTokenProviders();
 
 
-
+// JWT
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<JwtTokenOptions>();
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+})
+.AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false;
+    options.RequireHttpsMetadata = builder.Environment.IsDevelopment() ? false : true;
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = context =>
         {
-            // Eðer Authorization header yoksa ? Cookie'den token al
-            if (string.IsNullOrEmpty(context.Token) && context.Request.Cookies.ContainsKey("MyAuthCookie"))
+            if (context.Request.Cookies.ContainsKey("MyAuthCookie"))
             {
                 context.Token = context.Request.Cookies["MyAuthCookie"];
+                Console.WriteLine($"Token from MyAuthCookie: {context.Token}");
             }
-
+            else
+            {
+                Console.WriteLine("MyAuthCookie not found in request.");
+            }
             return Task.CompletedTask;
         }
     };
@@ -66,24 +80,11 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = tokenOptions.Audience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenOptions.Key)),
         ClockSkew = TimeSpan.Zero,
-        NameClaimType = "name",
-
+        NameClaimType = ClaimTypes.NameIdentifier
     };
 });
 
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.Cookie.HttpOnly = true; // Tarayýcýdan JavaScript ile eriþilemesin
-    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
-    options.Cookie.SameSite = SameSiteMode.Lax; // veya Strict / None
-    options.Cookie.Name = "JWT"; // Ýsteðe baðlý
-    options.LoginPath = "/girisyap"; // Giriþ yapýlmadýðýnda yönlendirilecek yer
-    options.AccessDeniedPath = "/girisyap"; // Yetki yoksa yönlendirilecek yer
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Cookie ömrü
-    options.SlidingExpiration = true; // Süre dolmadan aktifse uzat
-});
-
-
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
@@ -93,28 +94,21 @@ builder.Services.AddCors(options =>
                         .AllowCredentials());
 });
 
-
-
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseStaticFiles();
 app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
+
 
 
 var provider = builder.Services.BuildServiceProvider();

@@ -43,7 +43,10 @@ function ArchiveFilterPanel() {
           <div className="flex-column">
             <DatePicker
               label="Şu tarihten"
-              sx={{ width: "200px", marginBottom: "10px" }}
+              sx={{
+                width: "200px",
+                marginBottom: "10px",
+              }}
               value={startDate}
               onChange={(e) => setStartDate(e)}
             />
@@ -62,6 +65,7 @@ function ArchiveFilterPanel() {
           <Button
             variant={!filterMod ? "outlined" : "contained"}
             onClick={SetDate}
+            sx={{ textTransform: "none", width: "150px" }}
           >
             Filtre Acik
           </Button>
@@ -70,6 +74,7 @@ function ArchiveFilterPanel() {
           <Button
             variant={filterMod ? "outlined" : "contained"}
             onClick={ClearDate}
+            sx={{ textTransform: "none", width: "150px" }}
           >
             Filtre Kapali
           </Button>

@@ -12,8 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SetNewPatientDialogTrue } from "../../redux/slice/doctorSlice";
 
-function DoctorNavbar() {
-  const { doctorId } = useSelector((store) => store.doctor);
+function DoctorNavbar({ doctorId }) {
   const userId = doctorId;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,6 +20,7 @@ function DoctorNavbar() {
   const location = useLocation();
 
   const isOnArchivePage = location.pathname.startsWith("/arsiv");
+  const isOnDoctorPage = location.pathname.startsWith("/doktor");
 
   return (
     <div className="doctor-navbar">
@@ -28,13 +28,16 @@ function DoctorNavbar() {
         <div className="doctor-navbar-title">Diyabet Takip Sistemi</div>
       </div>
       <div className="flex-row">
-        <div className="doctor-navbar-icons">
-          <Tooltip title="Yeni Hasta Kaydı">
-            <IconButton onClick={() => dispatch(SetNewPatientDialogTrue())}>
-              <PersonAddAlt1Icon sx={{ fontSize: "35px" }} />
-            </IconButton>
-          </Tooltip>
-        </div>
+        {isOnDoctorPage && (
+          <div className="doctor-navbar-icons">
+            <Tooltip title="Yeni Hasta Kaydı">
+              <IconButton onClick={() => dispatch(SetNewPatientDialogTrue())}>
+                <PersonAddAlt1Icon sx={{ fontSize: "35px" }} />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
+
         {!isOnArchivePage ? (
           <div className="doctor-navbar-icons">
             <Tooltip title="Arşiv">

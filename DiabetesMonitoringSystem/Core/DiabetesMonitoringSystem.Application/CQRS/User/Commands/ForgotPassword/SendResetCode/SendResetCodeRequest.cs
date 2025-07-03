@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.SendResetCode
 {
-    public class SendResetCodeRequest:IRequest<Unit>
+    public class SendResetCodeRequest:IRequest<string>
     {
         public string Email { get; set; }
     }
