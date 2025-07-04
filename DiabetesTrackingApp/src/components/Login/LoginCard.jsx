@@ -158,7 +158,7 @@ function LoginCard() {
       </div>
       <div className="login-card-link">
         <Button
-          href="/sifremiunuttum"
+          onClick={() => navigate("/sifremiunuttum")}
           variant="contained"
           size="small"
           color="inherit"

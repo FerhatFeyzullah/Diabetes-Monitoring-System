@@ -33,6 +33,10 @@ export const ReadToken = createAsyncThunk("readToken", async () => {
   return response.data;
 });
 
+export const LogoutFromSystem = createAsyncThunk("logout", async (data) => {
+  await axios.post("Auths/Logout", data);
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -48,6 +52,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      //LoginPost
       .addCase(LoginPost.pending, (state) => {
         state.loading = true;
       })
@@ -66,13 +71,21 @@ export const authSlice = createSlice({
         state.loginAlert = true;
         state.errorMessage = "Sunucuya ulaşılamadı.";
       })
+
+      //ReadToken
       .addCase(ReadToken.fulfilled, (state, action) => {
         state.token = action.payload;
-        console.log(state.token);
       })
       .addCase(ReadToken.rejected, (state) => {
         state.token = {};
-      });
+      })
+
+      //LogoutFromSystem
+      .addCase(LogoutFromSystem.fulfilled, (state) => {
+        state.token = {};
+        console.log(state.token);
+      })
+      .addCase(LogoutFromSystem.rejected, (state) => {});
   },
 });
 

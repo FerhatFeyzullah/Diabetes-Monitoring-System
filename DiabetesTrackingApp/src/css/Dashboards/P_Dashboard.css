@@ -4,12 +4,21 @@
   align-items: center;
   padding: 0 10px;
 }
+.p-pd-title-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .p-title {
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   flex: 1;
   margin-left: 45px;
+}
+
+.p-pd-title {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .p-edit-icon {

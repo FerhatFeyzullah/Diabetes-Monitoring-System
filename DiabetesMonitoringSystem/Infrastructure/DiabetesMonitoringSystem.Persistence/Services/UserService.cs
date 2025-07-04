@@ -143,7 +143,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                 return new UserLoginResponseDto
                 {
                     Success = false,
-                    Message = "Şifre yanlış"
+                    Message = "Hatalı Şifre Girişi"
                 };
             }
 

@@ -7,6 +7,7 @@ import insulinReducer from "./slice/insulinSlice";
 import prescriptionReducer from "./slice/prescriptionSlice";
 import archiveReducer from "./slice/archiveSlice";
 import forgotPasswordReducer from "./slice/forgotPasswordSlice";
+import patientReducer from "./slice/patientSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +19,6 @@ export const store = configureStore({
     prescription: prescriptionReducer,
     archive: archiveReducer,
     forgotPassword: forgotPasswordReducer,
+    patient: patientReducer,
   },
 });

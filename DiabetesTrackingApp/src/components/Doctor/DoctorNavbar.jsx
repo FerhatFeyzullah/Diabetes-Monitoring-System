@@ -11,16 +11,35 @@ import Tooltip from "@mui/material/Tooltip";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SetNewPatientDialogTrue } from "../../redux/slice/doctorSlice";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import { LogoutFromSystem } from "../../redux/slice/authSlice";
 
 function DoctorNavbar({ doctorId }) {
-  const userId = doctorId;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const location = useLocation();
+
+  const userId = doctorId;
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
 
   const isOnArchivePage = location.pathname.startsWith("/arsiv");
   const isOnDoctorPage = location.pathname.startsWith("/doktor");
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const SignOut = async () => {
+    const data = {};
+    await dispatch(LogoutFromSystem(data));
+    navigate("/girisyap");
+  };
 
   return (
     <div className="doctor-navbar">
@@ -66,10 +85,25 @@ function DoctorNavbar({ doctorId }) {
         </div>
         <div className="doctor-navbar-icons">
           <Tooltip title="Profil">
-            <IconButton>
+            <IconButton onClick={handleClick}>
               <PersonIcon sx={{ fontSize: "35px" }} />
             </IconButton>
           </Tooltip>
+          <div>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              slotProps={{
+                list: {
+                  "aria-labelledby": "basic-button",
+                },
+              }}
+            >
+              <MenuItem onClick={handleClose}>Profilim</MenuItem>
+              <MenuItem onClick={SignOut}>Çıkış Yap</MenuItem>
+            </Menu>
+          </div>
         </div>
       </div>
     </div>

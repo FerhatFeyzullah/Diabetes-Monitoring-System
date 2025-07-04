@@ -90,9 +90,6 @@ function NewPatientDialog({ doctorId }) {
       setErrors(errObj);
     }
   };
-  useEffect(() => {
-    console.log(newPatientResponse);
-  }, [newPatientResponse]);
 
   return (
     <div>

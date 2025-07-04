@@ -16,6 +16,7 @@ import {
 } from "../../redux/slice/forgotPasswordSlice";
 import CountdownTimer from "../../hooks/CountdownTimer";
 import MistakeAlert from "../Alerts/MistakeAlert";
+import Tooltip from "@mui/material/Tooltip";
 
 function EmailCard() {
   const { recoveryEmail, errorMessage, rejectedAlert } = useSelector(
@@ -24,7 +25,7 @@ function EmailCard() {
   const [code, setCode] = useState("");
   const [errors, setErrors] = useState({});
   const [isExpired, setIsExpired] = useState(false);
-  const [resetTimer, setResetTimer] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,6 +33,11 @@ function EmailCard() {
     try {
       await schema.validate({ code }, { abortEarly: false });
       setErrors({});
+      const data = {
+        Email: recoveryEmail,
+        VerifyCode: code,
+      };
+      dispatch(VerifyCode(data));
     } catch (error) {
       const errObj = {};
       error.inner.forEach((e) => {
@@ -51,23 +57,9 @@ function EmailCard() {
       Email: email,
     };
     dispatch(SendResetCodeAgain(data));
-    setResetTimer((prev) => !prev);
+    setResetKey((prev) => prev + 1);
     setIsExpired(false);
   };
-
-  const verify = (mail, code) => {
-    const data = {
-      Email: mail,
-      VerifyCode: code,
-    };
-    dispatch(VerifyCode(data));
-  };
-
-  useEffect(() => {
-    if (resetTimer) {
-      setIsExpired(false);
-    }
-  }, [resetTimer]);
 
   const Closer = () => {
     dispatch(FP_RejectedAlertChange());
@@ -78,9 +70,11 @@ function EmailCard() {
       <div className="vc-main-container flex-column">
         <div className="fp-code-head">
           <div className="flex-row fp-back-button">
-            <IconButton>
-              <FaArrowLeft onClick={TurnBack} />
-            </IconButton>
+            <Tooltip title="Geri">
+              <IconButton>
+                <FaArrowLeft onClick={TurnBack} />
+              </IconButton>
+            </Tooltip>
           </div>
           <div className="fp-code-title flex-column">Doğrulama Kodu</div>
         </div>
@@ -94,7 +88,7 @@ function EmailCard() {
         </div>
 
         <div className="fp-input-text">
-          {errors.email ? (
+          {errors.code ? (
             <TextField
               error
               variant="outlined"
@@ -104,6 +98,7 @@ function EmailCard() {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               fullWidth
+              type="number"
             />
           ) : (
             <TextField
@@ -113,6 +108,7 @@ function EmailCard() {
               value={code}
               onChange={(e) => setCode(e.target.value)}
               fullWidth
+              type="number"
             />
           )}
         </div>
@@ -127,7 +123,7 @@ function EmailCard() {
           <CountdownTimer
             durationInSeconds={120}
             onFinish={() => setIsExpired(true)}
-            resetSignal={resetTimer}
+            key={resetKey}
           />
         </div>
         <div className="fp-input-text">
@@ -135,7 +131,7 @@ function EmailCard() {
             variant="contained"
             fullWidth
             disabled={isExpired}
-            onClick={() => verify(recoveryEmail, code)}
+            onClick={submit}
           >
             Gönder
           </Button>
@@ -146,6 +142,7 @@ function EmailCard() {
             variant="contained"
             color="inherit"
             size="small"
+            disabled={!isExpired}
           >
             Tekrar Kod Al
           </Button>

@@ -12,6 +12,7 @@ import {
   SendResetCode,
   SetRecoveryEmail,
 } from "../../redux/slice/forgotPasswordSlice";
+import Tooltip from "@mui/material/Tooltip";
 import MistakeAlert from "../Alerts/MistakeAlert";
 
 function EmailCard() {
@@ -56,9 +57,11 @@ function EmailCard() {
       <div className="e-main-container flex-column">
         <div className="fp-email-head">
           <div className="flex-row fp-back-button">
-            <IconButton>
-              <FaArrowLeft onClick={() => navigate("/girisyap")} />
-            </IconButton>
+            <Tooltip title="Geri">
+              <IconButton>
+                <FaArrowLeft onClick={() => navigate("/girisyap")} />
+              </IconButton>
+            </Tooltip>
           </div>
           <div className="fp-email-title flex-column">Email Girişi</div>
         </div>

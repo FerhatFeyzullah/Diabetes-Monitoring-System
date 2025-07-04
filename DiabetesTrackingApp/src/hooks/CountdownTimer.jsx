@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-function CountdownTimer({ durationInSeconds = 120, onFinish, resetSignal }) {
+function CountdownTimer({ durationInSeconds, onFinish, key }) {
   const [secondsLeft, setSecondsLeft] = useState(durationInSeconds);
 
   useEffect(() => {
-    setSecondsLeft(durationInSeconds); // reset için
-  }, [resetSignal, durationInSeconds]); // resetSignal değişirse sıfırla
+    setSecondsLeft(durationInSeconds); // reset tetiklendiğinde başa al
+  }, [key, durationInSeconds]);
 
   useEffect(() => {
     if (secondsLeft === 0) {
-      onFinish?.(); // varsa çağır
+      onFinish?.();
       return;
     }
 

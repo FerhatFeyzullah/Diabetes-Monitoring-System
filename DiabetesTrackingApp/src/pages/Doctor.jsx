@@ -22,7 +22,6 @@ function Doctor() {
     await dispatch(GetPatientsForDoctor(userId));
   };
   useEffect(() => {
-    console.log(userId);
     GetPatient(userId);
   }, []);
 

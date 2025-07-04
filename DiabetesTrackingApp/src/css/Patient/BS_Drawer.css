@@ -1,0 +1,16 @@
+.bs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 100%;
+}
+
+.bs-title {
+  text-align: center;
+  margin: 10px 0px;
+}
+.bs-input {
+  margin: 20px;
+}

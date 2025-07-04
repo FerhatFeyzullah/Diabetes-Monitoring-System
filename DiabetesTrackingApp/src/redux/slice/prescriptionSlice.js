@@ -76,12 +76,12 @@ export const prescriptionSlice = createSlice({
         state.prescription = action.payload;
       })
       .addCase(GetPrescription.rejected, (state) => {
-        state.pLoading = true;
+        state.pLoading = false;
       })
 
       //Update
       .addCase(UpdatePrescription.pending, (state) => {
-        state.pLoading = false;
+        state.pLoading = true;
       })
       .addCase(UpdatePrescription.fulfilled, (state, action) => {
         state.pLoading = false;
