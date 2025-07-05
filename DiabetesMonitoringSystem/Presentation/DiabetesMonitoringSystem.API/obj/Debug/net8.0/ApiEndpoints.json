@@ -179,6 +179,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.BloodSugarsController",
+    "Method": "GetBS_TimePeriodCheck",
+    "RelativePath": "api/BloodSugars/GetBS_TimePeriodCheck",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "TimePeriod",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
     "Method": "CreateDailyStatus",
     "RelativePath": "api/DailyStatuses/CreateDS",

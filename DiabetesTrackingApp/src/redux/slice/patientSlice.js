@@ -6,12 +6,21 @@ const initialState = {
   exerciseDialog: false,
   bsDrawerStatus: false,
   insulinDose: null,
-  donePeriods: [],
-  currentPeriod: null,
+  checkResult: null,
 };
 
 export const CreateBloodSugar = createAsyncThunk("createbs", async (data) => {
   var response = await axios.post("BloodSugars/CreateBloodSugar", data);
+  return response.data;
+});
+
+export const CheckTimePeriod = createAsyncThunk("checkTP", async (data) => {
+  var response = await axios.get("BloodSugars/GetBS_TimePeriodCheck", {
+    params: {
+      PatientId: data.patientId,
+      TimePeriod: data.timePeriod,
+    },
+  });
   return response.data;
 });
 
@@ -37,25 +46,24 @@ export const patientSlice = createSlice({
     SetBsDrawerFalse: (state) => {
       state.bsDrawerStatus = false;
     },
-    SetCurrentPeriod: (state, action) => {
-      state.currentPeriod = action.payload;
-    },
-
-    AddDonePeriods: (state, action) => {
-      if (!state.donePeriods.includes(action.payload)) {
-        state.donePeriods.push(action.payload);
-      }
-    },
-    ResetDonePeriods: (state) => {
-      state.donePeriods = [];
-    },
   },
   extraReducers: (builder) => {
     builder
+
+      //CreateBloodSugar
       .addCase(CreateBloodSugar.fulfilled, (state, action) => {
         state.insulinDose = action.payload;
+        state.bsDrawerStatus = false;
       })
       .addCase(CreateBloodSugar.rejected, () => {
+        console.log("basarisiz");
+      })
+
+      //CheckTimePeriod
+      .addCase(CheckTimePeriod.fulfilled, (state, action) => {
+        state.checkResult = action.payload;
+      })
+      .addCase(CheckTimePeriod.rejected, () => {
         console.log("basarisiz");
       });
   },
@@ -68,8 +76,5 @@ export const {
   SetExerciseDialogFalse,
   SetBsDrawerTrue,
   SetBsDrawerFalse,
-  AddDonePeriods,
-  ResetDonePeriods,
-  SetCurrentPeriod,
 } = patientSlice.actions;
 export default patientSlice.reducer;

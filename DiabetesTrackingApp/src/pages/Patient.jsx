@@ -27,7 +27,7 @@ function Patient() {
   return (
     <>
       <div>
-        <PatientNavbar />
+        <PatientNavbar patientId={userId} />
       </div>
       <div>
         <PatientDashboard />

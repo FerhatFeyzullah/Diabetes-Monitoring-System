@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function useTimeRange(startHour, endHour) {
-  const [isInTimeRange, setIsInTimeRange] = useState(true);
+  const [isInTimeRange, setIsInTimeRange] = useState(false);
 
   useEffect(() => {
     const checkTime = () => {

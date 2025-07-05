@@ -2,6 +2,7 @@
 using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByDate;
 using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByFilteredDate;
+using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_TimePeriodCheck;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,12 @@ namespace DiabetesMonitoringSystem.API.Controllers
 
         [HttpGet("GetBS_ByPatientAndGroupedByFilteredDate")]
         public async Task<IActionResult> GetBS_ByPatientAndGroupedByFilteredDate([FromQuery] GetBS_ByPatientAndGroupedByFilteredDateRequest request)
+        {
+            return Ok(await mediator.Send(request));
+
+        }
+        [HttpGet("GetBS_TimePeriodCheck")]
+        public async Task<IActionResult> GetBS_TimePeriodCheck([FromQuery] GetBS_TimePeriodCheckRequest request)
         {
             return Ok(await mediator.Send(request));
 

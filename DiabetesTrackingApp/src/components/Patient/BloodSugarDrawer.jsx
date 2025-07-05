@@ -2,10 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  AddDonePeriods,
+  CheckTimePeriod,
   CreateBloodSugar,
   SetBsDrawerFalse,
-  SetCurrentPeriod,
 } from "../../redux/slice/patientSlice";
 import "../../css/Patient/BS_Drawer.css";
 import TextField from "@mui/material/TextField";
@@ -35,7 +34,7 @@ function BloodSugarDrawer({ patientId }) {
   const Morning = useTimeRange(7, 8);
   const Midday = useTimeRange(12, 13);
   const Afternoon = useTimeRange(15, 16);
-  const Evening = useTimeRange(18, 19);
+  const Evening = useTimeRange(18, 20);
   const Night = useTimeRange(22, 23);
 
   useEffect(() => {
@@ -49,8 +48,6 @@ function BloodSugarDrawer({ patientId }) {
 
   const CreateBS = (data) => {
     dispatch(CreateBloodSugar(data));
-    dispatch(AddDonePeriods(period));
-    dispatch(SetCurrentPeriod(period));
     setSymptoms([]);
     setBsValue("");
   };

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DiabetesMonitoringSystem.Application.DTOs.BloodSugarDTOs;
 using DiabetesMonitoringSystem.Application.Services;
+using DiabetesMonitoringSystem.Domain.Enums;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
 
@@ -85,6 +86,15 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                  })
                  .FirstOrDefaultAsync();
             return value;
+        }
+
+        public async Task<bool> GetBS_TimePeriodCheck(int patientId, TimePeriod timePeriod)
+        {
+            var result = await _dbContext.BloodSugars
+                .AnyAsync(x => x.PatientId == patientId &&
+                             x.MeasurementTime == DateOnly.FromDateTime(DateTime.Today) &&
+                             x.TimePeriod == timePeriod);
+            return result;
         }
     }
 }

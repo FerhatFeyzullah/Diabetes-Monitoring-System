@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LogoutFromSystem } from "../../redux/slice/authSlice";
 import "../../css/Patient/Patient.css";
-import PersonIcon from "@mui/icons-material/Person";
 import { IconButton } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
@@ -12,6 +11,7 @@ import blood from "../../assets/img/bloodSugar.png";
 import diet from "../../assets/img/diet.png";
 import exercise from "../../assets/img/exercise.png";
 import {
+  CheckTimePeriod,
   SetBsDrawerTrue,
   SetDietDialogTrue,
 } from "../../redux/slice/patientSlice";
@@ -19,32 +19,49 @@ import BloodSugarDrawer from "./BloodSugarDrawer";
 import useTimeRange from "../../hooks/useTimeRange";
 import Avatar from "@mui/material/Avatar";
 
-function PatientNavbar() {
+function PatientNavbar({ patientId }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [period, setPeriod] = useState(null);
+  const [isTime, setIsTime] = useState(false);
 
-  const { currentPeriod } = useSelector((store) => store.patient);
-  const IsAlreadyDone = useSelector((store) =>
-    store.patient.donePeriods.includes(currentPeriod)
-  );
+  const { checkResult } = useSelector((store) => store.patient);
+
   const Morning = useTimeRange(7, 8);
   const Midday = useTimeRange(12, 13);
   const Afternoon = useTimeRange(15, 16);
-  const Evening = useTimeRange(18, 19);
+  const Evening = useTimeRange(18, 20);
   const Night = useTimeRange(22, 23);
 
-  const IsTime = Morning || Midday || Afternoon || Evening || Night;
-
-  const { donePeriods } = useSelector((store) => store.patient);
-
-  const IsButtonActive = IsTime && !IsAlreadyDone;
+  useEffect(() => {
+    const newIsTime = Morning || Midday || Afternoon || Evening || Night;
+    setIsTime(newIsTime);
+  }, [Morning, Midday, Afternoon, Evening, Night]);
 
   useEffect(() => {
-    console.log(IsButtonActive);
-    console.log(IsAlreadyDone);
-    console.log(donePeriods);
-    console.log(currentPeriod);
-  }, [IsButtonActive, donePeriods]);
+    if (Morning) setPeriod(1);
+    else if (Midday) setPeriod(2);
+    else if (Afternoon) setPeriod(3);
+    else if (Evening) setPeriod(4);
+    else if (Night) setPeriod(5);
+    else setPeriod(null); // hiçbirine girmediyse
+  }, [Morning, Midday, Afternoon, Evening, Night]);
+
+  const CheckTime = async (id, tperiod) => {
+    const data = {
+      patientId: id,
+      timePeriod: tperiod,
+    };
+    await dispatch(CheckTimePeriod(data));
+  };
+
+  useEffect(() => {
+    if (period !== null) {
+      CheckTime(patientId, period);
+    }
+  }, [period]);
+
+  const IsButtonActive = isTime && !checkResult;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -73,9 +90,7 @@ function PatientNavbar() {
               <IconButton
                 disabled={!Night}
                 style={{
-                  boxShadow: IsButtonActive
-                    ? "0 0 10px 3px green"
-                    : "0 0 10px 3px red",
+                  boxShadow: Night ? "0 0 10px 3px green" : "0 0 10px 3px red",
                 }}
               >
                 <img src={exercise} className="p-navbar-png" />
@@ -91,9 +106,7 @@ function PatientNavbar() {
                 onClick={() => dispatch(SetDietDialogTrue())}
                 disabled={!Night}
                 style={{
-                  boxShadow: IsButtonActive
-                    ? "0 0 10px 3px green"
-                    : "0 0 10px 3px red",
+                  boxShadow: Night ? "0 0 10px 3px green" : "0 0 10px 3px red",
                 }}
               >
                 <img src={diet} className="p-navbar-png" />
@@ -121,8 +134,7 @@ function PatientNavbar() {
         <div className="patient-navbar-icons">
           <Tooltip title="Profil">
             <IconButton onClick={handleClick}>
-              {/* <PersonIcon sx={{ fontSize: "35px" }} /> */}
-              <Avatar>H</Avatar>
+              <Avatar sx={{ width: 60, height: 60 }}>H</Avatar>
             </IconButton>
           </Tooltip>
           <div>

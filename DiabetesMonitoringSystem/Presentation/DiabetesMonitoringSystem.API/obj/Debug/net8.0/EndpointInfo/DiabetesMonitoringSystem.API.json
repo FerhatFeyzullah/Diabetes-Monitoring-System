@@ -281,6 +281,35 @@
         }
       }
     },
+    "/api/BloodSugars/GetBS_TimePeriodCheck": {
+      "get": {
+        "tags": [
+          "BloodSugars"
+        ],
+        "parameters": [
+          {
+            "name": "PatientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TimePeriod",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/TimePeriod"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/DailyStatuses/GetDS_ByPatientAndDate": {
       "get": {
         "tags": [
