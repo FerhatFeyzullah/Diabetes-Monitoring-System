@@ -8,15 +8,16 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Commands.CreateInsulin
 {
-    public class CreateInsulinHandler(IInsulinService ınsulinService) : INotificationHandler<CreateInsulinNotification>
+    public class CreateInsulinHandler(IInsulinService insulinService) : IRequestHandler<CreateInsulinRequest, int>
     {
-        public async Task Handle(CreateInsulinNotification notification, CancellationToken cancellationToken)
+        public async  Task<int> Handle(CreateInsulinRequest request, CancellationToken cancellationToken)
         {
-            var timePeriod = notification.TimePeriod;
-            var patientId = notification.PatientId;
-            var date = notification.Date;
+            var timePeriod = request.TimePeriod;
+            var patientId = request.PatientId;
+            var date = request.Date;
 
-            await ınsulinService.InsulinCreateBasedOnBloodSugar(timePeriod, patientId, date);           
+            var value = await insulinService.InsulinCreateBasedOnBloodSugar(timePeriod, patientId, date);
+            return value;
         }
     }
 }

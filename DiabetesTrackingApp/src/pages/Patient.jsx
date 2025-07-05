@@ -39,7 +39,7 @@ function Patient() {
         <ExerciseUpdateDialog dailyStatusId={dailyStatusId} />
       </div> */}
       <div>
-        <BloodSugarDrawer />
+        <BloodSugarDrawer patientId={userId} />
       </div>
     </>
   );

@@ -8,7 +8,7 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Commands.CreateInsulin
 {
-    public class CreateInsulinNotification:INotification
+    public class CreateInsulinRequest:IRequest<int>
     {
         public TimePeriod TimePeriod { get; set; }
         public DateOnly Date { get; set; }

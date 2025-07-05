@@ -13,14 +13,14 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.AddBloodSugar
 {
-    public class AddBloodSugarHandler(IWriteRepository<BloodSugar> writeRepository,IMapper mapper,IMediator mediator) : IRequestHandler<AddBloodSugarRequest, Unit>
+    public class AddBloodSugarHandler(IWriteRepository<BloodSugar> writeRepository,IMapper mapper,IMediator mediator) : IRequestHandler<AddBloodSugarRequest, int>
     {
-        public async Task<Unit> Handle(AddBloodSugarRequest request, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddBloodSugarRequest request, CancellationToken cancellationToken)
         {
             var bloodSugar = mapper.Map<BloodSugar>(request);
             bloodSugar.MeasurementTime = DateOnly.FromDateTime(DateTime.Today);
             await writeRepository.AddAsync(bloodSugar);
-            await mediator.Publish(new CreateInsulinNotification {TimePeriod = bloodSugar.TimePeriod,PatientId =bloodSugar.PatientId, Date = bloodSugar.MeasurementTime });
+            var dose = await mediator.Send(new CreateInsulinRequest {TimePeriod = bloodSugar.TimePeriod,PatientId =bloodSugar.PatientId, Date = bloodSugar.MeasurementTime });
             await mediator.Publish(new CreateAlertNotification { TimePeriod = bloodSugar.TimePeriod, PatientId = bloodSugar.PatientId,Date = bloodSugar.MeasurementTime,BloodSugarValue = bloodSugar.Value});
             await mediator.Publish(new CreatePrescriptionNotification 
             { PatientId = bloodSugar.PatientId,
@@ -29,7 +29,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.
                 Date = bloodSugar.MeasurementTime,
                 TimePeriod = bloodSugar.TimePeriod
             });
-            return Unit.Value;
+            return dose;
         }
     }
 }

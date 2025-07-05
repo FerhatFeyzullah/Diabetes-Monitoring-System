@@ -26,7 +26,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             this._dbContext = dbContext;
         }
 
-        public async Task InsulinCreateBasedOnBloodSugar(TimePeriod timePeriod, int patientId, DateOnly date)
+        public async Task<int> InsulinCreateBasedOnBloodSugar(TimePeriod timePeriod, int patientId, DateOnly date)
         {        
             var bloodSugars = await _dbContext.Set<BloodSugar>()
                 .Where(x => x.PatientId == patientId && x.MeasurementTime == date)
@@ -44,6 +44,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
        
                 await _dbContext.Insulins.AddAsync(insulin);     
                 await _dbContext.SaveChangesAsync();
+            return insulinDose;
 
         }
 

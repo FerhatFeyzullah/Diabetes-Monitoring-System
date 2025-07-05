@@ -8,7 +8,7 @@ using MediatR;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Commands.AddBloodSugar
 {
-    public class AddBloodSugarRequest:IRequest<Unit>
+    public class AddBloodSugarRequest:IRequest<int>
     {
         public int Value { get; set; }
         public TimePeriod TimePeriod { get; set; }

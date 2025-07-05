@@ -5,7 +5,15 @@ const initialState = {
   dietDialog: false,
   exerciseDialog: false,
   bsDrawerStatus: false,
+  insulinDose: null,
+  donePeriods: [],
+  currentPeriod: null,
 };
+
+export const CreateBloodSugar = createAsyncThunk("createbs", async (data) => {
+  var response = await axios.post("BloodSugars/CreateBloodSugar", data);
+  return response.data;
+});
 
 export const patientSlice = createSlice({
   name: "patient",
@@ -29,8 +37,28 @@ export const patientSlice = createSlice({
     SetBsDrawerFalse: (state) => {
       state.bsDrawerStatus = false;
     },
+    SetCurrentPeriod: (state, action) => {
+      state.currentPeriod = action.payload;
+    },
+
+    AddDonePeriods: (state, action) => {
+      if (!state.donePeriods.includes(action.payload)) {
+        state.donePeriods.push(action.payload);
+      }
+    },
+    ResetDonePeriods: (state) => {
+      state.donePeriods = [];
+    },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(CreateBloodSugar.fulfilled, (state, action) => {
+        state.insulinDose = action.payload;
+      })
+      .addCase(CreateBloodSugar.rejected, () => {
+        console.log("basarisiz");
+      });
+  },
 });
 
 export const {
@@ -40,5 +68,8 @@ export const {
   SetExerciseDialogFalse,
   SetBsDrawerTrue,
   SetBsDrawerFalse,
+  AddDonePeriods,
+  ResetDonePeriods,
+  SetCurrentPeriod,
 } = patientSlice.actions;
 export default patientSlice.reducer;

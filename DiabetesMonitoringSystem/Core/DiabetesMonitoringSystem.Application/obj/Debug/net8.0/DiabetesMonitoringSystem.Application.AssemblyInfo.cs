@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DiabetesMonitoringSystem.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0329847ab17271ec901b4d7e301fdbb311781e4e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+742ac65e2936832040a826aed6416a6c6e5f9eec")]
 [assembly: System.Reflection.AssemblyProductAttribute("DiabetesMonitoringSystem.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DiabetesMonitoringSystem.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

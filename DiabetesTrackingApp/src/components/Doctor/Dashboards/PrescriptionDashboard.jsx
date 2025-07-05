@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../../../css/Dashboards/P_Dashboard.css";
-import { IconButton, TextField } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { CiEdit } from "react-icons/ci";
 import { IoCheckmark } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,7 +16,7 @@ import useTimeRange from "../../../hooks/useTimeRange";
 
 function PrescriptionDashboard() {
   const dispatch = useDispatch();
-  const isActive = useTimeRange(7, 13);
+  const isActive = useTimeRange(7, 15);
 
   const { prescription } = useSelector((store) => store.prescription);
   const {
@@ -88,14 +95,21 @@ function PrescriptionDashboard() {
             {!isOnEditMode ? (
               <div className="p-status flex-row">{diet}</div>
             ) : (
-              <div>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  value={newDiet}
-                  onChange={(e) => setNewDiet(e.target.value)}
-                  sx={{ width: "160px" }}
-                />
+              <div style={{ marginBottom: "40px" }}>
+                <FormControl sx={{ width: "150px" }} size="small">
+                  <Select
+                    value={newDiet}
+                    onChange={(e) => setNewDiet(e.target.value)}
+                  >
+                    <MenuItem value="Az Şekerli Diyet">
+                      Az Şekerli Diyet
+                    </MenuItem>
+                    <MenuItem value="Şekersiz Diyet">Şekersiz Diyet</MenuItem>
+                    <MenuItem value="Dengeli Beslenme">
+                      Dengeli Beslenme
+                    </MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             )}
           </div>
@@ -104,14 +118,17 @@ function PrescriptionDashboard() {
             {!isOnEditMode ? (
               <div className="p-status flex-row">{exercise}</div>
             ) : (
-              <div>
-                <TextField
-                  variant="outlined"
-                  size="small"
-                  value={newExercise}
-                  onChange={(e) => setNewExercise(e.target.value)}
-                  sx={{ width: "160px" }}
-                />
+              <div style={{ marginBottom: "40px" }}>
+                <FormControl sx={{ width: "150px" }} size="small">
+                  <Select
+                    value={newExercise}
+                    onChange={(e) => setNewExercise(e.target.value)}
+                  >
+                    <MenuItem value="Yürüyüş">Yürüyüş</MenuItem>
+                    <MenuItem value="Bisiklet">Bisiklet</MenuItem>
+                    <MenuItem value="Klinik Egzersiz">Klinik Egzersiz</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
             )}
           </div>

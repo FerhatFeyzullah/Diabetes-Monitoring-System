@@ -7,13 +7,13 @@ function DailyStatusDashboard() {
   const { date, dietStatus, exerciseStatus } = dailyStatus;
 
   return (
-    <div className="single-dashboard">
+    <div className="ds-single-dashboard">
       <div className="ds-title flex-column">
         <h3>Diyet Ve Spor Takibi</h3>
         <div>Tarih: {date}</div>
       </div>
 
-      <div className="ds-status-main">
+      <div className="p-ds-status-main">
         <div>
           <div className="ds-status-title">Diyet</div>
           <div

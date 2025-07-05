@@ -10,7 +10,7 @@ namespace DiabetesMonitoringSystem.Application.Services
 {
     public interface IInsulinService
     {
-        Task InsulinCreateBasedOnBloodSugar(TimePeriod timePeriod, int patientId,DateOnly date);
+        Task<int> InsulinCreateBasedOnBloodSugar(TimePeriod timePeriod, int patientId,DateOnly date);
         Task<DailyInsulinGroupDto> GetInsulinByPatientAndGroupedByDateDaily(int patientId);
         Task<List<DailyInsulinGroupDto>> GetInsulinByPatientAndGroupedByDate(int patientId);
         Task<List<DailyInsulinGroupDto>> GetInsulinByPatientAndGroupedByFilteredDate(int patientId, DateOnly start, DateOnly end);
