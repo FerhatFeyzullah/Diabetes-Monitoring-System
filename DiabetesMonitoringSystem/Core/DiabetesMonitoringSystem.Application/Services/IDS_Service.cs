@@ -10,6 +10,8 @@ namespace DiabetesMonitoringSystem.Application.Services
     {
         Task DietOk(int id);
         Task ExerciseOK(int id);
+        Task DietNotOk(int id);
+        Task ExerciseNotOk(int id);
         Task PrescriptionOk(int id, DateOnly date);
     }
 }

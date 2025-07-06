@@ -53,7 +53,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     }
                     else if (bsValue is > 70 and < 110)
                     {
-                        if (belirtiler.Contains("Yorgunluk") || belirtiler.Contains("Kilo Kaybı"))
+                        if (belirtiler.Contains("Yorgunluk") || belirtiler.Contains("Kilo_Kaybı"))
                         {
                             prescription.Diet = "Az Şekerli Diyet";
                             prescription.Exercise = "Yürüyüş"; 
@@ -67,7 +67,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     else if (bsValue is >= 110 and < 180)
                     {
                         
-                        if ((belirtiler.Contains("Bulanık Görme") || belirtiler.Contains("Nöropati")) &&
+                        if ((belirtiler.Contains("Bulanık_Görme") || belirtiler.Contains("Nöropati")) &&
                             !belirtiler.Contains("Poliüri") && !belirtiler.Contains("Polidipsi") &&
                             !belirtiler.Contains("Yorgunluk"))
                         {
@@ -76,7 +76,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                         }
                         
                         else if ((belirtiler.Contains("Poliüri") || belirtiler.Contains("Polidipsi")) &&
-                                 !belirtiler.Contains("Bulanık Görme") && !belirtiler.Contains("Nöropati") &&
+                                 !belirtiler.Contains("Bulanık_Görme") && !belirtiler.Contains("Nöropati") &&
                                  !belirtiler.Contains("Yorgunluk"))
                         {
                             prescription.Diet = "Şekersiz Diyet"; 
@@ -84,7 +84,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                         }
                         
                         else if (belirtiler.Contains("Yorgunluk") &&
-                                 (belirtiler.Contains("Nöropati") || belirtiler.Contains("Bulanık Görme")))
+                                 (belirtiler.Contains("Nöropati") || belirtiler.Contains("Bulanık_Görme")))
                         {
                             prescription.Diet = "Az Şekerli Diyet";
                             prescription.Exercise = "Yürüyüş";
@@ -92,22 +92,22 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                     }
                     else if (bsValue >= 180)
                     {
-                        if (belirtiler.Contains("Yaraların Yavaş İyileşmesi"))
+                        if (belirtiler.Contains("Yaraların_Yavaş_İyileşmesi"))
                         {
                             prescription.Diet = "Şekersiz Diyet";
                             if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi"))
                                 prescription.Exercise = "Klinik Egzersiz";
-                            else if (belirtiler.Contains("Kilo Kaybı"))
+                            else if (belirtiler.Contains("Kilo_Kaybı"))
                                 prescription.Exercise = "Yürüyüş";
                             else
                                 prescription.Exercise = "Klinik Egzersiz";
                         }
-                        else if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi") || belirtiler.Contains("Kilo Kaybı"))
+                        else if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi") || belirtiler.Contains("Kilo_Kaybı"))
                         {
                             prescription.Diet = "Şekersiz Diyet";
                             if (belirtiler.Contains("Polifaji") || belirtiler.Contains("Polidipsi"))
                                 prescription.Exercise = "Klinik Egzersiz";
-                            else if (belirtiler.Contains("Kilo Kaybı"))
+                            else if (belirtiler.Contains("Kilo_Kaybı"))
                                 prescription.Exercise = "Yürüyüş";
                         }
                     }

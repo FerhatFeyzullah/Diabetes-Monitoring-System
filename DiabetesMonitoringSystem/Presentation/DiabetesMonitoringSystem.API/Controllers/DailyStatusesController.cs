@@ -1,7 +1,9 @@
 ﻿using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.CreateDS;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS;
-using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Diet;
-using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Exercise;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietNotOK;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietOK;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseNotOk;
+using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseOk;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDate;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndFilteredDate;
@@ -44,18 +46,32 @@ namespace DiabetesMonitoringSystem.API.Controllers
         public async Task<IActionResult> DS_DietUpdate([FromBody] UpdateDSRequest request)
         {
             await mediator.Send(request);
-            return Ok("Günlük Durum Diyet Bilgisi Güncellendi");
+            return Ok("Günlük Durum  Bilgisi Güncellendi");
         }
 
-        [HttpPut("UpdateDS_Diet")]
-        public async Task<IActionResult> UpdateDS_Diet([FromQuery]UpdateDS_DietRequest request)
+        [HttpPut("UpdateDS_DietOk")]
+        public async Task<IActionResult> UpdateDS_DietOk([FromBody] UpdateDS_DietOkRequest request)
         {
             await mediator.Send(request);
             return Ok("Günlük Durum Diet Güncellemesi Başarılı.");
         }
 
-        [HttpPut("UpdateDS_Exercise")]
-        public async Task<IActionResult> UpdateDS_Exercise([FromQuery]UpdateDS_ExerciseRequest request)
+        [HttpPut("UpdateDS_DietNotOk")]
+        public async Task<IActionResult> UpdateDS_DietNotOk([FromBody] UpdateDS_DietNotOkRequest request)
+        {
+            await mediator.Send(request);
+            return Ok("Günlük Durum Diet Güncellemesi Başarılı.");
+        }
+
+        [HttpPut("UpdateDS_ExerciseOk")]
+        public async Task<IActionResult> UpdateDS_ExerciseOk([FromBody]UpdateDS_ExerciseOkRequest request)
+        {
+            await mediator.Send(request);
+            return Ok("Günlük Durum Egzersiz Güncellemesi Başarılı.");
+        }
+
+        [HttpPut("UpdateDS_ExerciseNotOk")]
+        public async Task<IActionResult> UpdateDS_ExerciseNotOk([FromBody] UpdateDS_ExerciseNotOkRequest request)
         {
             await mediator.Send(request);
             return Ok("Günlük Durum Egzersiz Güncellemesi Başarılı.");

@@ -18,10 +18,24 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             _dbContext = dbContext;
         }
 
+        public async Task DietNotOk(int id)
+        {
+            var ds = await _dbContext.DailyStatuses.FindAsync(id);
+            ds.DietStatus = false;
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task DietOk(int id)
         {
             var ds = await _dbContext.DailyStatuses.FindAsync(id);
             ds.DietStatus = true;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task ExerciseNotOk(int id)
+        {
+            var ds = await _dbContext.DailyStatuses.FindAsync(id);
+            ds.ExerciseStatus = false;
             await _dbContext.SaveChangesAsync();
         }
 

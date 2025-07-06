@@ -37,7 +37,7 @@ function Doctor() {
 
   return (
     <div>
-      <DoctorNavbar doctorId={userId} />
+      <DoctorNavbar />
       <div className="doctor-screen">
         <div>
           <UserList />
@@ -46,7 +46,7 @@ function Doctor() {
           <DoctorDashboard />
         </div>
         <div>
-          <NewPatientDialog doctorId={userId} />
+          <NewPatientDialog />
         </div>
         <SuccessAlert
           status={successAlert}

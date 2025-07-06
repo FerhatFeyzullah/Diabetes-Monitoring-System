@@ -30,8 +30,10 @@ function LoginCard() {
       if (role === "Doktor") {
         navigate("/doktor/" + userId);
         dispatch(setDoctorId(userId));
+        localStorage.setItem("UserId", userId);
       } else if (role === "Hasta") {
         navigate("/hasta/" + userId);
+        localStorage.setItem("UserId", userId);
       } else {
         console.warn("Bilinmeyen rol:", role);
       }

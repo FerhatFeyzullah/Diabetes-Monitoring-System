@@ -15,12 +15,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { LogoutFromSystem } from "../../redux/slice/authSlice";
 
-function DoctorNavbar({ doctorId }) {
+function DoctorNavbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const userId = doctorId;
+  const userId = localStorage.getItem("UserId");
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -38,6 +38,7 @@ function DoctorNavbar({ doctorId }) {
   const SignOut = async () => {
     const data = {};
     await dispatch(LogoutFromSystem(data));
+    localStorage.removeItem("UserId");
     navigate("/girisyap");
   };
 
@@ -60,7 +61,7 @@ function DoctorNavbar({ doctorId }) {
         {!isOnArchivePage ? (
           <div className="doctor-navbar-icons">
             <Tooltip title="Arşiv">
-              <IconButton onClick={() => navigate("/arsiv/" + doctorId)}>
+              <IconButton onClick={() => navigate("/arsiv/" + userId)}>
                 <RiArchive2Fill style={{ fontSize: "30px" }} />
               </IconButton>
             </Tooltip>
@@ -100,7 +101,8 @@ function DoctorNavbar({ doctorId }) {
                 },
               }}
             >
-              <MenuItem onClick={handleClose}>Profilim</MenuItem>
+              <MenuItem onClick={handleClose}>Profil Resmi</MenuItem>
+              <MenuItem onClick={handleClose}>Şifre Değiştirme</MenuItem>
               <MenuItem onClick={SignOut}>Çıkış Yap</MenuItem>
             </Menu>
           </div>

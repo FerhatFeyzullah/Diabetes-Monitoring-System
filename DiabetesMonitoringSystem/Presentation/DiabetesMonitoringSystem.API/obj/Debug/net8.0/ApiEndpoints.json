@@ -291,32 +291,64 @@
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
-    "Method": "UpdateDS_Diet",
-    "RelativePath": "api/DailyStatuses/UpdateDS_Diet",
+    "Method": "UpdateDS_DietNotOk",
+    "RelativePath": "api/DailyStatuses/UpdateDS_DietNotOk",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "DailyStatusId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietNotOK.UpdateDS_DietNotOkRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
-    "Method": "UpdateDS_Exercise",
-    "RelativePath": "api/DailyStatuses/UpdateDS_Exercise",
+    "Method": "UpdateDS_DietOk",
+    "RelativePath": "api/DailyStatuses/UpdateDS_DietOk",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "DailyStatusId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietOK.UpdateDS_DietOkRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "UpdateDS_ExerciseNotOk",
+    "RelativePath": "api/DailyStatuses/UpdateDS_ExerciseNotOk",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseNotOk.UpdateDS_ExerciseNotOkRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "UpdateDS_ExerciseOk",
+    "RelativePath": "api/DailyStatuses/UpdateDS_ExerciseOk",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseOk.UpdateDS_ExerciseOkRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -57,3 +57,10 @@
 .info-card {
   margin-top: 15px;
 }
+.info-card-text {
+  padding-top: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  color: rgb(165, 163, 163);
+  font-family: Arial, Helvetica, sans-serif;
+}

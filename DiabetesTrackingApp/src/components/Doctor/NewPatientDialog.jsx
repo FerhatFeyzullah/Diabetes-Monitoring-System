@@ -29,12 +29,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="down" ref={ref} {...props} />;
 });
 
-function NewPatientDialog({ doctorId }) {
+function NewPatientDialog() {
   const { newPatientDialog, newPatientResponse, loading } = useSelector(
     (store) => store.doctor
   );
   const dispatch = useDispatch();
 
+  const userId = localStorage.getItem("UserId");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [tc, setTc] = useState("");
@@ -77,11 +78,11 @@ function NewPatientDialog({ doctorId }) {
         Email: email,
         BirthDate: formattedBirthDate,
         Gender: Number(gender),
-        DoctorId: doctorId,
+        DoctorId: userId,
       };
       CloseDialog();
       await dispatch(CreatePatient(data));
-      await dispatch(GetPatientsForDoctor(doctorId));
+      await dispatch(GetPatientsForDoctor(userId));
     } catch (error) {
       const errObj = {};
       error.inner.forEach((e) => {

@@ -1,0 +1,39 @@
+.patient-daily-insulin-dashboard {
+  width: 550px;
+  height: 160px;
+  background-color: whitesmoke;
+  margin: 0px 10px;
+  border: 1px solid lightgrey;
+  box-shadow: 7px 7px 4px lightblue;
+  border-radius: 5px;
+}
+.patient-daily-i-title {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.patient-daily-i-periods-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+}
+.patient-daily-i-period {
+  width: 50px;
+  height: 50px;
+  background-color: lightgray;
+  border-radius: 50px;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 0 10px 5px rgb(86, 168, 61);
+}
+.patient-daily-i-period-title {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.patient-daily-dashboard-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 5px 0px;
+}

@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Diet
+namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_ExerciseOk
 {
-    public class UpdateDS_DietRequest:IRequest<Unit>
+    public class UpdateDS_ExerciseOkRequest:IRequest<Unit>
     {
         public int DailyStatusId { get; set; }
-
     }
 }

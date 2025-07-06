@@ -5,6 +5,7 @@ import {
   CheckTimePeriod,
   CreateBloodSugar,
   SetBsDrawerFalse,
+  SetCheckResultTrue,
 } from "../../redux/slice/patientSlice";
 import "../../css/Patient/BS_Drawer.css";
 import TextField from "@mui/material/TextField";
@@ -16,8 +17,7 @@ import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import useTimeRange from "../../hooks/useTimeRange";
 import { schema } from "../../schemas/CreateBloodSugarSchema";
-import { boolean } from "yup";
-import { ValidationError } from "yup";
+import { GetInsulin } from "../../redux/slice/insulinSlice";
 
 function BloodSugarDrawer({ patientId }) {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function BloodSugarDrawer({ patientId }) {
   const Morning = useTimeRange(7, 8);
   const Midday = useTimeRange(12, 13);
   const Afternoon = useTimeRange(15, 16);
-  const Evening = useTimeRange(18, 20);
+  const Evening = useTimeRange(18, 19);
   const Night = useTimeRange(22, 23);
 
   useEffect(() => {
@@ -46,8 +46,64 @@ function BloodSugarDrawer({ patientId }) {
     else setPeriod(null); // hiçbirine girmediyse
   }, [Morning, Midday, Afternoon, Evening, Night]);
 
-  const CreateBS = (data) => {
-    dispatch(CreateBloodSugar(data));
+  const allSymptoms = [
+    {
+      label: "Nöropati",
+      value: "Nöropati",
+      ranges: [
+        [0, 70],
+        [110, 180],
+      ],
+    },
+    {
+      label: "Polifaji",
+      value: "Polifaji",
+      ranges: [
+        [0, 110],
+        [180, 1000],
+      ],
+    },
+    { label: "Polidipsi", value: "Polidipsi", ranges: [[70, 1000]] },
+    { label: "Poliüri", value: "Poliüri", ranges: [[110, 180]] },
+    { label: "Yorgunluk", value: "Yorgunluk", ranges: [[0, 180]] },
+    {
+      label: "Kilo Kaybı",
+      value: "Kilo_Kaybı",
+      ranges: [
+        [70, 110],
+        [180, 1000],
+      ],
+    },
+    { label: "Bulanık Görme", value: "Bulanık_Görme", ranges: [[110, 180]] },
+    {
+      label: "Yaraların Yavaş İyileşmesi",
+      value: "Yaraların_Yavaş_İyileşmesi",
+      ranges: [[180, 1000]],
+    },
+  ];
+
+  const filteredSymptoms = useMemo(() => {
+    if (!bsValue) return [];
+    const numericValue = parseFloat(bsValue);
+    return allSymptoms.filter((s) =>
+      s.ranges.some(([min, max]) => numericValue >= min && numericValue <= max)
+    );
+  }, [bsValue]);
+
+  const conflictMap = {
+    Polifaji: ["Yorgunluk", "Kilo_Kaybı"],
+    Polidipsi: ["Yorgunluk", "Kilo_Kaybı", "Bulanık_Görme", "Nöropati"],
+    Yorgunluk: ["Polifaji", "Polidipsi", "Poliüri"],
+    Kilo_Kaybı: ["Polifaji", "Polidipsi"],
+    Poliüri: ["Yorgunluk", "Kilo_Kaybı", "Bulanık_Görme", "Nöropati"],
+    Bulanık_Görme: ["Polidipsi", "Poliüri"],
+    Nöropati: ["Polidipsi", "Poliüri"],
+  };
+
+  const CreateBS = async (data, id) => {
+    await dispatch(CreateBloodSugar(data));
+    await dispatch(GetInsulin(id));
+    dispatch(SetCheckResultTrue());
     setSymptoms([]);
     setBsValue("");
   };
@@ -67,9 +123,7 @@ function BloodSugarDrawer({ patientId }) {
         Symptoms: symptoms,
         PatientId: patientId,
       };
-
-      CreateBS(data);
-      console.log(data);
+      CreateBS(data, patientId);
 
       setErrors({});
     } catch (error) {
@@ -143,10 +197,23 @@ function BloodSugarDrawer({ patientId }) {
                   multiple
                   label="Belirtiler"
                 >
-                  <MenuItem value="Yorgunluk">Yorgunluk</MenuItem>
-                  <MenuItem value="Polifaji">Polifaji</MenuItem>
-                  <MenuItem value="Polidipsi">Polidipsi</MenuItem>
+                  {filteredSymptoms.map((s) => {
+                    const isDisabled = conflictMap[s.value]?.some((c) =>
+                      symptoms.includes(c)
+                    );
+
+                    return (
+                      <MenuItem
+                        key={s.value}
+                        value={s.value}
+                        disabled={isDisabled}
+                      >
+                        {s.label}
+                      </MenuItem>
+                    );
+                  })}
                 </Select>
+
                 {errors.symptoms && (
                   <FormHelperText>{errors.symptoms}</FormHelperText>
                 )}

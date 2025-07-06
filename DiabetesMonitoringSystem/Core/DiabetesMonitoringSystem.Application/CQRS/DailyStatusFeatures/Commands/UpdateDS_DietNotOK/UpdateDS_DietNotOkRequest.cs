@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_Exercise
+namespace DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.UpdateDS_DietNotOK
 {
-    public class UpdateDS_ExerciseRequest:IRequest<Unit>
+    public class UpdateDS_DietNotOkRequest:IRequest<Unit>
     {
         public int DailyStatusId { get; set; }
     }

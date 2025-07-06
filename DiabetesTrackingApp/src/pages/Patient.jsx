@@ -8,21 +8,34 @@ import { GetDailyStatus } from "../redux/slice/dailyStatusSlice";
 import DietUpdateDialog from "../components/Patient/DietUpdateDialog";
 import ExerciseUpdateDialog from "../components/Patient/ExerciseUpdateDialog";
 import BloodSugarDrawer from "../components/Patient/BloodSugarDrawer";
+import InsulinResultDialog from "../components/Patient/InsulinDoseCard";
+import MistakeAlert from "../components/Alerts/MistakeAlert";
+import { SetMistakeAlertFalse } from "../redux/slice/patientSlice";
+import { GetInsulin } from "../redux/slice/insulinSlice";
+import Loading from "../components/Loading";
 
 function Patient() {
   const { userId } = useParams();
+  const dispatch = useDispatch();
   const { dailyStatus } = useSelector((store) => store.dailyStatus);
   const { dailyStatusId } = dailyStatus;
 
-  const dispatch = useDispatch();
+  const { errorMessage, mistakeAlert, loading } = useSelector(
+    (store) => store.patient
+  );
 
-  const GetP_And_DS = (id) => {
+  const CloserAlert = () => {
+    dispatch(SetMistakeAlertFalse());
+  };
+
+  const GetP_And_DS_And_I = (id) => {
     dispatch(GetPrescription(id));
     dispatch(GetDailyStatus(id));
+    dispatch(GetInsulin(id));
   };
 
   useEffect(() => {
-    GetP_And_DS(userId);
+    GetP_And_DS_And_I(userId);
   }, []);
   return (
     <>
@@ -32,15 +45,26 @@ function Patient() {
       <div>
         <PatientDashboard />
       </div>
-      {/* <div>
+      <div>
         <DietUpdateDialog dailyStatusId={dailyStatusId} />
       </div>
       <div>
         <ExerciseUpdateDialog dailyStatusId={dailyStatusId} />
-      </div> */}
+      </div>
       <div>
         <BloodSugarDrawer patientId={userId} />
       </div>
+      <div>
+        <InsulinResultDialog />
+      </div>
+      <div>
+        <MistakeAlert
+          message={errorMessage}
+          status={mistakeAlert}
+          closer={CloserAlert}
+        />
+      </div>
+      <Loading status={loading} />
     </>
   );
 }

@@ -454,21 +454,30 @@
         }
       }
     },
-    "/api/DailyStatuses/UpdateDS_Diet": {
+    "/api/DailyStatuses/UpdateDS_DietOk": {
       "put": {
         "tags": [
           "DailyStatuses"
         ],
-        "parameters": [
-          {
-            "name": "DailyStatusId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietOkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietOkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietOkRequest"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -476,21 +485,92 @@
         }
       }
     },
-    "/api/DailyStatuses/UpdateDS_Exercise": {
+    "/api/DailyStatuses/UpdateDS_DietNotOk": {
       "put": {
         "tags": [
           "DailyStatuses"
         ],
-        "parameters": [
-          {
-            "name": "DailyStatusId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietNotOkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietNotOkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_DietNotOkRequest"
+              }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DailyStatuses/UpdateDS_ExerciseOk": {
+      "put": {
+        "tags": [
+          "DailyStatuses"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseOkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseOkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseOkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DailyStatuses/UpdateDS_ExerciseNotOk": {
+      "put": {
+        "tags": [
+          "DailyStatuses"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseNotOkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseNotOkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDS_ExerciseNotOkRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -1202,6 +1282,46 @@
           },
           "prescriptionAvailable": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDS_DietNotOkRequest": {
+        "type": "object",
+        "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDS_DietOkRequest": {
+        "type": "object",
+        "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDS_ExerciseNotOkRequest": {
+        "type": "object",
+        "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateDS_ExerciseOkRequest": {
+        "type": "object",
+        "properties": {
+          "dailyStatusId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

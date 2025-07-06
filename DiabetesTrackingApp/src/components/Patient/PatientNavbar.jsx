@@ -14,6 +14,7 @@ import {
   CheckTimePeriod,
   SetBsDrawerTrue,
   SetDietDialogTrue,
+  SetExerciseDialogTrue,
 } from "../../redux/slice/patientSlice";
 import BloodSugarDrawer from "./BloodSugarDrawer";
 import useTimeRange from "../../hooks/useTimeRange";
@@ -30,7 +31,7 @@ function PatientNavbar({ patientId }) {
   const Morning = useTimeRange(7, 8);
   const Midday = useTimeRange(12, 13);
   const Afternoon = useTimeRange(15, 16);
-  const Evening = useTimeRange(18, 20);
+  const Evening = useTimeRange(18, 19);
   const Night = useTimeRange(22, 23);
 
   useEffect(() => {
@@ -59,7 +60,7 @@ function PatientNavbar({ patientId }) {
     if (period !== null) {
       CheckTime(patientId, period);
     }
-  }, [period]);
+  }, [period, checkResult]);
 
   const IsButtonActive = isTime && !checkResult;
 
@@ -76,6 +77,7 @@ function PatientNavbar({ patientId }) {
   const SignOut = async () => {
     const data = {};
     await dispatch(LogoutFromSystem(data));
+    localStorage.removeItem("UserId");
     navigate("/girisyap");
   };
   return (
@@ -88,6 +90,7 @@ function PatientNavbar({ patientId }) {
           <Tooltip title="Egzersiz Durumu Güncelleme">
             <span>
               <IconButton
+                onClick={() => dispatch(SetExerciseDialogTrue())}
                 disabled={!Night}
                 style={{
                   boxShadow: Night ? "0 0 10px 3px green" : "0 0 10px 3px red",
@@ -148,7 +151,8 @@ function PatientNavbar({ patientId }) {
                 },
               }}
             >
-              <MenuItem onClick={handleClose}>Profilim</MenuItem>
+              <MenuItem onClick={handleClose}>Profil Resmi</MenuItem>
+              <MenuItem onClick={handleClose}>Şifre Değiştirme</MenuItem>
               <MenuItem onClick={SignOut}>Çıkış Yap</MenuItem>
             </Menu>
           </div>
