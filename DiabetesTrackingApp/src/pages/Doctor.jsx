@@ -13,6 +13,8 @@ import {
 import NewPatientDialog from "../components/Doctor/NewPatientDialog";
 import SuccessAlert from "../components/Alerts/SuccessAlert";
 import MistakeAlert from "../components/Alerts/MistakeAlert";
+import AccountSettingDrawer from "../components/AccountSettingDrawer";
+import { GetAppUser } from "../redux/slice/accountSlice";
 
 function Doctor() {
   const { userId } = useParams();
@@ -20,6 +22,7 @@ function Doctor() {
 
   const GetPatient = async (userId) => {
     await dispatch(GetPatientsForDoctor(userId));
+    await dispatch(GetAppUser(userId));
   };
   useEffect(() => {
     GetPatient(userId);
@@ -58,6 +61,10 @@ function Doctor() {
           message={newPatientResponse}
           closer={handleMistakeClose}
         />
+      </div>
+
+      <div>
+        <AccountSettingDrawer />
       </div>
     </div>
   );

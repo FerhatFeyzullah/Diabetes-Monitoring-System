@@ -13,6 +13,8 @@ import MistakeAlert from "../components/Alerts/MistakeAlert";
 import { SetMistakeAlertFalse } from "../redux/slice/patientSlice";
 import { GetInsulin } from "../redux/slice/insulinSlice";
 import Loading from "../components/Loading";
+import AccountSettingDrawer from "../components/AccountSettingDrawer";
+import { GetAppUser } from "../redux/slice/accountSlice";
 
 function Patient() {
   const { userId } = useParams();
@@ -23,6 +25,7 @@ function Patient() {
   const { errorMessage, mistakeAlert, loading } = useSelector(
     (store) => store.patient
   );
+  const { logoutLoading } = useSelector((store) => store.auth);
 
   const CloserAlert = () => {
     dispatch(SetMistakeAlertFalse());
@@ -32,6 +35,7 @@ function Patient() {
     dispatch(GetPrescription(id));
     dispatch(GetDailyStatus(id));
     dispatch(GetInsulin(id));
+    dispatch(GetAppUser(id));
   };
 
   useEffect(() => {
@@ -40,7 +44,7 @@ function Patient() {
   return (
     <>
       <div>
-        <PatientNavbar patientId={userId} />
+        <PatientNavbar />
       </div>
       <div>
         <PatientDashboard />
@@ -63,6 +67,9 @@ function Patient() {
           status={mistakeAlert}
           closer={CloserAlert}
         />
+      </div>
+      <div>
+        <AccountSettingDrawer />
       </div>
       <Loading status={loading} />
     </>

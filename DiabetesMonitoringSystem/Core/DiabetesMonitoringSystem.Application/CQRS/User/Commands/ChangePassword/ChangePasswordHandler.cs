@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.ChangePassword
 {
-    public class ChangePasswordHandler(IUserService userService) : IRequestHandler<ChangePasswordRequest, IdentityResult>
+    public class ChangePasswordHandler(IUserService userService) : IRequestHandler<ChangePasswordRequest, string>
     {
-        public async Task<IdentityResult> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
+        public async Task<string> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
         {
             return await userService.ChangePassword(request.AppUserId, request.OldPassword, request.NewPassword, request.ConfirmNewPassword);
         }

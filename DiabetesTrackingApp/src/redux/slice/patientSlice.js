@@ -98,6 +98,7 @@ export const patientSlice = createSlice({
       .addCase(CreateBloodSugar.fulfilled, (state, action) => {
         state.insulinDose = action.payload;
         state.bsDrawerStatus = false;
+        state.loading = false;
         state.insulinDialog = true;
         state.errorMessage = "";
         state.mistakeAlert = false;

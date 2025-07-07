@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/Doctor.css";
 import MailIcon from "@mui/icons-material/Mail";
 import PersonIcon from "@mui/icons-material/Person";
@@ -6,7 +6,7 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import { RiArchive2Fill } from "react-icons/ri";
 import Badge from "@mui/material/Badge";
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,10 @@ import { SetNewPatientDialogTrue } from "../../redux/slice/doctorSlice";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { LogoutFromSystem } from "../../redux/slice/authSlice";
+import {
+  GetAppUser,
+  SetAccountDrawerTrue,
+} from "../../redux/slice/accountSlice";
 
 function DoctorNavbar() {
   const navigate = useNavigate();
@@ -21,6 +25,18 @@ function DoctorNavbar() {
   const location = useLocation();
 
   const userId = localStorage.getItem("UserId");
+
+  const { AppUser } = useSelector((store) => store.account);
+
+  const AppUserId = localStorage.getItem("UserId");
+
+  const { profilePhotoId } = AppUser;
+  const letter = AppUser?.firstName?.[0]?.toUpperCase();
+
+  useEffect(() => {
+    dispatch(GetAppUser(AppUserId));
+  }, [profilePhotoId]);
+  const [imgError, setImgError] = useState(false);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -35,10 +51,16 @@ function DoctorNavbar() {
     setAnchorEl(null);
   };
 
+  const AccountSetting = () => {
+    dispatch(SetAccountDrawerTrue());
+    setAnchorEl(null);
+  };
+
   const SignOut = async () => {
     const data = {};
     await dispatch(LogoutFromSystem(data));
-    localStorage.removeItem("UserId");
+    localStorage.clear();
+    dispatch({ type: "auth/logout" });
     navigate("/girisyap");
   };
 
@@ -84,12 +106,20 @@ function DoctorNavbar() {
             </IconButton>
           </Tooltip>
         </div>
-        <div className="doctor-navbar-icons">
-          <Tooltip title="Profil">
-            <IconButton onClick={handleClick}>
-              <PersonIcon sx={{ fontSize: "35px" }} />
-            </IconButton>
-          </Tooltip>
+        <div className="patient-navbar-icons">
+          <IconButton onClick={handleClick}>
+            <Avatar
+              sx={{ width: 60, height: 60 }}
+              src={
+                !imgError && profilePhotoId
+                  ? `https://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
+                  : undefined
+              }
+              onError={() => setImgError(true)}
+            >
+              {(!profilePhotoId || imgError) && letter}
+            </Avatar>
+          </IconButton>
           <div>
             <Menu
               anchorEl={anchorEl}
@@ -101,8 +131,7 @@ function DoctorNavbar() {
                 },
               }}
             >
-              <MenuItem onClick={handleClose}>Profil Resmi</MenuItem>
-              <MenuItem onClick={handleClose}>Şifre Değiştirme</MenuItem>
+              <MenuItem onClick={AccountSetting}>Hesap Ayarları</MenuItem>
               <MenuItem onClick={SignOut}>Çıkış Yap</MenuItem>
             </Menu>
           </div>

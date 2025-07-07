@@ -4,8 +4,10 @@ using DiabetesMonitoringSystem.Application.CQRS.User.Commands.CreateUser;
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.ChangeForgotPassword;
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.SendResetCode;
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.ForgotPassword.VerifyResetCode;
+using DiabetesMonitoringSystem.Application.CQRS.User.Commands.RemoveProfilePhoto;
 using DiabetesMonitoringSystem.Application.CQRS.User.Commands.UploadProfilePhoto;
 using DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetPatientWithDoctor;
+using DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetUser;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,14 +17,60 @@ namespace DiabetesMonitoringSystem.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IMediator mediator) : ControllerBase
+    public class UsersController(IMediator mediator, IWebHostEnvironment _environment) : ControllerBase
     {
+
 
         [HttpGet("GetPatientsForDoctor")]
         public async Task<IActionResult> GetPatientForDoctor([FromQuery] GetPatientForDoctorRequest request)
         {
             return Ok(await mediator.Send(request));
         }
+
+        [HttpGet("GetUser")]
+        public async Task<IActionResult> GetUser([FromQuery] GetUserRequest request)
+        {
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpGet("ProfileImage/{photoId}")]
+        public IActionResult GetProfileImage(string photoId)
+        {
+            if (string.IsNullOrWhiteSpace(photoId) || photoId.Contains(".."))
+                return BadRequest("Geçersiz dosya adı.");
+
+            var filePath = Path.Combine(_environment.WebRootPath, "upload", photoId);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound();
+
+            var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+            var contentType = GetContentType(filePath); // dosya türünü dinamik ayarla
+
+            Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
+            Response.Headers["Pragma"] = "no-cache";
+            Response.Headers["Expires"] = "0";
+
+
+            return new FileStreamResult(stream, contentType);
+
+        }
+
+        private string GetContentType(string path)
+        {
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return ext switch
+            {
+                ".jpg" => "image/jpeg",
+                ".jpeg" => "image/jpeg",
+                ".png" => "image/png",
+                ".gif" => "image/gif",
+                _ => "application/octet-stream"
+            };
+        }
+
+
 
         [HttpPost("CreatePatient")]
         public async Task<IActionResult> CreatePatient(CreatePatientRequest request)
@@ -47,11 +95,16 @@ namespace DiabetesMonitoringSystem.API.Controllers
             }
         }
 
-        [HttpPost("UploadProfilePhoto")]
+        [HttpPut("UploadProfilePhoto")]
         public async Task<IActionResult> UploadProfilePhoto([FromForm] UploadProfilePhotoRequest request)
         {
-            await mediator.Send(request);
-            return Ok("Profil Fotoğrafı Yüklendi");
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpPut("RemoveProfilePhoto/{id}")]
+        public async Task<IActionResult> RemoveProfilePhoto(int id)
+        {
+            return Ok(await mediator.Send(new RemoveProfilePhotoRequest { AppUserId = id }));
         }
 
         [HttpPost("ChangePassword")]

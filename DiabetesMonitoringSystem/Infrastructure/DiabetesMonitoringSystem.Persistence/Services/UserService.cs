@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
@@ -162,7 +163,7 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             await signInManager.SignOutAsync();
         }
 
-        public async Task UploadImage(int patientId, IFormFile image)
+        public async Task<AppUser> UploadImage(int patientId, IFormFile image)
         {
             var imageId = await fileStorageService.UploadImage(image);
 
@@ -177,23 +178,27 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             {
                 throw new Exception("User not found");
             }
+            return user;
         }
 
-        public async Task<IdentityResult> ChangePassword(int appUserId, string oldPass, string newPass, string confNewPass)
+        public async Task<string> ChangePassword(int appUserId, string oldPass, string newPass, string confNewPass)
         {
             var user = await usermanager.FindByIdAsync(appUserId.ToString());
+
+            var resultMessage = "";
 
             bool isOldPasswordValid = await usermanager.CheckPasswordAsync(user, oldPass);
             if (!isOldPasswordValid)
             {
-                return IdentityResult.Failed(new IdentityError { Description = "Eski şifre yanlış" });
+                return resultMessage = "Eski şifre yanlış" ;
             }
             if (newPass != confNewPass)
             {
-                return IdentityResult.Failed(new IdentityError { Description = "Yeni şifreler eşleşmiyor" });
+                return resultMessage =  "Yeni şifreler eşleşmiyor" ;
             }
 
-            return await usermanager.ChangePasswordAsync(user, oldPass, newPass);
+            await usermanager.ChangePasswordAsync(user, oldPass, newPass);
+            return resultMessage = "";
 
 
         }
@@ -210,6 +215,22 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             var result = await usermanager.ResetPasswordAsync(user, token, newPass);
             return result;
 
+        }
+
+        public async Task<AppUser> RemoveImage(int patientId)
+        {
+            var user = await context.Users.FindAsync(patientId);
+            if (user != null)
+            {
+                user.ProfilePhotoId = "";
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
+            return user;
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DiabetesMonitoringSystem.Application.CQRS.User.Commands.ChangePassword
 {
-    public class ChangePasswordRequest:IRequest<IdentityResult>
+    public class ChangePasswordRequest:IRequest<string>
     {
         public int AppUserId { get; set; }
         public string OldPassword { get; set; }

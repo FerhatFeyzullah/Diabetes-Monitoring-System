@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DiabetesMonitoringSystem.Application.DTOs.UserDTOs;
+using DiabetesMonitoringSystem.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -20,9 +21,10 @@ namespace DiabetesMonitoringSystem.Application.Services
 
         Task LogoutAsync();
 
-        Task UploadImage(int patientId,IFormFile image);
+        Task<AppUser>UploadImage(int patientId,IFormFile image);
+        Task<AppUser>RemoveImage(int patientId);
 
-        Task<IdentityResult> ChangePassword(int appUserId, string oldPass,string newPass,string confNewPass);
+        Task<string> ChangePassword(int appUserId, string oldPass,string newPass,string confNewPass);
 
         Task<IdentityResult> ChangeForgotPassword(string email, string newPass, string confNewPass);
 

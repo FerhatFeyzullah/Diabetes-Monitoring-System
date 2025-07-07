@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../api/axios";
 
 const initialState = {
-  loading: false,
+  logoutLoading: false,
   loginAlert: false,
   errorMessage: "",
   token: {},
@@ -49,6 +49,9 @@ export const authSlice = createSlice({
       state.errorMessage = "";
       state.loginAlert = false;
     },
+    SetLogoutLoading: (state) => {
+      state.logoutLoading = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -82,12 +85,11 @@ export const authSlice = createSlice({
 
       //LogoutFromSystem
       .addCase(LogoutFromSystem.fulfilled, (state) => {
+        state.logoutLoading = true;
         state.token = {};
-        console.log(state.token);
-      })
-      .addCase(LogoutFromSystem.rejected, (state) => {});
+      });
   },
 });
 
-export const { LoginAlertChange, Logout } = authSlice.actions;
+export const { LoginAlertChange, Logout, SetLogoutLoading } = authSlice.actions;
 export default authSlice.reducer;

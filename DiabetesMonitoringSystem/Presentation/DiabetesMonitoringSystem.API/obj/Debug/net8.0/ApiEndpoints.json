@@ -583,6 +583,54 @@
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "GetUser",
+    "RelativePath": "api/Users/GetUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AppUserId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "GetProfileImage",
+    "RelativePath": "api/Users/ProfileImage/{photoId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "photoId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
+    "Method": "RemoveProfilePhoto",
+    "RelativePath": "api/Users/RemoveProfilePhoto/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
     "Method": "SendResetCode",
     "RelativePath": "api/Users/SendResetCode",
     "HttpMethod": "POST",
@@ -601,7 +649,7 @@
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.UsersController",
     "Method": "UploadProfilePhoto",
     "RelativePath": "api/Users/UploadProfilePhoto",
-    "HttpMethod": "POST",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
