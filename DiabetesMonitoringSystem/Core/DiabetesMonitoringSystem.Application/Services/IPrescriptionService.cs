@@ -11,5 +11,6 @@ namespace DiabetesMonitoringSystem.Application.Services
     {
         Task CreatePrescriptionAsync(int patientId, int bsValue, List<string> symptoms, DateOnly date, TimePeriod timePeriod);
 
+
     }
 }

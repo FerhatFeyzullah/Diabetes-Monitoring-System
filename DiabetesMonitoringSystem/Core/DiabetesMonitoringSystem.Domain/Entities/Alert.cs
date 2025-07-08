@@ -19,6 +19,7 @@ namespace DiabetesMonitoringSystem.Domain.Entities
         public AppUser Patient { get; set; }
 
         public int DoctorId { get; set; }
+        public bool IsRead { get; set; }
 
     }
 }

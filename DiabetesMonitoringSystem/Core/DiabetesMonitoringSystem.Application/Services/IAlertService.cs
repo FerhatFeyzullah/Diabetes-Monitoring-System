@@ -10,5 +10,6 @@ namespace DiabetesMonitoringSystem.Application.Services
     public interface IAlertService
     {
         Task GenerateAlertAsync(int patId, int bsValue, DateOnly date, TimePeriod period);
+        Task<int> ReadingAlert(int AlertId, int doctorId);
     }
 }

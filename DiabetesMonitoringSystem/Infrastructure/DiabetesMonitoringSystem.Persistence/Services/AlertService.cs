@@ -41,7 +41,8 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                 AlertType = alertType.Value,
                 Message = message,
                 AlertDate = date,
-                TimePeriod = period
+                TimePeriod = period,
+                IsRead = false,
             };
 
             await _dbContext.Alerts.AddAsync(alert);
@@ -91,6 +92,17 @@ namespace DiabetesMonitoringSystem.Persistence.Services
                 >= 151 and <= 200 => (AlertType.Monitoring, "Hastanın kan şekeri 151-200 mg/dL arasında. Diyabet kontrolü gereklidir."),
                 > 200 => (AlertType.Emergency, "Hastanın kan şekeri 200 mg/dL’nin üzerinde. Hiperglisemi durumu. Acil müdahale gerekebilir."),               
             };
+        }
+
+        public async Task<int> ReadingAlert(int AlertId,int doctorId)
+        {
+            var alert = await _dbContext.Alerts.FirstOrDefaultAsync(x=>x.AlertId == AlertId);
+            alert.IsRead = true;
+            await _dbContext.SaveChangesAsync();
+            var count = await _dbContext.Alerts
+                .Where(x => x.DoctorId == doctorId && !x.IsRead)
+                .CountAsync();
+            return count;
         }
     }
 }

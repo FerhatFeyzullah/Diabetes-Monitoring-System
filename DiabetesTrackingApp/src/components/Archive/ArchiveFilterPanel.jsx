@@ -13,7 +13,7 @@ import {
 } from "../../redux/slice/archiveSlice";
 import dayjs from "dayjs";
 
-function ArchiveFilterPanel() {
+function ArchiveFilterPanel({ selectedTab }) {
   const dispatch = useDispatch();
   const { filterMod } = useSelector((store) => store.archive);
 
@@ -49,12 +49,14 @@ function ArchiveFilterPanel() {
               }}
               value={startDate}
               onChange={(e) => setStartDate(e)}
+              disabled={selectedTab == 4}
             />
             <DatePicker
               label="Şu tarihe"
               sx={{ width: "200px" }}
               value={endDate}
               onChange={(e) => setEndDate(e)}
+              disabled={selectedTab == 4}
             />
           </div>
         </DemoContainer>
@@ -66,8 +68,9 @@ function ArchiveFilterPanel() {
             variant={!filterMod ? "outlined" : "contained"}
             onClick={SetDate}
             sx={{ textTransform: "none", width: "150px" }}
+            disabled={selectedTab == 4}
           >
-            Filtre Acik
+            Filtre Açık
           </Button>
         </div>
         <div style={{ marginTop: "10px" }}>
@@ -75,8 +78,9 @@ function ArchiveFilterPanel() {
             variant={filterMod ? "outlined" : "contained"}
             onClick={ClearDate}
             sx={{ textTransform: "none", width: "150px" }}
+            disabled={selectedTab == 4}
           >
-            Filtre Kapali
+            Filtre Kapalı
           </Button>
         </div>
       </div>

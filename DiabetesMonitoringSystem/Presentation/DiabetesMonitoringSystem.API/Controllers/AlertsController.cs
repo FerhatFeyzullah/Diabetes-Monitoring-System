@@ -1,6 +1,8 @@
-﻿using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertByPatientAndAlertType;
+﻿using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Commands.ReadAlert;
+using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertByPatientAndAlertType;
 using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsByPatient;
 using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsByPatientAndDate;
+using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetUnReadAlertsCount;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +27,18 @@ namespace DiabetesMonitoringSystem.API.Controllers
 
         [HttpGet("GetAlertByPatientAndAlertType")]
         public async Task<IActionResult> GetAlertByPatientAndAlertType([FromQuery]GetAlertByPatientAndAlertTypeRequest request)
+        {
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpGet("GetUnReadAlertsCount")]
+        public async Task<IActionResult> GetUnReadAlertsCount([FromQuery] GetUnReadAlertsCountRequest request)
+        {
+            return Ok(await mediator.Send(request));
+        }
+
+        [HttpPut("ReadingAlert")]
+        public async Task<IActionResult> ReadingAlert([FromBody] ReadAlertRequest request)
         {
             return Ok(await mediator.Send(request));
         }

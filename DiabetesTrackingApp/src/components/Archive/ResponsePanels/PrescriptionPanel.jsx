@@ -5,7 +5,7 @@ import {
   GetP_UnFiltered,
 } from "../../../redux/slice/prescriptionSlice";
 
-import I_ArchiveCard from "../ResponsePanelCards/P_ArchiveCard";
+import P_ArchiveCard from "../ResponsePanelCards/P_ArchiveCard";
 
 function PrescriptionPanel() {
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ function PrescriptionPanel() {
   return (
     <div>
       <div>
-        <I_ArchiveCard />
+        <P_ArchiveCard />
       </div>
     </div>
   );

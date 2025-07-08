@@ -63,6 +63,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetUnReadAlertsCount",
+    "RelativePath": "api/Alerts/GetUnReadAlertsCount",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DoctorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "ReadingAlert",
+    "RelativePath": "api/Alerts/ReadingAlert",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Commands.ReadAlert.ReadAlertRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AuthsController",
     "Method": "Login",
     "RelativePath": "api/Auths/Login",
@@ -268,6 +300,22 @@
       {
         "Name": "End",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.DailyStatusesController",
+    "Method": "GetPercentage",
+    "RelativePath": "api/DailyStatuses/GetPercentage",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],

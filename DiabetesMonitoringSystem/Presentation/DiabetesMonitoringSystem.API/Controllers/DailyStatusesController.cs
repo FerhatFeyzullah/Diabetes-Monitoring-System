@@ -7,6 +7,7 @@ using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Commands.Upd
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDate;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndFilteredDate;
+using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPercentageOfDailyStatus;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -75,6 +76,12 @@ namespace DiabetesMonitoringSystem.API.Controllers
         {
             await mediator.Send(request);
             return Ok("Günlük Durum Egzersiz Güncellemesi Başarılı.");
+        }
+
+        [HttpGet("GetPercentage")]
+        public async Task<IActionResult> GetPercentage([FromQuery] GetPercentageOfPrescriptionRequest request)
+        {
+            return Ok(await mediator.Send(request));
         }
 
     }

@@ -5,6 +5,7 @@ const initialState = {
   dsLoading: false,
   dailyStatus: {},
   dailyStatusArchive: [],
+  percentages: {},
 };
 
 export const GetDailyStatus = createAsyncThunk(
@@ -46,6 +47,15 @@ export const GetDS_UnFiltered = createAsyncThunk(
   }
 );
 
+export const GetPercentage = createAsyncThunk("percentage", async (id) => {
+  var response = await axios.get("DailyStatuses/GetPercentage", {
+    params: {
+      PatientId: id,
+    },
+  });
+  return response.data;
+});
+
 export const dailyStatusSlice = createSlice({
   name: "dailyStatus",
   initialState,
@@ -67,6 +77,14 @@ export const dailyStatusSlice = createSlice({
       })
       .addCase(GetDS_UnFiltered.fulfilled, (state, action) => {
         state.dailyStatusArchive = action.payload;
+      })
+
+      //GetPercentage
+      .addCase(GetPercentage.fulfilled, (state, action) => {
+        state.percentages = action.payload;
+      })
+      .addCase(GetPercentage.rejected, () => {
+        console.log("percentage basarisiz");
       });
   },
 });
