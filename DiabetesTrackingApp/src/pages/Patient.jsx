@@ -15,6 +15,7 @@ import { GetInsulin } from "../redux/slice/insulinSlice";
 import Loading from "../components/Loading";
 import AccountSettingDrawer from "../components/AccountSettingDrawer";
 import { GetAppUser } from "../redux/slice/accountSlice";
+import ReviewPhotoDialog from "../components/ReviewPhotoDialog";
 
 function Patient() {
   const { userId } = useParams();
@@ -70,6 +71,9 @@ function Patient() {
       </div>
       <div>
         <AccountSettingDrawer />
+      </div>
+      <div>
+        <ReviewPhotoDialog />
       </div>
       <Loading status={loading} />
     </>

@@ -8,6 +8,7 @@ const initialState = {
   mistakeAlert: false,
   successAlert: false,
   loading: false,
+  reviewPhotoDialog: false,
 };
 
 export const UploadPP = createAsyncThunk("updatepp", async (data) => {
@@ -48,6 +49,12 @@ export const accountSlice = createSlice({
     },
     SetSuccessAlertFalse: (state) => {
       state.successAlert = false;
+    },
+    SetReviewPhotoDialogTrue: (state) => {
+      state.reviewPhotoDialog = true;
+    },
+    SetReviewPhotoDialogFalse: (state) => {
+      state.reviewPhotoDialog = false;
     },
   },
   extraReducers: (builder) => {
@@ -108,5 +115,7 @@ export const {
   SetAccountDrawerTrue,
   SetMistakeAlertFalse,
   SetSuccessAlertFalse,
+  SetReviewPhotoDialogTrue,
+  SetReviewPhotoDialogFalse,
 } = accountSlice.actions;
 export default accountSlice.reducer;

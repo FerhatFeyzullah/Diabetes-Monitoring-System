@@ -5,6 +5,7 @@ const initialState = {
   selectedPatientId: null,
   selectedStartDate: null,
   selectedEndDate: null,
+  selectedAlertType: 0,
   filterMod: false,
 };
 
@@ -21,6 +22,9 @@ export const archiveSlice = createSlice({
     SetEndDate: (state, action) => {
       state.selectedEndDate = action.payload;
     },
+    SetAlertType: (state, action) => {
+      state.selectedAlertType = action.payload;
+    },
     SetFilterModTrue: (state) => {
       state.filterMod = true;
     },
@@ -36,5 +40,6 @@ export const {
   SetEndDate,
   SetFilterModTrue,
   SetFilterModFalse,
+  SetAlertType,
 } = archiveSlice.actions;
 export default archiveSlice.reducer;

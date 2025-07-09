@@ -34,7 +34,7 @@ function InsulinResultDialog() {
           Ölçüm Sonucu Hesaplanan İnsulin Miktarı <hr />
         </DialogTitle>
 
-        <DialogContent sx={{ height: "150px" }}>
+        <DialogContent sx={{ height: "100px" }}>
           <div className="flex-row main-div">
             <div className="dose-text ">{insulinDose} ml</div>
           </div>

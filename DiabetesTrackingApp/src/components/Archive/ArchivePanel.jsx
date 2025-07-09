@@ -10,6 +10,8 @@ import InsulinPanel from "./ResponsePanels/InsulinPanel";
 import ArchivePatientsList from "./ArchivePatients/ArchivePatientsList";
 import ArchiveFilterPanel from "./ArchiveFilterPanel";
 import PercentagePanel from "./ResponsePanels/PercentagePanel";
+import AlertPanel from "./ResponsePanels/AlertPanel";
+import { Badge } from "@mui/material";
 
 function ArchivePanel() {
   const { doctorId } = useParams();
@@ -37,6 +39,7 @@ function ArchivePanel() {
               label="TEDAVİ PROGRAMI UYUM DURUMU"
               sx={{ textTransform: "none" }}
             />
+            <Tab label="UYARILAR" sx={{ textTransform: "none" }} />
           </Tabs>
         </div>
       </div>
@@ -57,6 +60,7 @@ function ArchivePanel() {
           {selectedTab === 2 && <BloodSugarPanel />}
           {selectedTab === 3 && <InsulinPanel />}
           {selectedTab === 4 && <PercentagePanel />}
+          {selectedTab === 5 && <AlertPanel />}
         </div>
         <div className="filter">
           <ArchiveFilterPanel selectedTab={selectedTab} />

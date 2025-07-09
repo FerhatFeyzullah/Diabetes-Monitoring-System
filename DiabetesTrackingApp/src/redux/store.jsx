@@ -9,6 +9,7 @@ import archiveReducer from "./slice/archiveSlice";
 import forgotPasswordReducer from "./slice/forgotPasswordSlice";
 import patientReducer from "./slice/patientSlice";
 import accountReducer from "./slice/accountSlice";
+import alertReducer from "./slice/alertSlice";
 
 const appReducer = combineReducers({
   auth: authReducer,
@@ -21,6 +22,7 @@ const appReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   patient: patientReducer,
   account: accountReducer,
+  alert: alertReducer,
 });
 
 const rootReducer = (state, action) => {

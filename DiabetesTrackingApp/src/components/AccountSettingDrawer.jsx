@@ -7,6 +7,7 @@ import {
   RemovePP,
   SetAccountDrawerFalse,
   SetMistakeAlertFalse,
+  SetReviewPhotoDialogTrue,
   SetSuccessAlertFalse,
   UploadPP,
 } from "../redux/slice/accountSlice";
@@ -130,12 +131,18 @@ function AccountSettingDrawer() {
             <hr />
             <div style={{ position: "relative", display: "inline-block" }}>
               <Avatar
-                sx={{ width: 120, height: 120, marginTop: "15px" }}
+                sx={{
+                  width: 120,
+                  height: 120,
+                  marginTop: "15px",
+                  cursor: "pointer",
+                }}
                 src={
                   !imgError && profilePhotoId
                     ? `https://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
                     : undefined
                 }
+                onClick={() => dispatch(SetReviewPhotoDialogTrue())}
                 onError={() => setImgError(true)}
               >
                 {(!profilePhotoId || imgError) && letter}

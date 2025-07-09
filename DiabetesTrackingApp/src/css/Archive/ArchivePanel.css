@@ -1,5 +1,5 @@
 .archive-panel-main {
-  width: 1150px;
+  width: 1200px;
   height: 540px;
   background-color: whitesmoke;
   border-radius: 5px;
@@ -48,7 +48,7 @@
   border: 2px solid rgb(224, 240, 255);
 }
 .responses {
-  width: 55%;
+  width: 52%;
   height: 430px;
   background-color: white;
   justify-content: center;
@@ -58,11 +58,12 @@
   border: 2px solid lightcyan;
 }
 .filter {
-  width: 20%;
+  width: 23%;
   height: 430px;
   background-color: white;
   justify-content: center;
   display: flex;
   border-radius: 5px;
   border: 2px solid lightcyan;
+  overflow-y: auto;
 }

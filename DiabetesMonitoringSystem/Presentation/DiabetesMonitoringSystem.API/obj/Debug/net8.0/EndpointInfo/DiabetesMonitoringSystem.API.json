@@ -94,6 +94,72 @@
         }
       }
     },
+    "/api/Alerts/GetAlertsByPatientAndDateAndType": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "parameters": [
+          {
+            "name": "PatientId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "StartDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "EndDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "AlertType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/AlertType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Alerts/GetAlertsDaily": {
+      "get": {
+        "tags": [
+          "Alerts"
+        ],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/GetAlertsDailyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Alerts/GetUnReadAlertsCount": {
       "get": {
         "tags": [
@@ -1361,6 +1427,10 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "GetAlertsDailyRequest": {
+        "type": "object",
+        "additionalProperties": false
       },
       "GetAllSymptomRequest": {
         "type": "object",

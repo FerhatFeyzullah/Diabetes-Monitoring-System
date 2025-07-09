@@ -64,6 +64,53 @@
   },
   {
     "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetAlertsByPatientAndDateAndType",
+    "RelativePath": "api/Alerts/GetAlertsByPatientAndDateAndType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "PatientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "StartDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "EndDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "AlertType",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
+    "Method": "GetAlertsDaily",
+    "RelativePath": "api/Alerts/GetAlertsDaily",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsDaily.GetAlertsDailyRequest",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DiabetesMonitoringSystem.API.Controllers.AlertsController",
     "Method": "GetUnReadAlertsCount",
     "RelativePath": "api/Alerts/GetUnReadAlertsCount",
     "HttpMethod": "GET",

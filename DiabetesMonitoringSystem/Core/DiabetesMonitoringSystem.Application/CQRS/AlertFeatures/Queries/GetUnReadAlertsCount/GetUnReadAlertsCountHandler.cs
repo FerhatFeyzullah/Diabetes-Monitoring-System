@@ -15,6 +15,7 @@ namespace DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetUnR
         {
             var count = await readRepository.FilteredCountAsync(
                 x => x.DoctorId == request.DoctorId &&
+                x.AlertDate == DateOnly.FromDateTime(DateTime.Today)&&
                 x.IsRead == false
             );
             return count;

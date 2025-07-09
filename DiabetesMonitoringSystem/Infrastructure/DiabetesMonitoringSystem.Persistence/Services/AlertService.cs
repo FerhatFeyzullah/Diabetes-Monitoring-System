@@ -96,11 +96,13 @@ namespace DiabetesMonitoringSystem.Persistence.Services
 
         public async Task<int> ReadingAlert(int AlertId,int doctorId)
         {
-            var alert = await _dbContext.Alerts.FirstOrDefaultAsync(x=>x.AlertId == AlertId);
+            var alert = await _dbContext.Alerts.FindAsync(AlertId);
             alert.IsRead = true;
             await _dbContext.SaveChangesAsync();
             var count = await _dbContext.Alerts
-                .Where(x => x.DoctorId == doctorId && !x.IsRead)
+                .Where(x => x.DoctorId == doctorId &&
+                x.AlertDate == DateOnly.FromDateTime(DateTime.Today) &&
+                !x.IsRead)
                 .CountAsync();
             return count;
         }

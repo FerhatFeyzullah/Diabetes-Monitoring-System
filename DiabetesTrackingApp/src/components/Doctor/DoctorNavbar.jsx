@@ -18,23 +18,27 @@ import {
   GetAppUser,
   SetAccountDrawerTrue,
 } from "../../redux/slice/accountSlice";
+import archive_logo from "../../assets/img/archive.png";
+import app_patient_logo from "../../assets/img/add-person.png";
+import dashboard_logo from "../../assets/img/dashboard.png";
+import bell from "../../assets/animation/bell.json";
+import Lottie from "lottie-react";
+import { SetAlertDrawerTrue } from "../../redux/slice/alertSlice";
 
 function DoctorNavbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
 
+  const { isAlert } = useSelector((store) => store.alert);
+
   const userId = localStorage.getItem("UserId");
-
   const { AppUser } = useSelector((store) => store.account);
-
-  const AppUserId = localStorage.getItem("UserId");
-
   const { profilePhotoId } = AppUser;
   const letter = AppUser?.firstName?.[0]?.toUpperCase();
 
   useEffect(() => {
-    dispatch(GetAppUser(AppUserId));
+    dispatch(GetAppUser(userId));
   }, [profilePhotoId]);
   const [imgError, setImgError] = useState(false);
 
@@ -64,48 +68,61 @@ function DoctorNavbar() {
     navigate("/girisyap");
   };
 
+  const animation = () => {
+    dispatch(SetAlertDrawerTrue());
+  };
+
   return (
     <div className="doctor-navbar">
       <div className="flex-row">
-        <div className="doctor-navbar-title">Diyabet Takip Sistemi</div>
+        <div className="doctor-navbar-title">
+          {isOnDoctorPage
+            ? "Diyabet Takip Sistemi"
+            : "Diyabet Takip Sistemi Arşiv Sayfası"}
+        </div>
       </div>
       <div className="flex-row">
         {isOnDoctorPage && (
           <div className="doctor-navbar-icons">
             <Tooltip title="Yeni Hasta Kaydı">
               <IconButton onClick={() => dispatch(SetNewPatientDialogTrue())}>
-                <PersonAddAlt1Icon sx={{ fontSize: "35px" }} />
+                <img src={app_patient_logo} className="d-navbar-png" />
               </IconButton>
             </Tooltip>
           </div>
         )}
 
         {!isOnArchivePage ? (
-          <div className="doctor-navbar-icons">
+          <div style={{ marginRight: 10 }}>
             <Tooltip title="Arşiv">
               <IconButton onClick={() => navigate("/arsiv/" + userId)}>
-                <RiArchive2Fill style={{ fontSize: "30px" }} />
+                <img src={archive_logo} className="d-navbar-png" />
               </IconButton>
             </Tooltip>
           </div>
         ) : (
-          <div className="doctor-navbar-icons">
+          <div style={{ marginRight: 20 }}>
             <Tooltip title="Günlük Takip Paneli">
               <IconButton onClick={() => navigate("/doktor/" + userId)}>
-                <RiDashboardHorizontalFill style={{ fontSize: "30px" }} />
+                <img src={dashboard_logo} className="d-navbar-png" />
               </IconButton>
             </Tooltip>
           </div>
         )}
-        <div className="doctor-navbar-icons">
-          <Tooltip title="Mesajlar">
-            <IconButton>
-              <Badge badgeContent={5} color="warning">
-                <MailIcon sx={{ fontSize: "30px" }} />
-              </Badge>
-            </IconButton>
-          </Tooltip>
-        </div>
+        {isOnDoctorPage && (
+          <div style={{ marginRight: 10 }}>
+            <Tooltip title="Gelen Hasta Bildirimleri">
+              <IconButton onClick={animation}>
+                <Lottie
+                  animationData={bell}
+                  loop={isAlert > 0}
+                  style={{ width: 60, height: 60 }}
+                />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
+
         <div className="patient-navbar-icons">
           <IconButton onClick={handleClick}>
             <Avatar
@@ -131,7 +148,17 @@ function DoctorNavbar() {
                 },
               }}
             >
-              <MenuItem onClick={AccountSetting}>Hesap Ayarları</MenuItem>
+              <Tooltip
+                title="Hesap Ayarlarını Görüntüleyebilmek İçin Günlük Takip Paneline Geçiniz."
+                placement="left"
+              >
+                <span>
+                  <MenuItem onClick={AccountSetting} disabled={isOnArchivePage}>
+                    Hesap Ayarları
+                  </MenuItem>
+                </span>
+              </Tooltip>
+
               <MenuItem onClick={SignOut}>Çıkış Yap</MenuItem>
             </Menu>
           </div>

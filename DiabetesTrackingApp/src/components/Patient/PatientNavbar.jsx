@@ -103,7 +103,7 @@ function PatientNavbar() {
     setAnchorEl(null);
   };
 
-  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  //const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   const SignOut = async () => {
     const data = {};
