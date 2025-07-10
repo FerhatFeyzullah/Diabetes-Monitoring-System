@@ -6,11 +6,13 @@ using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsB
 using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsDaily;
 using DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetUnReadAlertsCount;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles ="Doktor")]
     [Route("api/[controller]")]
     [ApiController]
     public class AlertsController(IMediator mediator) : ControllerBase

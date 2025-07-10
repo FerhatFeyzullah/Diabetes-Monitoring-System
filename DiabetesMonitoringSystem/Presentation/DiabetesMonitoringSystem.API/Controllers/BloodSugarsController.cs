@@ -4,11 +4,13 @@ using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS
 using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_ByPatientAndGroupedByFilteredDate;
 using DiabetesMonitoringSystem.Application.CQRS.BloodSugarFeatures.Queries.GetBS_TimePeriodCheck;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles = "Doktor, Hasta")]
     [Route("api/[controller]")]
     [ApiController]
     public class BloodSugarsController(IMediator mediator) : ControllerBase

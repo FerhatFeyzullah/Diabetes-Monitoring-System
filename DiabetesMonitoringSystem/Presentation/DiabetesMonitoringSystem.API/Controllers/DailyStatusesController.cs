@@ -9,11 +9,13 @@ using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetD
 using DiabetesMonitoringSystem.Application.CQRS.DailyStatusFeatures.Queries.GetDS_ByPatientAndFilteredDate;
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPercentageOfDailyStatus;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles ="Doktor, Hasta")]
     [Route("api/[controller]")]
     [ApiController]
     public class DailyStatusesController(IMediator mediator) : ControllerBase

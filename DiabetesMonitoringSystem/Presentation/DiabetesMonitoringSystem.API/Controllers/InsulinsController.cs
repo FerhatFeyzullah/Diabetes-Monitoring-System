@@ -2,11 +2,13 @@
 using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.InsulinFeatures.Queries.GetInsulinByPatientAndGroupedByFilteredDate;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles = "Doktor,Hasta")]
     [Route("api/[controller]")]
     [ApiController]
     public class InsulinsController(IMediator mediator) : ControllerBase

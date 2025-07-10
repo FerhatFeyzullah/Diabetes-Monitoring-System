@@ -4,11 +4,13 @@ using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.Get
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndDateDaily;
 using DiabetesMonitoringSystem.Application.CQRS.PrescriptionFeatures.Queries.GetPrescriptionByPatientAndFilteredDate;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles = "Doktor, Hasta")]
     [Route("api/[controller]")]
     [ApiController]
     public class PrescriptionsController(IMediator mediator) : ControllerBase

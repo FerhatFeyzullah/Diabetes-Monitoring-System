@@ -9,12 +9,14 @@ using DiabetesMonitoringSystem.Application.CQRS.User.Commands.UploadProfilePhoto
 using DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetPatientWithDoctor;
 using DiabetesMonitoringSystem.Application.CQRS.User.Queries.GetUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DiabetesMonitoringSystem.API.Controllers
 {
+    [Authorize(Roles = "Doktor, Hasta")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController(IMediator mediator, IWebHostEnvironment _environment) : ControllerBase
@@ -68,7 +70,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
                 ".gif" => "image/gif",
                 _ => "application/octet-stream"
             };
-        }
+        } 
 
 
 
@@ -81,6 +83,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
             
         }
 
+        
         [HttpPost("CreateDoctor")]
         public async Task<IActionResult> CreateDoctor(CreateDoctorRequest request)
         {
@@ -113,6 +116,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
             return Ok(await mediator.Send(request));
         }
 
+        [AllowAnonymous]
         [HttpPost("SendResetCode")]
         public async Task<IActionResult> SendResetCode([FromBody] SendResetCodeRequest request)
         {
@@ -121,6 +125,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpPost("VerifyResetCode")]
         public async Task<IActionResult> VerifyResetCode([FromBody] VerifyResetCodeRequest request)
         {
@@ -128,6 +133,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
                 return Ok(await mediator.Send(request));         
         }
 
+        [AllowAnonymous]
         [HttpPost("ChangeForgotPassword")]
         public async Task<IActionResult> ChangeForgotPassword([FromBody] ChangeForgotPasswordRequest request)
         {
