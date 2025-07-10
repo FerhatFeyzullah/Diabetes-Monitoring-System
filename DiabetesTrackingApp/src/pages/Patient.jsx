@@ -14,7 +14,10 @@ import { SetMistakeAlertFalse } from "../redux/slice/patientSlice";
 import { GetInsulin } from "../redux/slice/insulinSlice";
 import Loading from "../components/Loading";
 import AccountSettingDrawer from "../components/AccountSettingDrawer";
-import { GetAppUser } from "../redux/slice/accountSlice";
+import {
+  GetAppUser,
+  SetAccountMistakeAlertFalse,
+} from "../redux/slice/accountSlice";
 import ReviewPhotoDialog from "../components/ReviewPhotoDialog";
 
 function Patient() {
@@ -26,10 +29,17 @@ function Patient() {
   const { errorMessage, mistakeAlert, loading } = useSelector(
     (store) => store.patient
   );
+  const { responseMessage, a_mistakeAlert } = useSelector(
+    (store) => store.account
+  );
+
   const { logoutLoading } = useSelector((store) => store.auth);
 
   const CloserAlert = () => {
     dispatch(SetMistakeAlertFalse());
+  };
+  const AccountCloserAlert = () => {
+    dispatch(SetAccountMistakeAlertFalse());
   };
 
   const GetP_And_DS_And_I = (id) => {
@@ -43,7 +53,7 @@ function Patient() {
     GetP_And_DS_And_I(userId);
   }, []);
   return (
-    <>
+    <div className="patient-dashboard-main-div">
       <div>
         <PatientNavbar />
       </div>
@@ -70,13 +80,20 @@ function Patient() {
         />
       </div>
       <div>
+        <MistakeAlert
+          message={responseMessage}
+          status={a_mistakeAlert}
+          closer={AccountCloserAlert}
+        />
+      </div>
+      <div>
         <AccountSettingDrawer />
       </div>
       <div>
         <ReviewPhotoDialog />
       </div>
       <Loading status={loading} />
-    </>
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../../../css/Archive/ArchiveCards/AlertCard.css";
 
-function AlertCard() {
+function AlertCard({ patId }) {
   const { alertArchive } = useSelector((store) => store.alert);
 
   const timeLabels = {
@@ -23,13 +23,43 @@ function AlertCard() {
 
   return (
     <>
-      {alertArchive &&
+      {patId == null ? (
+        // Durum 1: Hasta seçilmemiş
+        <div
+          className="flex-column"
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: "17px",
+            fontWeight: "bold",
+            height: "450px",
+          }}
+        >
+          <div>
+            Veri görüntüleme işlemi için lütfen önce bir hasta seçimi yapınız.
+          </div>
+        </div>
+      ) : alertArchive.length === 0 ? (
+        // Durum 2: Hasta var ama veri yok
+        <div
+          className="flex-column"
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: "17px",
+            fontWeight: "bold",
+            height: "450px",
+          }}
+        >
+          <div>Seçilen hastaya ait herhangi bir uyarı bulunmamaktadır.</div>
+        </div>
+      ) : (
+        // Durum 3: Hasta var ve veri var
         alertArchive.map((a) => (
           <div
+            key={a.alertId}
             className="a-single-card a-main-card"
             style={{
               border: `3px solid ${alertColors[a.alertType] || "#ccc"}`,
-              borderRadius: "10px", // opsiyonel, daha yumuşak kenar
+              borderRadius: "10px",
             }}
           >
             <div className="flex-column">
@@ -46,7 +76,8 @@ function AlertCard() {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      )}
     </>
   );
 }

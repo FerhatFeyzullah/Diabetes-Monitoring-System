@@ -9,7 +9,6 @@ function UserList() {
 
   return (
     <div className="user-list-main">
-      <div className="user-list-title">Hasta Listesi</div>
       <div className="users-list">
         <div className="flex-column">
           {patients &&

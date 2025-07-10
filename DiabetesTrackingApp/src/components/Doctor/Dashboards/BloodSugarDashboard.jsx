@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import "../../../css/Dashboards/BS_Dashboard.css";
+import "../../../css/DoctorDashboard.css";
 
 function BloodSugarDashboard() {
   const { bloodSugar } = useSelector((store) => store.bloodSugar);

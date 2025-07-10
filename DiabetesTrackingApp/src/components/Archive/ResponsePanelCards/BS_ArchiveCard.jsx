@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "../../../css/Archive/ArchiveCards/BS_ArchiveCard.css";
 
-function BS_ArchiveCard() {
+function BS_ArchiveCard({ patId }) {
   const { bloodSugarArchive } = useSelector((store) => store.bloodSugar);
 
   const timePeriods = {
@@ -20,7 +20,38 @@ function BS_ArchiveCard() {
 
   return (
     <>
-      {bloodSugarArchive &&
+      {patId == null ? (
+        // Durum 1: Hasta seçilmemiş
+        <div
+          className="flex-column"
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: "17px",
+            fontWeight: "bold",
+            height: "450px",
+          }}
+        >
+          <div>
+            Veri görüntüleme işlemi için lütfen önce bir hasta seçimi yapınız.
+          </div>
+        </div>
+      ) : bloodSugarArchive.length === 0 ? (
+        // Durum 2: Hasta seçildi ama veri yok
+        <div
+          className="flex-column"
+          style={{
+            fontFamily: "sans-serif",
+            fontSize: "17px",
+            fontWeight: "bold",
+            height: "450px",
+          }}
+        >
+          <div>
+            Seçilen hastaya ait kan şekeri ölçüm verisi bulunmamaktadır.
+          </div>
+        </div>
+      ) : (
+        // Durum 3: Hasta ve veri var
         bloodSugarArchive.map((m) => (
           <div key={m.measurementTime} className="single-card bs-main-card">
             <div className="bs-a-time-title">{m.measurementTime}</div>
@@ -47,7 +78,8 @@ function BS_ArchiveCard() {
               );
             })}
           </div>
-        ))}
+        ))
+      )}
     </>
   );
 }

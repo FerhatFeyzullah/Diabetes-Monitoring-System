@@ -6,6 +6,8 @@ const initialState = {
   alertArchive: [],
   alertDrawer: false,
   isAlert: 0,
+  alertsErrorMessage: "",
+  alertsErrorAlert: false,
 };
 
 export const GetA_FilteredDate = createAsyncThunk(
@@ -84,6 +86,9 @@ export const alertSlice = createSlice({
     SetAlertDrawerFalse: (state) => {
       state.alertDrawer = false;
     },
+    SetAlertsErrorAlertFalse: (state) => {
+      state.alertsErrorAlert = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -107,17 +112,25 @@ export const alertSlice = createSlice({
       .addCase(IsAlertExist.fulfilled, (state, action) => {
         state.isAlert = action.payload;
       })
-      .addCase(IsAlertExist.rejected, () => {
-        console.log("Is Alert Exist basarisiz");
+      .addCase(IsAlertExist.rejected, (state) => {
+        state.alertsErrorAlert = true;
+        state.alertsErrorMessage =
+          "Sunucu Tarfında Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyin";
       })
       .addCase(ReadAlert.fulfilled, (state, action) => {
         state.isAlert = action.payload;
       })
-      .addCase(ReadAlert.rejected, () => {
-        console.log("read alert basarisiz");
+      .addCase(ReadAlert.rejected, (state) => {
+        state.alertsErrorAlert = true;
+        state.alertsErrorMessage =
+          "Sunucu Tarfında Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyin";
       });
   },
 });
 
-export const { SetAlertDrawerFalse, SetAlertDrawerTrue } = alertSlice.actions;
+export const {
+  SetAlertDrawerFalse,
+  SetAlertDrawerTrue,
+  SetAlertsErrorAlertFalse,
+} = alertSlice.actions;
 export default alertSlice.reducer;

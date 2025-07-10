@@ -70,7 +70,7 @@ export const dailyStatusSlice = createSlice({
         state.dailyStatus = action.payload;
       })
       .addCase(GetDailyStatus.rejected, (state) => {
-        state.dsLoading = true;
+        state.dsLoading = false;
       })
       .addCase(GetDS_Filtered.fulfilled, (state, action) => {
         state.dailyStatusArchive = action.payload;

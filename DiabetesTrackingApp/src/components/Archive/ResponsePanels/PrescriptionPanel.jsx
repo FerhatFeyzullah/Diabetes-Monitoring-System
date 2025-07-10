@@ -42,7 +42,7 @@ function PrescriptionPanel() {
   return (
     <div>
       <div>
-        <P_ArchiveCard />
+        <P_ArchiveCard patId={selectedPatientId} />
       </div>
     </div>
   );

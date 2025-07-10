@@ -42,7 +42,7 @@ function DailyStatusPanel() {
   return (
     <div>
       <div>
-        <DS_ArchiveCard />
+        <DS_ArchiveCard patId={selectedPatientId} />
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ const initialState = {
   accountDrawer: false,
   AppUser: JSON.parse(localStorage.getItem("AppUser")) || {},
   responseMessage: "",
-  mistakeAlert: false,
-  successAlert: false,
+  a_mistakeAlert: false,
+  a_successAlert: false,
   loading: false,
   reviewPhotoDialog: false,
 };
@@ -44,11 +44,11 @@ export const accountSlice = createSlice({
     SetAccountDrawerTrue: (state) => {
       state.accountDrawer = true;
     },
-    SetMistakeAlertFalse: (state) => {
-      state.mistakeAlert = false;
+    SetAccountMistakeAlertFalse: (state) => {
+      state.a_mistakeAlert = false;
     },
     SetSuccessAlertFalse: (state) => {
-      state.successAlert = false;
+      state.a_successAlert = false;
     },
     SetReviewPhotoDialogTrue: (state) => {
       state.reviewPhotoDialog = true;
@@ -64,26 +64,31 @@ export const accountSlice = createSlice({
         state.AppUser = action.payload;
         localStorage.setItem("AppUser", JSON.stringify(action.payload));
       })
-      .addCase(UploadPP.rejected, () => {
-        console.log("PP Basarisiz");
+      .addCase(UploadPP.rejected, (state) => {
+        state.a_mistakeAlert = true;
+        state.responseMessage =
+          "Sunucu Tarfında Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyin";
       })
       //Remove
       .addCase(RemovePP.fulfilled, (state, action) => {
         state.AppUser = action.payload;
         localStorage.setItem("AppUser", JSON.stringify(action.payload));
       })
-      .addCase(RemovePP.rejected, () => {
-        console.log("PP Remove Basarisiz");
+      .addCase(RemovePP.rejected, (state) => {
+        state.a_mistakeAlert = true;
+        state.responseMessage =
+          "Sunucu Tarfında Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyin";
       })
 
       //GetAppUser
       .addCase(GetAppUser.fulfilled, (state, action) => {
         state.AppUser = action.payload;
         localStorage.setItem("AppUser", JSON.stringify(action.payload));
-        console.log("GetUser Basarili");
       })
-      .addCase(GetAppUser.rejected, () => {
-        console.log("GetUser Basarisiz");
+      .addCase(GetAppUser.rejected, (state) => {
+        state.a_mistakeAlert = true;
+        state.responseMessage =
+          "Sunucu Tarfında Bir Hata Oluştu, Lütfen Daha Sonra Tekrar Deneyin";
       })
 
       //ChangePassword
@@ -94,10 +99,10 @@ export const accountSlice = createSlice({
         state.loading = false;
         if (action.payload == "") {
           state.accountDrawer = false;
-          state.successAlert = true;
+          state.a_successAlert = true;
           state.responseMessage = "Şifre başarıyla değiştirildi";
         } else {
-          state.mistakeAlert = true;
+          state.a_mistakeAlert = true;
           state.responseMessage = action.payload;
         }
       })
@@ -105,7 +110,7 @@ export const accountSlice = createSlice({
         state.loading = false;
         state.responseMessage = "Sunucu Tarafında Bir Hata Oluştu";
         state.accountDrawer = false;
-        state.mistakeAlert = true;
+        state.a_mistakeAlert = true;
       });
   },
 });
@@ -113,7 +118,7 @@ export const accountSlice = createSlice({
 export const {
   SetAccountDrawerFalse,
   SetAccountDrawerTrue,
-  SetMistakeAlertFalse,
+  SetAccountMistakeAlertFalse,
   SetSuccessAlertFalse,
   SetReviewPhotoDialogTrue,
   SetReviewPhotoDialogFalse,

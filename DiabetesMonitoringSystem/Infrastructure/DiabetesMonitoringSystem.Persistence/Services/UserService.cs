@@ -11,18 +11,20 @@ using DiabetesMonitoringSystem.Domain.Entities;
 using DiabetesMonitoringSystem.Infrastructure.Interfaces;
 using DiabetesMonitoringSystem.Persistence.DbContext;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.Extensions.Hosting;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DiabetesMonitoringSystem.Persistence.Services
 {
     public class UserService(UserManager<AppUser> usermanager,SignInManager<AppUser> signInManager,
         IJwtService jwtService,IMapper mapper,IMailService mailService,
-        IFileStorageService fileStorageService, DiabetesDbContext _context) : IUserService
+        IFileStorageService fileStorageService, DiabetesDbContext _context, IWebHostEnvironment _environment) : IUserService
     {
         private readonly DiabetesDbContext context = _context;
       
@@ -222,6 +224,19 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             var user = await context.Users.FindAsync(patientId);
             if (user != null)
             {
+                var oldFileName = user.ProfilePhotoId;
+
+                if (!string.IsNullOrEmpty(oldFileName))
+                {
+                    var uploadFolder = Path.Combine(_environment.WebRootPath, "upload");
+                    var oldFilePath = Path.Combine(uploadFolder, oldFileName);
+
+                    if (File.Exists(oldFilePath))
+                    {
+                        File.Delete(oldFilePath);
+                    }
+                }
+
                 user.ProfilePhotoId = "";
                 context.Users.Update(user);
                 await context.SaveChangesAsync();
@@ -232,5 +247,6 @@ namespace DiabetesMonitoringSystem.Persistence.Services
             }
             return user;
         }
+
     }
 }

@@ -136,7 +136,7 @@ function ArchiveFilterPanel({ selectedTab }) {
                 </Button>
               </div>
             ))}
-            <div style={{ marginTop: "30px" }}>
+            <div style={{ margin: "30px" }}>
               <Button
                 variant={selectedAlertType != 0 ? "outlined" : "contained"}
                 onClick={ClearType}

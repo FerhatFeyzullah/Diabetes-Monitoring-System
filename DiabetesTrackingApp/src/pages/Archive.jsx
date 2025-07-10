@@ -4,7 +4,7 @@ import ArchivePanel from "../components/Archive/ArchivePanel";
 
 function Archive() {
   return (
-    <div>
+    <div className="archive-main-div">
       <DoctorNavbar />
 
       <div className="flex-row" style={{ marginTop: "50px" }}>

@@ -56,7 +56,7 @@ function AlertsDrawer() {
           sx: {
             position: "absolute",
             top: "80px",
-            height: "600px",
+            height: "810px",
             borderRadius: "10px",
             marginRight: "10px",
             width: "350px",

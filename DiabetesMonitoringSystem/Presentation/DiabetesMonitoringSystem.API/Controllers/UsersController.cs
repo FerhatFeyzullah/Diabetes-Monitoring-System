@@ -29,6 +29,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
             return Ok(await mediator.Send(request));
         }
 
+        [AllowAnonymous]
         [HttpGet("GetUser")]
         public async Task<IActionResult> GetUser([FromQuery] GetUserRequest request)
         {

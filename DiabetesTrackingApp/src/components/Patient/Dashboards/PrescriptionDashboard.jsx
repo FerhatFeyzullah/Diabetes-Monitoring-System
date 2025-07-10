@@ -33,7 +33,7 @@ function PrescriptionDashboard() {
             onChange={handleChange("panel1")}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <div className="p-pd-title">{diet}</div>
+              <div className="p-pd-title">{"Diyet - " + diet}</div>
             </AccordionSummary>
             <AccordionDetails>
               {diet === "Az Şekerli Diyet" && (
@@ -70,7 +70,7 @@ function PrescriptionDashboard() {
             onChange={handleChange("panel2")}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <div className="p-pd-title">{exercise}</div>
+              <div className="p-pd-title">{"Egzersiz - " + exercise}</div>
             </AccordionSummary>
             <AccordionDetails>
               {exercise === "Yürüyüş" && (
@@ -98,6 +98,11 @@ function PrescriptionDashboard() {
                   doktor eşliğinde yapılan özel egzersizlerdir. → Reçetede bu
                   varsa hastaneye danışarak uygun egzersiz planı çıkarılmalı,
                   evde kendi başınıza yapmamanız önerilir.
+                </div>
+              )}
+              {exercise === "Yok" && (
+                <div className="p-pd-title">
+                  Reçetenizde Egzersiz Bulunmamaktadır.
                 </div>
               )}
             </AccordionDetails>

@@ -6,7 +6,7 @@ import {
   GetAppUser,
   RemovePP,
   SetAccountDrawerFalse,
-  SetMistakeAlertFalse,
+  SetAccountMistakeAlertFalse,
   SetReviewPhotoDialogTrue,
   SetSuccessAlertFalse,
   UploadPP,
@@ -22,8 +22,8 @@ function AccountSettingDrawer() {
   const {
     accountDrawer,
     AppUser,
-    mistakeAlert,
-    successAlert,
+    a_mistakeAlert,
+    a_successAlert,
     responseMessage,
     loading,
   } = useSelector((store) => store.account);
@@ -73,7 +73,7 @@ function AccountSettingDrawer() {
     dispatch(SetSuccessAlertFalse());
   };
   const handleMistakeClose = () => {
-    dispatch(SetMistakeAlertFalse());
+    dispatch(SetAccountMistakeAlertFalse());
   };
   const FormClear = () => {
     setOldPassword("");
@@ -107,6 +107,12 @@ function AccountSettingDrawer() {
     }
   };
 
+  const SetReviewPhotoDialog = () => {
+    if (profilePhotoId && !imgError) {
+      dispatch(SetReviewPhotoDialogTrue());
+    }
+  };
+
   return (
     <>
       <Drawer
@@ -117,7 +123,7 @@ function AccountSettingDrawer() {
           sx: {
             position: "absolute", // ✅ artık fixed değil
             top: "80px", // ✅ istediğin kadar aşağı al
-            height: "600px", // ✅ yükseklik belirle
+            height: "650px", // ✅ yükseklik belirle
             borderRadius: "10px",
             marginRight: "10px",
             width: "350px",
@@ -142,7 +148,7 @@ function AccountSettingDrawer() {
                     ? `https://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
                     : undefined
                 }
-                onClick={() => dispatch(SetReviewPhotoDialogTrue())}
+                onClick={SetReviewPhotoDialog}
                 onError={() => setImgError(true)}
               >
                 {(!profilePhotoId || imgError) && letter}
@@ -176,6 +182,7 @@ function AccountSettingDrawer() {
                 variant="outlined"
                 size="small"
                 sx={{ marginTop: "10px", textTransform: "none" }}
+                disabled={!profilePhotoId || imgError}
                 onClick={() => RemovePhoto(AppUserId)}
               >
                 RESMİ KALDIR
@@ -222,12 +229,12 @@ function AccountSettingDrawer() {
       </Drawer>
       <div>
         <SuccessAlert
-          status={successAlert}
+          status={a_successAlert}
           message={responseMessage}
           closer={handleSuccessClose}
         />
         <MistakeAlert
-          status={mistakeAlert}
+          status={a_mistakeAlert}
           message={responseMessage}
           closer={handleMistakeClose}
         />

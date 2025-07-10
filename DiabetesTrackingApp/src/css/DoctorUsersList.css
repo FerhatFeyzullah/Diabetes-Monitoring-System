@@ -1,19 +1,14 @@
 .users-list {
   width: 300px;
-  height: 570px;
+  height: 630px;
   margin: 10px;
-  background-color: whitesmoke;
-  border: 1px solid lightgrey;
+  background-color: rgba(224, 255, 255, 0.7);
+  border: 2px solid lightgray;
   box-shadow: 7px 7px 4px lightblue;
   border-radius: 5px;
   overflow-y: auto;
 }
-.user-list-title {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  margin-top: 10px;
-}
+
 .user-card-main {
   width: 90%;
   margin-top: 12px;

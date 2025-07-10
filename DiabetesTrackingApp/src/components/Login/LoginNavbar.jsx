@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 
 function LoginNavbar() {
   return (
-    
-        <div className='login-navbar'>
-            <h1 className='login-navbar-title'>Diyabet Takip Uygulaması</h1>
-
-        </div>
-  
-  )
+    <div className="login-navbar">
+      <div className="login-navbar-title">Diyabet Takip Uygulaması</div>
+      <div className="login-navbar-title-alt">
+        Diyabeti Takip Et, Sağlığını Kontrol Et!
+      </div>
+    </div>
+  );
 }
 
-export default LoginNavbar
+export default LoginNavbar;

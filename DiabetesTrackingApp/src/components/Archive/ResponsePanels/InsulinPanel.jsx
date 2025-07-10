@@ -41,7 +41,7 @@ function InsulinPanel() {
   return (
     <div>
       <div>
-        <I_ArchiveCard />
+        <I_ArchiveCard patId={selectedPatientId} />
       </div>
     </div>
   );

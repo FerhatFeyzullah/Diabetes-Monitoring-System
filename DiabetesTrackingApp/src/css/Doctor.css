@@ -1,7 +1,7 @@
 .doctor-navbar {
   width: 100%;
   height: 70px;
-  background-color: rgb(52, 176, 207);
+  background-color: rgba(52, 176, 207, 0.788);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,7 +24,10 @@
 .doctor-screen {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-left: 150px;
 }
 .d-navbar-png {
   width: 35px;

@@ -73,7 +73,7 @@ function AlertPanel() {
   return (
     <div>
       <div>
-        <AlertCard />
+        <AlertCard patId={selectedPatientId} />
       </div>
     </div>
   );

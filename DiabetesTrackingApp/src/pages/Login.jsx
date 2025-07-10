@@ -18,7 +18,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="login-background">
       <LoginNavbar />
 
       <div className="login-card">

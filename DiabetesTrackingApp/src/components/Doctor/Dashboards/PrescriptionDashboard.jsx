@@ -84,8 +84,8 @@ function PrescriptionDashboard() {
           <div>
             <div className="p-symptom-title">Belirtiler</div>
             <div className="p-symptom flex-column" style={{ width: "200px" }}>
-              {symptoms.map((symptom) => (
-                <div>{symptom}</div>
+              {symptoms.map((s) => (
+                <div key={s}>{s}</div>
               ))}
             </div>
           </div>

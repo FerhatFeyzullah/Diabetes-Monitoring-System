@@ -1,12 +1,8 @@
 import React from "react";
-import InsulinDailyDashboard from "./InsulinDailyDashboard";
 
 function InfoCard() {
   return (
     <div>
-      <div>
-        <InsulinDailyDashboard />
-      </div>
       <div className="info-card-text">
         <strong>🕒 Günlük Ölçüm Saatleri:</strong>
         <br />

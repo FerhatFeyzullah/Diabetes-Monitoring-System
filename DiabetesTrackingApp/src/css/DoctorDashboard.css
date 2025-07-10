@@ -6,11 +6,11 @@
 }
 
 .single-dashboard {
-  width: 550px;
-  height: 280px;
-  background-color: whitesmoke;
+  width: 570px;
+  height: 300px;
+  background-color: rgba(231, 250, 250, 0.7);
   margin: 15px;
-  border: 1px solid lightgrey;
-  box-shadow: 7px 7px 4px lightblue;
+  border: 2px solid lightgray;
+  box-shadow: 0px 0px 10px lightblue;
   border-radius: 5px;
 }

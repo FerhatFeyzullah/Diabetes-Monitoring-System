@@ -42,7 +42,7 @@ function BloodSugarPanel() {
   return (
     <div>
       <div>
-        <BS_ArchiveCard />
+        <BS_ArchiveCard patId={selectedPatientId} />
       </div>
     </div>
   );

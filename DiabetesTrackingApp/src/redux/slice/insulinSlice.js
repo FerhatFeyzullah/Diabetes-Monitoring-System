@@ -48,7 +48,6 @@ export const GetI_UnFiltered = createAsyncThunk(
     return response.data;
   }
 );
-
 export const insulinSlice = createSlice({
   name: "insulin",
   initialState,
@@ -63,7 +62,7 @@ export const insulinSlice = createSlice({
         state.insulin = action.payload;
       })
       .addCase(GetInsulin.rejected, (state) => {
-        state.iLoading = true;
+        state.iLoading = false;
       })
       .addCase(GetI_Filtered.fulfilled, (state, action) => {
         state.insulinArchive = action.payload;

@@ -1,9 +1,10 @@
 .archive-panel-main {
   width: 1200px;
-  height: 540px;
-  background-color: whitesmoke;
+  height: 600px;
+  background-color: rgba(245, 245, 245, 0);
   border-radius: 5px;
   box-shadow: 7px 7px 4px lightblue;
+  border: 2px solid lightgray;
 }
 
 .archive-tabs-menu {
@@ -39,31 +40,31 @@
 
 .users {
   width: 20%;
-  height: 430px;
+  height: 490px;
   background-color: white;
   justify-content: center;
   display: flex;
   overflow-y: auto;
   border-radius: 5px;
-  border: 2px solid rgb(224, 240, 255);
+  border: 2px solid lightgray;
 }
 .responses {
   width: 52%;
-  height: 430px;
+  height: 490px;
   background-color: white;
   justify-content: center;
   display: flex;
   overflow-y: auto;
   border-radius: 5px;
-  border: 2px solid lightcyan;
+  border: 2px solid lightgray;
 }
 .filter {
   width: 23%;
-  height: 430px;
+  height: 490px;
   background-color: white;
   justify-content: center;
   display: flex;
   border-radius: 5px;
-  border: 2px solid lightcyan;
+  border: 2px solid lightgray;
   overflow-y: auto;
 }
