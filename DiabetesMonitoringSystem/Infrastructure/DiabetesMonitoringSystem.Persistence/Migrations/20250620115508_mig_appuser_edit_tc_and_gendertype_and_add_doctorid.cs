@@ -18,14 +18,15 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                 oldClrType: typeof(int),
                 oldType: "integer");
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Gender",
-                table: "AspNetUsers",
-                type: "integer",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldType: "text");
-
+            // Gender sütununu integer'a dönüştürürken PostgreSQL için doğru dönüşümü belirtiyoruz
+            migrationBuilder.Sql(@"
+        ALTER TABLE ""AspNetUsers""
+        ALTER COLUMN ""Gender"" TYPE integer USING
+            CASE
+                WHEN ""Gender"" ~ '^\d+$' THEN ""Gender""::integer
+                ELSE 0
+            END;
+    ");
 
             migrationBuilder.AddColumn<int>(
                 name: "DoctorId",
@@ -45,6 +46,7 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                 principalTable: "AspNetUsers",
                 principalColumn: "Id");
         }
+
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)

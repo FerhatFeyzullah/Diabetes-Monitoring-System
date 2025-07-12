@@ -129,7 +129,7 @@ function DoctorNavbar() {
               sx={{ width: 60, height: 60 }}
               src={
                 !imgError && profilePhotoId
-                  ? `https://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
+                  ? `http://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
                   : undefined
               }
               onError={() => setImgError(true)}

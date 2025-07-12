@@ -16,4 +16,12 @@ RUN dotnet publish -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
+
+# Port expose et
+EXPOSE 7014
+
+# Environment variables
+ENV ASPNETCORE_URLS=http://+:7014
+ENV ASPNETCORE_ENVIRONMENT=Development
+
 ENTRYPOINT ["dotnet", "DiabetesMonitoringSystem.API.dll"]

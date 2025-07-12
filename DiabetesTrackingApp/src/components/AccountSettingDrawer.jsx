@@ -145,7 +145,7 @@ function AccountSettingDrawer() {
                 }}
                 src={
                   !imgError && profilePhotoId
-                    ? `https://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
+                    ? `http://localhost:7014/api/Users/ProfileImage/${profilePhotoId}`
                     : undefined
                 }
                 onClick={SetReviewPhotoDialog}

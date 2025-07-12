@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//builder.WebHost.UseUrls("http://0.0.0.0:80");
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -38,7 +39,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
     options.Password.RequireLowercase = false;
-    // Cookie tabanlý oturum yönetimini devre dýþý býrak
+    // Cookie tabanlï¿½ oturum yï¿½netimini devre dï¿½ï¿½ï¿½ bï¿½rak
     options.SignIn.RequireConfirmedAccount = false;
 })
 .AddEntityFrameworkStores<DiabetesDbContext>()
@@ -85,15 +86,20 @@ builder.Services.AddAuthentication(options =>
 });
 
 //CORS
+
+
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
-        policy => policy.WithOrigins("http://localhost:5173")
+        policy => policy.WithOrigins("http://localhost:5173", "http://localhost:3000", "http://frontend:80")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials());
 });
-//var frontendOrigin = builder.Configuration["Cors:FrontendOrigin"] ?? "http://frontend:80"; // Docker için varsayýlan
+
+
+//var frontendOrigin = builder.Configuration["Cors:FrontendOrigin"] ?? "http://frontend:80"; // Docker iï¿½in varsayï¿½lan
 
 //builder.Services.AddCors(options =>
 //{
@@ -113,7 +119,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<DiabetesDbContext>();
-    context.Database.Migrate(); // Migration'larý uygula
+    context.Database.Migrate(); // Migration'larï¿½ uygula
 }
 
 if (app.Environment.IsDevelopment())
