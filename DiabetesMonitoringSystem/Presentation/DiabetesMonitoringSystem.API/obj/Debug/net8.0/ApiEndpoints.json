@@ -102,8 +102,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAlertsDaily.GetAlertsDailyRequest",
+        "Name": "DoctorId",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],

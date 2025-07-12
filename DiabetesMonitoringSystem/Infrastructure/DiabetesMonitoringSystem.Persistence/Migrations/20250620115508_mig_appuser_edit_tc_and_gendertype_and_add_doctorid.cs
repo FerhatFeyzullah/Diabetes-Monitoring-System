@@ -26,6 +26,7 @@ namespace DiabetesMonitoringSystem.Persistence.Migrations
                 oldClrType: typeof(string),
                 oldType: "text");
 
+
             migrationBuilder.AddColumn<int>(
                 name: "DoctorId",
                 table: "AspNetUsers",

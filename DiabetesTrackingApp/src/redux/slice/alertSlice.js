@@ -57,9 +57,11 @@ export const GetA_UnFiltered = createAsyncThunk("getaunfilter", async (id) => {
   });
   return response.data;
 });
-export const GetA_Daily = createAsyncThunk("getadaily", async (data) => {
+export const GetA_Daily = createAsyncThunk("getadaily", async (id) => {
   var response = await axios.get("Alerts/GetAlertsDaily", {
-    params: {},
+    params: {
+      DoctorId: id,
+    },
   });
   return response.data;
 });
@@ -119,6 +121,7 @@ export const alertSlice = createSlice({
       })
       .addCase(ReadAlert.fulfilled, (state, action) => {
         state.isAlert = action.payload;
+        console.log("readAlert");
       })
       .addCase(ReadAlert.rejected, (state) => {
         state.alertsErrorAlert = true;

@@ -69,7 +69,8 @@ export const doctorSlice = createSlice({
         state.loading = false;
 
         if (action.payload == "") {
-          state.newPatientResponse = "Yeni Hasta Kaydı Başarıyla Yapıldı";
+          state.newPatientResponse =
+            "Yeni hasta kaydı başarıyla tamamlandı. Bilgiler hastanın mail adresine gönderildi.";
           state.succesAlert = true;
           state.mistakeAlert = false;
         } else {

@@ -84,7 +84,7 @@ namespace DiabetesMonitoringSystem.API.Controllers
             
         }
 
-        
+        [AllowAnonymous]
         [HttpPost("CreateDoctor")]
         public async Task<IActionResult> CreateDoctor(CreateDoctorRequest request)
         {

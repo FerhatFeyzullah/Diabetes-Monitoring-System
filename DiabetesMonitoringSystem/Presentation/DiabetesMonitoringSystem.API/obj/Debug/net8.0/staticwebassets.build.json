@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "zlbQfYWrYxhV42hhTy/RGugfZGfHN2p8KjnNBfVAscw=",
+  "Hash": "G5dH3xzOJ8N7YHagUlWZfuzXE4EjEKu0tfHaWifqWPs=",
   "Source": "DiabetesMonitoringSystem.API",
   "BasePath": "_content/DiabetesMonitoringSystem.API",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\93ad898e-05df-45fd-a488-6c7c72b7a605.JPG",
+      "Identity": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\cdc988b3-6076-499a-85fe-86662cb5fddc.JPG",
       "SourceId": "DiabetesMonitoringSystem.API",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\",
       "BasePath": "_content/DiabetesMonitoringSystem.API",
-      "RelativePath": "upload/93ad898e-05df-45fd-a488-6c7c72b7a605#[.{fingerprint}]?.JPG",
+      "RelativePath": "upload/cdc988b3-6076-499a-85fe-86662cb5fddc#[.{fingerprint}]?.JPG",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -35,13 +35,13 @@
       "Integrity": "nzq3Z4LQEkuNa2W+3jWmesCzJFQAvfKZHh+JjBxcokw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\upload\\93ad898e-05df-45fd-a488-6c7c72b7a605.JPG"
+      "OriginalItemSpec": "wwwroot\\upload\\cdc988b3-6076-499a-85fe-86662cb5fddc.JPG"
     }
   ],
   "Endpoints": [
     {
-      "Route": "upload/93ad898e-05df-45fd-a488-6c7c72b7a605.JPG",
-      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\93ad898e-05df-45fd-a488-6c7c72b7a605.JPG",
+      "Route": "upload/cdc988b3-6076-499a-85fe-86662cb5fddc.JPG",
+      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\cdc988b3-6076-499a-85fe-86662cb5fddc.JPG",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -62,7 +62,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Jul 2025 17:46:12 GMT"
+          "Value": "Fri, 11 Jul 2025 16:30:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -77,8 +77,8 @@
       ]
     },
     {
-      "Route": "upload/93ad898e-05df-45fd-a488-6c7c72b7a605.lj6xmk8s18.JPG",
-      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\93ad898e-05df-45fd-a488-6c7c72b7a605.JPG",
+      "Route": "upload/cdc988b3-6076-499a-85fe-86662cb5fddc.lj6xmk8s18.JPG",
+      "AssetFile": "C:\\Users\\Dell\\Desktop\\Projects\\DiabetesMonitoringSystem\\Presentation\\DiabetesMonitoringSystem.API\\wwwroot\\upload\\cdc988b3-6076-499a-85fe-86662cb5fddc.JPG",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -99,7 +99,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 07 Jul 2025 17:46:12 GMT"
+          "Value": "Fri, 11 Jul 2025 16:30:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -113,7 +113,7 @@
         },
         {
           "Name": "label",
-          "Value": "upload/93ad898e-05df-45fd-a488-6c7c72b7a605.JPG"
+          "Value": "upload/cdc988b3-6076-499a-85fe-86662cb5fddc.JPG"
         },
         {
           "Name": "integrity",

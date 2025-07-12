@@ -35,15 +35,15 @@ function AlertsDrawer() {
     5: "Yetersiz Ölçüm",
   };
 
-  const Read = async (alertId, docId) => {
+  const Read = async (alertId, docId, isRead) => {
+    if (isRead) return;
     const data = {
       AlertId: alertId,
       DoctorId: Number(docId),
     };
     await dispatch(ReadAlert(data));
     await dispatch(IsAlertExist(AppUserId));
-    const emptydata = {};
-    await dispatch(GetA_Daily(emptydata));
+    await dispatch(GetA_Daily(AppUserId));
   };
 
   return (
@@ -103,7 +103,9 @@ function AlertsDrawer() {
                   marginBottom: "10px",
                 }}
               >
-                <Accordion onChange={() => Read(a.alertId, AppUserId)}>
+                <Accordion
+                  onChange={() => Read(a.alertId, AppUserId, a.isRead)}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"

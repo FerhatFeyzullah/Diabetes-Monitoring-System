@@ -34,8 +34,7 @@ function Doctor() {
     await dispatch(GetPatientsForDoctor(userId));
     await dispatch(GetAppUser(userId));
     await dispatch(IsAlertExist(userId));
-    const data = {};
-    await dispatch(GetA_Daily(data));
+    await dispatch(GetA_Daily(userId));
   };
   useEffect(() => {
     GetPatient(userId);

@@ -27,7 +27,7 @@ builder.Services.AddInfrastructureServices();
 
 builder.Services.AddDbContext<DiabetesDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
 });
 
 // Identity servisleri (SignInManager ile birlikte)
@@ -84,7 +84,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// CORS
+//CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
@@ -93,8 +93,28 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod()
                         .AllowCredentials());
 });
+//var frontendOrigin = builder.Configuration["Cors:FrontendOrigin"] ?? "http://frontend:80"; // Docker için varsayýlan
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowFrontend", policy =>
+//        policy.WithOrigins(frontendOrigin)
+//              .AllowAnyHeader()
+//              .AllowAnyMethod()
+//              .AllowCredentials());
+//});
+
+
+
+
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<DiabetesDbContext>();
+    context.Database.Migrate(); // Migration'larý uygula
+}
 
 if (app.Environment.IsDevelopment())
 {

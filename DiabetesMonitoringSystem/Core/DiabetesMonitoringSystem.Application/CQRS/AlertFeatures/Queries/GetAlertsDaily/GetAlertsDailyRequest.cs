@@ -9,6 +9,6 @@ namespace DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAle
 {
     public class GetAlertsDailyRequest:IRequest<List<GetAlertsDailyResponse>>
     {
-
+        public int DoctorId { get; set; }
     }
 }

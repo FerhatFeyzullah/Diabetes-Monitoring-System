@@ -146,10 +146,11 @@
         ],
         "parameters": [
           {
-            "name": "request",
+            "name": "DoctorId",
             "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/GetAlertsDailyRequest"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -1427,10 +1428,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "GetAlertsDailyRequest": {
-        "type": "object",
-        "additionalProperties": false
       },
       "GetAllSymptomRequest": {
         "type": "object",

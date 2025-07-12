@@ -15,7 +15,8 @@ namespace DiabetesMonitoringSystem.Application.CQRS.AlertFeatures.Queries.GetAle
         public async Task<List<GetAlertsDailyResponse>> Handle(GetAlertsDailyRequest request, CancellationToken cancellationToken)
         {
             var values = await readRepository.GetByFilteredList(
-                x => x.AlertDate == DateOnly.FromDateTime(DateTime.Today),
+                x => x.AlertDate == DateOnly.FromDateTime(DateTime.Today) &&
+                x.DoctorId == request.DoctorId,
                 x => x.Patient);               
             return mapper.Map<List<GetAlertsDailyResponse>>(values);
         }
