@@ -2,16 +2,6 @@
 
 This project is a comprehensive web application that allows diabetes patients to monitor their blood sugar levels. Users can enter measurements based on specific time periods (morning, noon, afternoon, evening, night) to analyze their health data. The system is fully integrated with a React frontend, .NET Web API backend, and PostgreSQL database.
 
-## 📚 Table of Contents
-
-- [Features](#features)
-- [Technologies](#technologies)
-- [Installation](#installation)
-- [API Usage](#api-usage)
-- [Time Periods](#time-periods)
-- [Screenshots](#screenshots)
-- [Contact](#contact)
-
 ---
 
 ## ✅ Features
