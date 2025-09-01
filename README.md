@@ -17,7 +17,7 @@ This project is a comprehensive web application that allows diabetes patients to
 
 ## ⚙️ Technologies Used
 
-| Layer       | Technology                        |
+| Layer       | Technology                         |
 |-------------|------------------------------------|
 | Frontend    | React, Vite, Axios, Tailwind CSS   |
 | Backend     | ASP.NET Core Web API (.NET 8)      |
@@ -109,7 +109,7 @@ Authorization: Bearer {token}
 ### Get Measurements
 
 ```http
-GET /api/BloodGlucoses
+GET /api/GetBS_ByPatientAndGroupedByDateDaily
 Authorization: Bearer {token}
 ```
 
@@ -136,10 +136,3 @@ Authorization: Bearer {token}
 ![Dashboard](public/screenshots/dashboard.png)
 ![Archive Screen](public/screenshots/archive.png)
 ```
-
----
-
-## 📫 Contact
-
-- 👨‍💻 Developer: Ferhat Feyzullah  
-- 🌐 GitHub: [github.com/FerhatFeyzullah](https://github.com/FerhatFeyzullah)
